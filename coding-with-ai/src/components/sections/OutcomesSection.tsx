@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { TrendingUp, Briefcase, Globe, Rocket, Award, ArrowRight, Terminal, CheckCircle2, ChevronRight } from "lucide-react";
+import { TrendingUp, Briefcase, Globe, Rocket, Award, ArrowRight, Terminal, CheckCircle2, ChevronRight, Users, Star, Clock, Zap } from "lucide-react";
 import BorderGlow from "@/components/ui/BorderGlow";
 import TiltedCard from "@/components/ui/TiltedCard";
+import Stack from "@/components/ui/Stack";
 
 const outcomes = [
   {
@@ -125,6 +126,121 @@ const outcomes = [
       </div>
     )
   },
+  {
+    metric: "2,400+",
+    label: "Community Members",
+    description: "An ever-growing network of AI builders, indie hackers, and full-stack developers collaborating daily.",
+    icon: <Users size={22} />,
+    glowColorHSL: "190 85 55",
+    borderColors: ['#06b6d4', '#22d3ee', '#67e8f9'],
+    color: "from-cyan-400 to-sky-500",
+    shadow: "shadow-[0_0_30px_rgba(6,182,212,0.15)]",
+    viz: (
+      <div className="flex -space-x-2">
+        {[1,2,3,4,5].map((n) => (
+          <motion.div
+            key={n}
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.3, delay: n * 0.1 }}
+            className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-sky-600 border-2 border-[#0B0F19] flex items-center justify-center text-[9px] font-bold text-white"
+          >
+            {String.fromCharCode(64 + n)}
+          </motion.div>
+        ))}
+        <motion.div
+          initial={{ scale: 0 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.3, delay: 0.6 }}
+          className="w-8 h-8 rounded-full bg-cyan-500/20 border-2 border-cyan-500/30 flex items-center justify-center text-[8px] font-bold text-cyan-400"
+        >
+          +2k
+        </motion.div>
+      </div>
+    )
+  },
+  {
+    metric: "4.9★",
+    label: "Student Rating",
+    description: "Consistently rated 4.9/5 across all cohort batches — our highest-rated program ever.",
+    icon: <Star size={22} />,
+    glowColorHSL: "45 90 60",
+    borderColors: ['#eab308', '#facc15', '#fde047'],
+    color: "from-yellow-400 to-amber-500",
+    shadow: "shadow-[0_0_30px_rgba(234,179,8,0.15)]",
+    viz: (
+      <div className="flex gap-1">
+        {[1,2,3,4,5].map((s) => (
+          <motion.div
+            key={s}
+            initial={{ scale: 0, rotate: -180 }}
+            whileInView={{ scale: 1, rotate: 0 }}
+            viewport={{ once: true }}
+            transition={{ type: "spring", stiffness: 300, damping: 15, delay: s * 0.08 }}
+          >
+            <Star size={18} className={s <= 4 ? "fill-yellow-400 text-yellow-400" : "fill-yellow-400/60 text-yellow-400/60"} />
+          </motion.div>
+        ))}
+      </div>
+    )
+  },
+  {
+    metric: "120+",
+    label: "Mentor Hours",
+    description: "Hours of live 1-on-1 mentoring, code reviews, and pair-programming sessions per cohort.",
+    icon: <Clock size={22} />,
+    glowColorHSL: "330 75 60",
+    borderColors: ['#ec4899', '#f43f5e', '#fb7185'],
+    color: "from-pink-400 to-rose-500",
+    shadow: "shadow-[0_0_30px_rgba(236,72,153,0.15)]",
+    viz: (
+      <svg className="w-14 h-14 text-pink-400" viewBox="0 0 36 36">
+        <circle cx="18" cy="18" r="15" className="text-white/5" strokeWidth="2" stroke="currentColor" fill="none" />
+        <motion.line
+          x1="18" y1="18" x2="18" y2="8"
+          stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+          initial={{ rotate: 0 }}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+          style={{ transformOrigin: "18px 18px" }}
+        />
+        <motion.line
+          x1="18" y1="18" x2="24" y2="18"
+          stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"
+          initial={{ rotate: 0 }}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+          style={{ transformOrigin: "18px 18px" }}
+        />
+        <circle cx="18" cy="18" r="1.5" fill="currentColor" />
+      </svg>
+    )
+  },
+  {
+    metric: "10x",
+    label: "Avg Productivity Boost",
+    description: "Graduates report a 10x increase in shipping speed using AI-powered workflows and toolchains.",
+    icon: <Zap size={22} />,
+    glowColorHSL: "160 80 50",
+    borderColors: ['#10b981', '#34d399', '#6ee7b7'],
+    color: "from-emerald-400 to-green-500",
+    shadow: "shadow-[0_0_30px_rgba(16,185,129,0.15)]",
+    viz: (
+      <div className="flex items-center gap-2">
+        {[1,2,3].map((b) => (
+          <motion.div
+            key={b}
+            animate={{ opacity: [0.3, 1, 0.3] }}
+            transition={{ duration: 1.5, repeat: Infinity, delay: b * 0.3 }}
+            className="w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(16,185,129,0.5)]"
+          />
+        ))}
+        <Zap size={20} className="text-emerald-400 fill-emerald-400" />
+      </div>
+    )
+  },
 ];
 
 const milestones = [
@@ -224,57 +340,48 @@ export default function OutcomesSection() {
           </motion.p>
         </div>
 
-        {/* Asymmetrical Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-6 mb-24">
-          {outcomes.map((outcome, i) => {
-            const colSpanClass = "md:col-span-3";
-            return (
-              <motion.div
-                key={outcome.label}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className={`${colSpanClass} flex`}
-              >
-                <BorderGlow
-                  edgeSensitivity={35}
-                  glowColor={outcome.glowColorHSL}
-                  backgroundColor="rgba(17, 24, 39, 0.45)"
-                  borderRadius={28}
-                  glowRadius={50}
-                  glowIntensity={1.0}
-                  colors={outcome.borderColors}
-                  className={`w-full group relative transition-all duration-500 hover:-translate-y-1 backdrop-blur-xl ${outcome.shadow}`}
+        {/* Interactive Card Stack */}
+        <div className="max-w-3xl mx-auto mb-32 relative">
+          <div className="w-full" style={{ height: 340 }}>
+            <Stack
+              randomRotation={true}
+              sensitivity={180}
+              sendToBackOnClick={true}
+              autoplay={true}
+              autoplayDelay={4000}
+              pauseOnHover={true}
+              mobileClickOnly={true}
+              animationConfig={{ stiffness: 260, damping: 24 }}
+              cards={outcomes.map((outcome) => (
+                <div
+                  key={outcome.label}
+                  className={`w-full h-full rounded-[28px] border border-white/[0.08] backdrop-blur-xl p-8 md:p-10 flex flex-col justify-between ${outcome.shadow}`}
+                  style={{ background: "rgba(17, 24, 39, 0.75)" }}
                 >
-                  <div className="p-8 md:p-10 flex flex-col justify-between h-full min-h-[220px]">
-                    <div className="flex justify-between items-start gap-4 mb-8">
-                      <div className="flex gap-5 items-center">
-                        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${outcome.color} flex items-center justify-center text-white flex-shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-lg`}>
-                          {outcome.icon}
-                        </div>
-                        <div>
-                          <p className="text-sm font-semibold tracking-wide text-gray-400 uppercase">{outcome.label}</p>
-                          <p className="text-4xl md:text-5xl font-black tracking-tight text-white mt-1">
-                            {outcome.metric}
-                          </p>
-                        </div>
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div className="flex gap-5 items-center">
+                      <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${outcome.color} flex items-center justify-center text-white flex-shrink-0 shadow-lg`}>
+                        {outcome.icon}
                       </div>
-
-                      {/* Integrated Visualization */}
-                      <div className="flex-shrink-0">
-                        {outcome.viz}
+                      <div>
+                        <p className="text-sm font-semibold tracking-wide text-gray-400 uppercase">{outcome.label}</p>
+                        <p className="text-4xl md:text-5xl font-black tracking-tight text-white mt-1">
+                          {outcome.metric}
+                        </p>
                       </div>
                     </div>
-
-                    <p className="text-gray-400 leading-relaxed text-base group-hover:text-gray-300 transition-colors">
-                      {outcome.description}
-                    </p>
+                    <div className="flex-shrink-0 self-end sm:self-auto">
+                      {outcome.viz}
+                    </div>
                   </div>
-                </BorderGlow>
-              </motion.div>
-            );
-          })}
+                  <p className="text-gray-400 leading-relaxed text-base mt-4">
+                    {outcome.description}
+                  </p>
+                  <p className="text-xs text-gray-500 mt-4 text-center italic">Drag or click to see next card</p>
+                </div>
+              ))}
+            />
+          </div>
         </div>
 
         {/* Interactive Achievement Pathway Dashboard */}
