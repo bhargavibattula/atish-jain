@@ -15,8 +15,36 @@ import CTASection from "@/components/sections/CTASection";
 import ScrollVelocity from "@/components/ui/ScrollVelocity";
 import CurvedLoop from "@/components/ui/CurvedLoop";
 import RotatingText from "@/components/ui/RotatingText";
+import LogoLoop from "@/components/ui/LogoLoop";
+import { 
+  SiReact, 
+  SiNextdotjs, 
+  SiTypescript, 
+  SiTailwindcss, 
+  SiOpenai, 
+  SiGithub, 
+  SiVercel, 
+  SiSupabase, 
+  SiPython, 
+  SiDocker, 
+  SiPostgresql, 
+  SiNodedotjs 
+} from "react-icons/si";
 
-
+const techLogos = [
+  { node: <SiNextdotjs className="text-white" />, title: "Next.js" },
+  { node: <SiReact className="text-[#61DAFB]" />, title: "React" },
+  { node: <SiTypescript className="text-[#3178C6]" />, title: "TypeScript" },
+  { node: <SiTailwindcss className="text-[#06B6D4]" />, title: "Tailwind CSS" },
+  { node: <SiOpenai className="text-[#10A37F]" />, title: "OpenAI" },
+  { node: <SiGithub className="text-white" />, title: "GitHub" },
+  { node: <SiVercel className="text-white" />, title: "Vercel" },
+  { node: <SiSupabase className="text-[#3ECF8E]" />, title: "Supabase" },
+  { node: <SiPython className="text-[#3776AB]" />, title: "Python" },
+  { node: <SiDocker className="text-[#2496ED]" />, title: "Docker" },
+  { node: <SiPostgresql className="text-[#4169E1]" />, title: "PostgreSQL" },
+  { node: <SiNodedotjs className="text-[#5FA04E]" />, title: "Node.js" }
+];
 
 export default function HomePage() {
   return (
@@ -40,6 +68,30 @@ export default function HomePage() {
 
         {/* Act 3: Show the Path */}
         <MembershipSection />
+
+        {/* Tech Stack LogoLoop */}
+        <section className="py-10 bg-[#0B0F19] overflow-hidden border-t border-b border-white/[0.02] relative">
+          <div className="max-w-7xl mx-auto px-4 text-center mb-6">
+            <p className="text-gray-400/80 text-xs md:text-sm font-semibold tracking-wider uppercase">
+              The Modern AI Stack You Will Master
+            </p>
+          </div>
+          <div className="max-w-6xl mx-auto px-4">
+            <LogoLoop
+              logos={techLogos}
+              speed={50}
+              direction="left"
+              logoHeight={32}
+              gap={56}
+              fadeOut={true}
+              fadeOutColor="#0B0F19"
+              scaleOnHover={true}
+              pauseOnHover={true}
+              ariaLabel="Modern AI Stack"
+            />
+          </div>
+        </section>
+
         <ProjectsSection />
         <ProjectsGallerySection />
 
