@@ -11,6 +11,11 @@ export interface IUserDocument extends Document {
   image?: string;
   provider?: string;
   membership?: string;
+  whatsappNumber?: string;
+  membershipStatus?: "none" | "pending" | "approved" | "rejected";
+  membershipTypeRequested?: "silver" | "gold" | "diamond" | null;
+  applicationMessage?: string;
+  isActive: boolean;
   progress: {
     courseId: mongoose.Types.ObjectId;
     completedVideos: string[];
@@ -34,6 +39,11 @@ const UserSchema = new Schema<IUserDocument>(
     image: { type: String },
     provider: { type: String, default: "credentials" },
     membership: { type: Schema.Types.ObjectId, ref: "Membership", default: null },
+    whatsappNumber: { type: String, trim: true },
+    membershipStatus: { type: String, enum: ["none", "pending", "approved", "rejected"], default: "none" },
+    membershipTypeRequested: { type: String, enum: ["silver", "gold", "diamond", null], default: null },
+    applicationMessage: { type: String, trim: true },
+    isActive: { type: Boolean, default: true },
     progress: [
       {
         courseId: { type: Schema.Types.ObjectId, ref: "Course" },

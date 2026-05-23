@@ -6,6 +6,7 @@ import User from "@/models/User";
 import Membership from "@/models/Membership"; // Ensure Membership schema is registered
 import AdminDashboard from "@/components/dashboard/AdminDashboard";
 
+export const dynamic = "force-dynamic";
 export const metadata = { title: "Admin Dashboard" };
 
 export default async function AdminDashboardPage() {
@@ -24,10 +25,18 @@ export default async function AdminDashboardPage() {
       .lean(),
   ]);
 
+  // Calculate actual revenue from approved users' memberships
+  const revenue = allUsers.reduce((sum: number, u: any) => {
+    if (u.membershipStatus === "approved" && u.membership) {
+      return sum + (u.membership.price || 0);
+    }
+    return sum;
+  }, 0);
+
   const stats = {
     totalUsers,
-    totalMembers,
-    revenue: 0, // Placeholder or calculated if required
+    totalMembers: allUsers.filter((u: any) => u.membershipStatus === "approved" && u.membership).length,
+    revenue,
   };
 
   return (

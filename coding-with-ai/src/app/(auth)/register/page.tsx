@@ -66,11 +66,25 @@ export default function RegisterPage() {
 
       toast.success("Account created! Signing you in...");
 
-      await signIn("credentials", {
+      const result = await signIn("credentials", {
         email: data.email,
         password: data.password,
-        callbackUrl: "/student",
+        redirect: false,
       });
+
+      if (result?.error) {
+        toast.error("Auto sign-in failed. Please login manually.");
+        router.push("/login");
+      } else {
+        const { getSession } = await import("next-auth/react");
+        const session = await getSession();
+        if (session?.user?.role === "admin") {
+          router.push("/admin");
+        } else {
+          router.push("/student");
+        }
+        router.refresh();
+      }
     } catch {
       toast.error("Something went wrong. Please try again.");
     }

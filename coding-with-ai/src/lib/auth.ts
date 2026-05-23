@@ -25,6 +25,10 @@ export const authOptions: NextAuthOptions = {
           throw new Error("No user found with this email");
         }
 
+        if (user.isActive === false) {
+          throw new Error("Your account has been deactivated. Please contact support.");
+        }
+
         const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
 
         if (!isPasswordValid) {
@@ -38,6 +42,7 @@ export const authOptions: NextAuthOptions = {
           image: user.image,
           role: user.role,
           membership: user.membership ? user.membership.toString() : null,
+          isActive: user.isActive !== false,
         };
       },
     }),
@@ -51,6 +56,8 @@ export const authOptions: NextAuthOptions = {
         token.id = user.id;
         token.role = user.role;
         token.membership = user.membership ? user.membership.toString() : null;
+        token.isActive = user.isActive;
+        token.membershipStatus = user.membershipStatus || "none";
       } else if (token.email) {
         // Refresh user data from DB
         await connectDB();
@@ -59,6 +66,8 @@ export const authOptions: NextAuthOptions = {
           token.id = dbUser._id.toString();
           token.role = dbUser.role;
           token.membership = dbUser.membership ? dbUser.membership.toString() : null;
+          token.isActive = dbUser.isActive !== false;
+          token.membershipStatus = dbUser.membershipStatus || "none";
         }
       }
       return token;
@@ -68,6 +77,8 @@ export const authOptions: NextAuthOptions = {
         session.user.id = token.id as string;
         session.user.role = token.role as "student" | "admin";
         session.user.membership = token.membership as string;
+        session.user.isActive = token.isActive as boolean;
+        session.user.membershipStatus = token.membershipStatus as string;
       }
       return session;
     },

@@ -6,14 +6,36 @@ export default withAuth(
     const { pathname } = req.nextUrl;
     const token = req.nextauth.token;
 
+    // Check if user is deactivated
+    if (token && token.isActive === false) {
+      return NextResponse.redirect(new URL("/login?error=deactivated", req.url));
+    }
+
+    // Redirect authenticated users away from auth pages
+    if ((pathname === "/login" || pathname === "/register") && token) {
+      if (token.role === "admin") {
+        return NextResponse.redirect(new URL("/admin", req.url));
+      }
+      return NextResponse.redirect(new URL("/student", req.url));
+    }
+
     // Admin only routes
     if (pathname.startsWith("/admin") && token?.role !== "admin") {
       return NextResponse.redirect(new URL("/login?error=unauthorized", req.url));
     }
 
-    // Student dashboard
-    if (pathname.startsWith("/student") && !token) {
-      return NextResponse.redirect(new URL("/login", req.url));
+    // Student only routes
+    if (pathname.startsWith("/student")) {
+      if (!token) {
+        return NextResponse.redirect(new URL("/login", req.url));
+      }
+      if (token.role !== "student") {
+        return NextResponse.redirect(new URL("/admin", req.url));
+      }
+      // Block access to subroutes (like /student/courses) if not approved
+      if (token.membershipStatus !== "approved" && pathname !== "/student") {
+        return NextResponse.redirect(new URL("/student", req.url));
+      }
     }
 
     return NextResponse.next();

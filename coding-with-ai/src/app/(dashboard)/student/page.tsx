@@ -7,11 +7,13 @@ import "@/models/Membership"; // Ensure Membership schema is registered
 import "@/models/Certificate"; // Ensure Certificate schema is registered
 import StudentDashboard from "@/components/dashboard/StudentDashboard";
 
+export const dynamic = "force-dynamic";
 export const metadata = { title: "Student Dashboard" };
 
 export default async function StudentDashboardPage() {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
+  if (session.user.role === "admin") redirect("/admin");
 
   await connectDB();
   const user = await User.findById(session.user.id)

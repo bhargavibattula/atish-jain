@@ -5,21 +5,13 @@ import Link from "next/link";
 import { ArrowRight, Terminal, Sparkles, Command, Zap, Play, Code2, Bot } from "lucide-react";
 import Image from "next/image";
 import { useRef, useEffect, useState } from "react";
-import LightRays from "@/components/ui/LightRays/LightRays";
-import SplitText from "@/components/ui/SplitText";
-import ShapeGrid from "@/components/ui/ShapeGrid";
+import dynamic from "next/dynamic";
 
-export default function HeroSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
+const LightRays = dynamic(() => import("@/components/ui/LightRays/LightRays"), { ssr: false });
+const SplitText = dynamic(() => import("@/components/ui/SplitText"), { ssr: false });
+const ShapeGrid = dynamic(() => import("@/components/ui/ShapeGrid"), { ssr: false });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
-  // Typing effect state
+function EditorPanel() {
   const [codeText, setCodeText] = useState("");
   const fullCode = `function generateAIApp(idea) {
   const stack = ["Next.js", "AI", "Tailwind"];
@@ -45,6 +37,53 @@ export default function HeroSection() {
   }, [fullCode]);
 
   return (
+    <div className="absolute inset-0 lg:right-[-10%] lg:left-[10%] top-[10%] bottom-[10%] rounded-[24px] border border-white/[0.08] bg-[#0A0F1C]/80 backdrop-blur-2xl shadow-[0_0_80px_rgba(59,130,246,0.2)] overflow-hidden z-10 transform lg:rotate-y-[-10deg] lg:rotate-x-[5deg] transition-transform duration-700 hover:rotate-y-0 hover:rotate-x-0">
+      {/* Editor Header */}
+      <div className="h-12 border-b border-white/[0.05] bg-white/[0.02] flex items-center px-4 gap-4">
+        <div className="flex gap-2">
+          <div className="w-3 h-3 rounded-full bg-red-500/80 shadow-[0_0_10px_rgba(239,68,68,0.5)]" />
+          <div className="w-3 h-3 rounded-full bg-yellow-500/80 shadow-[0_0_10px_rgba(234,179,8,0.5)]" />
+          <div className="w-3 h-3 rounded-full bg-green-500/80 shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
+        </div>
+        <div className="flex-1 flex justify-center">
+          <div className="px-3 py-1 rounded-md bg-black/40 border border-white/5 text-[11px] text-gray-400 font-mono flex items-center gap-2">
+            <Terminal size={12} className="text-cyan-400" /> index.tsx
+          </div>
+        </div>
+      </div>
+
+      {/* Editor Body (Live Typing Simulation) */}
+      <div className="p-6 font-mono text-sm leading-relaxed overflow-hidden">
+        <div className="flex">
+          <div className="text-gray-600 select-none pr-4 text-right border-r border-white/5 mr-4 flex flex-col gap-1">
+            {[1, 2, 3, 4, 5, 6, 7, 8].map(n => <span key={n}>{n}</span>)}
+          </div>
+          <div className="text-gray-300 whitespace-pre">
+            <span className="text-purple-400">export default</span> <span className="text-blue-400">function</span> <span className="text-yellow-300">App</span>() {'{\n'}
+            {'  '} <span className="text-cyan-400">const</span> app = <span className="text-blue-300">{codeText}</span>
+            <motion.span
+              animate={{ opacity: [1, 0] }}
+              transition={{ duration: 0.8, repeat: Infinity }}
+              className="inline-block w-2 h-4 bg-white align-middle ml-1"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function HeroSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  return (
     <section ref={containerRef} className="relative min-h-screen pt-32 pb-20 overflow-hidden bg-[#0B0F19] flex items-center">
       {/* Immersive Particle Background */}
       <div className="absolute inset-0 z-0">
@@ -60,20 +99,20 @@ export default function HeroSection() {
         />
 
         {/* WebGL Light Rays Background */}
-        <div className="absolute inset-0 pointer-events-none opacity-40 mix-blend-screen">
+        <div className="absolute inset-0 pointer-events-none opacity-90 mix-blend-screen">
           <LightRays
             raysOrigin="top-center"
             raysColor="#06b6d4"
-            raysSpeed={0.8}
-            lightSpread={1.5}
-            rayLength={2.5}
-            pulsating={false}
-            fadeDistance={1.0}
-            saturation={1.2}
+            raysSpeed={1.2}
+            lightSpread={2.5}
+            rayLength={3.5}
+            pulsating={true}
+            fadeDistance={1.5}
+            saturation={1.8}
             followMouse={true}
-            mouseInfluence={0.1}
+            mouseInfluence={0.2}
             noiseAmount={0.02}
-            distortion={0.05}
+            distortion={0.08}
           />
         </div>
 
@@ -190,40 +229,7 @@ export default function HeroSection() {
             className="relative lg:h-[600px] w-full mt-12 lg:mt-0 perspective-1000"
           >
             {/* The Main Editor Panel */}
-            <div className="absolute inset-0 lg:right-[-10%] lg:left-[10%] top-[10%] bottom-[10%] rounded-[24px] border border-white/[0.08] bg-[#0A0F1C]/80 backdrop-blur-2xl shadow-[0_0_80px_rgba(59,130,246,0.2)] overflow-hidden z-10 transform lg:rotate-y-[-10deg] lg:rotate-x-[5deg] transition-transform duration-700 hover:rotate-y-0 hover:rotate-x-0">
-
-              {/* Editor Header */}
-              <div className="h-12 border-b border-white/[0.05] bg-white/[0.02] flex items-center px-4 gap-4">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500/80 shadow-[0_0_10px_rgba(239,68,68,0.5)]" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/80 shadow-[0_0_10px_rgba(234,179,8,0.5)]" />
-                  <div className="w-3 h-3 rounded-full bg-green-500/80 shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
-                </div>
-                <div className="flex-1 flex justify-center">
-                  <div className="px-3 py-1 rounded-md bg-black/40 border border-white/5 text-[11px] text-gray-400 font-mono flex items-center gap-2">
-                    <Terminal size={12} className="text-cyan-400" /> index.tsx
-                  </div>
-                </div>
-              </div>
-
-              {/* Editor Body (Live Typing Simulation) */}
-              <div className="p-6 font-mono text-sm leading-relaxed overflow-hidden">
-                <div className="flex">
-                  <div className="text-gray-600 select-none pr-4 text-right border-r border-white/5 mr-4 flex flex-col gap-1">
-                    {[1, 2, 3, 4, 5, 6, 7, 8].map(n => <span key={n}>{n}</span>)}
-                  </div>
-                  <div className="text-gray-300 whitespace-pre">
-                    <span className="text-purple-400">export default</span> <span className="text-blue-400">function</span> <span className="text-yellow-300">App</span>() {'{\n'}
-                    {'  '} <span className="text-cyan-400">const</span> app = <span className="text-blue-300">{codeText}</span>
-                    <motion.span
-                      animate={{ opacity: [1, 0] }}
-                      transition={{ duration: 0.8, repeat: Infinity }}
-                      className="inline-block w-2 h-4 bg-white align-middle ml-1"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <EditorPanel />
 
             {/* Floating AI Chatbot Assistant Layer */}
             <motion.div
@@ -263,7 +269,7 @@ export default function HeroSection() {
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: [0, 15, 0], opacity: 1 }}
               transition={{ y: { duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }, opacity: { duration: 1, delay: 1.5 } }}
-              className="absolute top-10 -right-6 lg:-right-12 z-0 p-4 rounded-2xl border border-white/10 bg-[#0A0F1C]/60 backdrop-blur-md shadow-2xl"
+              className="absolute top-10 -right-6 lg:-right-12 z-20 p-4 rounded-2xl border border-white/10 bg-[#0A0F1C]/60 backdrop-blur-md shadow-2xl"
             >
               <div className="flex items-center gap-2 mb-2">
                 <Sparkles size={14} className="text-yellow-400" />

@@ -38,7 +38,13 @@ export default function LoginPage() {
       toast.error(result.error || "Invalid credentials");
     } else {
       toast.success("Welcome back!");
-      router.push("/student");
+      const { getSession } = await import("next-auth/react");
+      const session = await getSession();
+      if (session?.user?.role === "admin") {
+        router.push("/admin");
+      } else {
+        router.push("/student");
+      }
       router.refresh();
     }
   };
@@ -73,7 +79,11 @@ export default function LoginPage() {
         <div className="bg-[#111827] rounded-2xl border border-white/10 p-7 shadow-2xl shadow-black/40">
           {callbackError && (
             <div className="mb-5 p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-              {callbackError === "unauthorized" ? "You don't have permission to access that page." : "Something went wrong. Please try again."}
+              {callbackError === "unauthorized"
+                ? "You don't have permission to access that page."
+                : callbackError === "deactivated"
+                ? "Your account has been deactivated. Please contact support."
+                : "Something went wrong. Please try again."}
             </div>
           )}
 
