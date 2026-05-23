@@ -19,5 +19,5 @@ export default async function StudentDashboardPage() {
     .populate("certificates")
     .lean();
 
-  return <StudentDashboard user={JSON.parse(JSON.stringify(user))} session={session} />;
+  return <StudentDashboard user={JSON.parse(JSON.stringify(user))} session={JSON.parse(JSON.stringify(session))} />;
 }

@@ -5,6 +5,8 @@ import Link from "next/link";
 import { ArrowRight, Terminal, Sparkles, Command, Zap, Play, Code2, Bot } from "lucide-react";
 import Image from "next/image";
 import { useRef, useEffect, useState } from "react";
+import LightRays from "@/components/ui/LightRays/LightRays";
+import SplitText from "@/components/ui/SplitText";
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -47,6 +49,24 @@ export default function HeroSection() {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center opacity-[0.03]" />
         
+        {/* WebGL Light Rays Background */}
+        <div className="absolute inset-0 pointer-events-none opacity-40 mix-blend-screen">
+          <LightRays
+            raysOrigin="top-center"
+            raysColor="#06b6d4"
+            raysSpeed={0.8}
+            lightSpread={1.5}
+            rayLength={2.5}
+            pulsating={false}
+            fadeDistance={1.0}
+            saturation={1.2}
+            followMouse={true}
+            mouseInfluence={0.1}
+            noiseAmount={0.02}
+            distortion={0.05}
+          />
+        </div>
+
         {/* Holographic Glowing Orbs */}
         <motion.div 
           animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
@@ -79,20 +99,37 @@ export default function HeroSection() {
             </motion.div>
 
             {/* Massive Heading */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-5xl sm:text-7xl lg:text-[5rem] font-bold text-white tracking-tight mb-8 leading-[1.05]"
-            >
-              Build software <br />
-              <span className="relative">
-                <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
-                  at lightspeed.
+            <h1 className="text-5xl sm:text-7xl lg:text-[5rem] font-bold text-white tracking-tight mb-8 leading-[1.05] flex flex-col items-start">
+              <SplitText
+                text="Build software"
+                className="text-white block text-left"
+                delay={50}
+                duration={0.8}
+                ease="power3.out"
+                splitType="chars"
+                from={{ opacity: 0, y: 40 }}
+                to={{ opacity: 1, y: 0 }}
+                textAlign="left"
+                tag="span"
+              />
+              <span className="relative inline-block mt-2">
+                <span className="relative z-10">
+                  <SplitText
+                    text="at lightspeed."
+                    className="inline-block text-left [&_.split-char]:text-transparent [&_.split-char]:bg-clip-text [&_.split-char]:bg-gradient-to-r [&_.split-char]:from-cyan-400 [&_.split-char]:via-blue-500 [&_.split-char]:to-purple-500"
+                    delay={50}
+                    duration={0.8}
+                    ease="power3.out"
+                    splitType="chars"
+                    from={{ opacity: 0, y: 40 }}
+                    to={{ opacity: 1, y: 0 }}
+                    textAlign="left"
+                    tag="span"
+                  />
                 </span>
                 <span className="absolute inset-0 blur-xl bg-gradient-to-r from-cyan-400/30 to-purple-500/30 -z-10" />
               </span>
-            </motion.h1>
+            </h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}

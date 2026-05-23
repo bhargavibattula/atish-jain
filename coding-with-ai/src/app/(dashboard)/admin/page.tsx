@@ -34,7 +34,7 @@ export default async function AdminDashboardPage() {
     <AdminDashboard
       stats={stats}
       allUsers={JSON.parse(JSON.stringify(allUsers))}
-      session={session}
+      session={JSON.parse(JSON.stringify(session))}
     />
   );
 }

@@ -37,7 +37,7 @@ export const authOptions: NextAuthOptions = {
           email: user.email,
           image: user.image,
           role: user.role,
-          membership: user.membership,
+          membership: user.membership ? user.membership.toString() : null,
         };
       },
     }),
@@ -50,7 +50,7 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id;
         token.role = user.role;
-        token.membership = user.membership;
+        token.membership = user.membership ? user.membership.toString() : null;
       } else if (token.email) {
         // Refresh user data from DB
         await connectDB();
@@ -58,7 +58,7 @@ export const authOptions: NextAuthOptions = {
         if (dbUser) {
           token.id = dbUser._id.toString();
           token.role = dbUser.role;
-          token.membership = dbUser.membership;
+          token.membership = dbUser.membership ? dbUser.membership.toString() : null;
         }
       }
       return token;
