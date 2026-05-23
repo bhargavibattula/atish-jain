@@ -21,6 +21,9 @@ interface SplitTextProps {
   textAlign?: 'left' | 'center' | 'right' | 'justify' | 'inherit';
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div';
   onLetterAnimationComplete?: () => void;
+  animateOnMount?: boolean;
+  overflow?: 'visible' | 'hidden';
+  display?: string;
 }
 
 const SplitText: React.FC<SplitTextProps> = ({
@@ -36,7 +39,10 @@ const SplitText: React.FC<SplitTextProps> = ({
   rootMargin = '-100px',
   textAlign = 'center',
   tag = 'p',
-  onLetterAnimationComplete
+  onLetterAnimationComplete,
+  animateOnMount = false,
+  overflow = 'visible',
+  display = 'block'
 }) => {
   const ref = useRef<HTMLParagraphElement>(null);
   const animationCompletedRef = useRef(false);
@@ -92,18 +98,20 @@ const SplitText: React.FC<SplitTextProps> = ({
       // Reset initial values before starting animation
       gsap.set(targets, { ...from });
 
+      const scrollTriggerConfig = animateOnMount ? undefined : {
+        trigger: el,
+        start,
+        once: true,
+        fastScrollEnd: true,
+        anticipatePin: 0.4
+      };
+
       const tween = gsap.to(targets, {
         ...to,
         duration,
         ease,
         stagger: delay / 1000,
-        scrollTrigger: {
-          trigger: el,
-          start,
-          once: true,
-          fastScrollEnd: true,
-          anticipatePin: 0.4
-        },
+        scrollTrigger: scrollTriggerConfig,
         onComplete: () => {
           animationCompletedRef.current = true;
           onCompleteRef.current?.();
@@ -113,9 +121,11 @@ const SplitText: React.FC<SplitTextProps> = ({
       });
 
       return () => {
-        ScrollTrigger.getAll().forEach(st => {
-          if (st.trigger === el) st.kill();
-        });
+        if (!animateOnMount) {
+          ScrollTrigger.getAll().forEach(st => {
+            if (st.trigger === el) st.kill();
+          });
+        }
         tween.kill();
       };
     },
@@ -130,7 +140,8 @@ const SplitText: React.FC<SplitTextProps> = ({
         JSON.stringify(to),
         threshold,
         rootMargin,
-        fontsLoaded
+        fontsLoaded,
+        animateOnMount
       ],
       scope: ref
     }
@@ -143,13 +154,13 @@ const SplitText: React.FC<SplitTextProps> = ({
         <span
           key={wordIndex}
           className="split-word inline-block whitespace-nowrap"
-          style={{ marginRight: '0.22em' }}
+          style={{ marginRight: '0.22em', paddingBottom: '0.15em', marginBottom: '-0.15em' }}
         >
           {word.split('').map((char, charIndex) => (
             <span
               key={charIndex}
               className="split-char inline-block"
-              style={{ display: 'inline-block', willChange: 'transform, opacity' }}
+              style={{ display: 'inline-block', willChange: 'transform, opacity', paddingBottom: '0.15em', marginBottom: '-0.15em' }}
             >
               {char}
             </span>
@@ -164,7 +175,7 @@ const SplitText: React.FC<SplitTextProps> = ({
         <span
           key={wordIndex}
           className="split-word inline-block"
-          style={{ marginRight: '0.22em', willChange: 'transform, opacity' }}
+          style={{ marginRight: '0.22em', willChange: 'transform, opacity', paddingBottom: '0.15em', marginBottom: '-0.15em' }}
         >
           {word}
         </span>
@@ -176,8 +187,8 @@ const SplitText: React.FC<SplitTextProps> = ({
 
   const style: React.CSSProperties = {
     textAlign,
-    overflow: 'hidden',
-    display: 'inline-block',
+    overflow,
+    display,
     whiteSpace: 'normal',
     wordWrap: 'break-word',
     willChange: 'transform, opacity'

@@ -11,6 +11,7 @@ import FounderSection from "@/components/sections/FounderSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import FAQSection from "@/components/sections/FAQSection";
 import CTASection from "@/components/sections/CTASection";
+import ScrollVelocity from "@/components/ui/ScrollVelocity";
 
 export default function HomePage() {
   return (
@@ -31,12 +32,25 @@ export default function HomePage() {
 
         {/* Act 4: Prove It */}
         <OutcomesSection />
+        
         <FounderSection />
         <TestimonialsSection />
 
         {/* Act 5: Close the Loop */}
         <FAQSection />
         <CTASection />
+
+        {/* Cinematic Kinetic Divider - Positioned above footer with reduced sizing */}
+        <div className="py-10 bg-[#0B0F19] overflow-hidden border-t border-white/[0.03] flex flex-col gap-4">
+          <ScrollVelocity
+            texts={[
+              "Build with AI // 10x Developer // Silicon Valley // Zero to Production //",
+              "Deploy at Lightspeed // Master Prompting // Full Stack Apps // Scale //"
+            ]}
+            velocity={60}
+            className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-500 font-extrabold uppercase tracking-tight select-none opacity-80"
+          />
+        </div>
       </main>
       <Footer />
     </>

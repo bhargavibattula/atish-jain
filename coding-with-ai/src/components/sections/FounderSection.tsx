@@ -28,27 +28,30 @@ export default function FounderSection() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
-            <div className="relative mx-auto max-w-md aspect-[4/5] rounded-[32px] overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-transparent to-transparent z-10 opacity-80" />
-              <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-purple-500/20 mix-blend-overlay z-10 transition-opacity duration-700 group-hover:opacity-0" />
-              
-              {/* Premium Founder Photo */}
-              <div className="w-full h-full bg-[#111827] flex flex-col items-center justify-center border border-white/10 relative overflow-hidden">
-                <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10" />
-                <Image
-                  src="/atishjainsir.png"
-                  alt="Atish Jain"
-                  fill
-                  className="object-cover object-top z-20 grayscale-[20%] hover:grayscale-0 transition-all duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-transparent to-transparent z-30 opacity-90" />
+            <div className="relative mx-auto max-w-md">
+              {/* Inner container with overflow-hidden for the image styling */}
+              <div className="relative w-full aspect-[4/5] rounded-[32px] overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-transparent to-transparent z-10 opacity-80" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-purple-500/20 mix-blend-overlay z-10 transition-opacity duration-700 group-hover:opacity-0" />
+                
+                {/* Premium Founder Photo */}
+                <div className="w-full h-full bg-[#111827] flex flex-col items-center justify-center border border-white/10 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10" />
+                  <Image
+                    src="/atishjainsir.png"
+                    alt="Atish Jain"
+                    fill
+                    className="object-cover object-top z-20 grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-transparent to-transparent z-30 opacity-90" />
+                </div>
               </div>
 
-              {/* Floating Credibility Indicators */}
+              {/* Floating Credibility Indicators - Outside overflow-hidden so it's fully visible */}
               <motion.div 
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute bottom-10 -right-6 lg:-right-12 z-30 p-5 rounded-2xl bg-[#0A0F1C]/80 backdrop-blur-xl border border-white/10 shadow-2xl"
+                className="absolute bottom-10 -right-6 lg:-right-12 z-30 p-5 rounded-2xl bg-[#0A0F1C]/90 backdrop-blur-xl border border-white/10 shadow-2xl"
               >
                 <Quote size={24} className="text-blue-400 mb-2 opacity-50" />
                 <p className="text-sm text-gray-300 font-medium italic">"Coding is a superpower. <br/> AI is the multiplier."</p>

@@ -111,13 +111,16 @@ export default function HeroSection() {
                 to={{ opacity: 1, y: 0 }}
                 textAlign="left"
                 tag="span"
+                animateOnMount={true}
+                overflow="visible"
+                display="block"
               />
-              <span className="relative inline-block mt-2">
+              <span className="relative inline-block mt-2 pb-3">
                 <span className="relative z-10">
                   <SplitText
                     text="at lightspeed."
                     className="inline-block text-left [&_.split-char]:text-transparent [&_.split-char]:bg-clip-text [&_.split-char]:bg-gradient-to-r [&_.split-char]:from-cyan-400 [&_.split-char]:via-blue-500 [&_.split-char]:to-purple-500"
-                    delay={50}
+                    delay={55}
                     duration={0.8}
                     ease="power3.out"
                     splitType="chars"
@@ -125,6 +128,9 @@ export default function HeroSection() {
                     to={{ opacity: 1, y: 0 }}
                     textAlign="left"
                     tag="span"
+                    animateOnMount={true}
+                    overflow="visible"
+                    display="inline-block"
                   />
                 </span>
                 <span className="absolute inset-0 blur-xl bg-gradient-to-r from-cyan-400/30 to-purple-500/30 -z-10" />
