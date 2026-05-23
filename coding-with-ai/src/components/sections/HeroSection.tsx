@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useRef, useEffect, useState } from "react";
 import LightRays from "@/components/ui/LightRays/LightRays";
 import SplitText from "@/components/ui/SplitText";
+import ShapeGrid from "@/components/ui/ShapeGrid";
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -47,7 +48,16 @@ export default function HeroSection() {
     <section ref={containerRef} className="relative min-h-screen pt-32 pb-20 overflow-hidden bg-[#0B0F19] flex items-center">
       {/* Immersive Particle Background */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center opacity-[0.03]" />
+        <ShapeGrid 
+          speed={0.4} 
+          squareSize={48}
+          direction="diagonal"
+          borderColor="rgba(255, 255, 255, 0.025)"
+          hoverFillColor="rgba(6, 182, 212, 0.15)"
+          shape="hexagon"
+          hoverTrailAmount={6}
+          className="absolute inset-0 z-0 pointer-events-none"
+        />
         
         {/* WebGL Light Rays Background */}
         <div className="absolute inset-0 pointer-events-none opacity-40 mix-blend-screen">
