@@ -6,6 +6,7 @@ import WhySection from "@/components/sections/WhySection";
 import AIToolsSection from "@/components/sections/AIToolsSection";
 import MembershipSection from "@/components/sections/MembershipSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
+import ProjectsGallerySection from "@/components/sections/ProjectsGallerySection";
 import OutcomesSection from "@/components/sections/OutcomesSection";
 import FounderSection from "@/components/sections/FounderSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
@@ -29,6 +30,7 @@ export default function HomePage() {
         {/* Act 3: Show the Path */}
         <MembershipSection />
         <ProjectsSection />
+        <ProjectsGallerySection />
 
         {/* Act 4: Prove It */}
         <OutcomesSection />

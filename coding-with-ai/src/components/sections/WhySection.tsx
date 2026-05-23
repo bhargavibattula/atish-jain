@@ -2,7 +2,8 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { Zap, Brain, Target, Rocket, Briefcase, DollarSign, ArrowDownCircle } from "lucide-react";
+import { Zap, Brain, Target, Rocket, Briefcase } from "lucide-react";
+import BorderGlow from "@/components/ui/BorderGlow";
 
 const capabilities = [
   {
@@ -12,6 +13,8 @@ const capabilities = [
     color: "from-blue-500 to-cyan-400",
     glow: "shadow-[0_0_30px_rgba(59,130,246,0.3)]",
     alignment: "left",
+    glowColorHSL: "200 80 70",
+    borderColors: ['#3b82f6', '#22d3ee', '#60a5fa'],
   },
   {
     icon: <Brain size={24} />,
@@ -20,6 +23,8 @@ const capabilities = [
     color: "from-purple-500 to-fuchsia-400",
     glow: "shadow-[0_0_30px_rgba(168,85,247,0.3)]",
     alignment: "right",
+    glowColorHSL: "280 85 70",
+    borderColors: ['#a855f7', '#e879f9', '#c084fc'],
   },
   {
     icon: <Rocket size={24} />,
@@ -28,6 +33,8 @@ const capabilities = [
     color: "from-orange-500 to-rose-400",
     glow: "shadow-[0_0_30px_rgba(249,115,22,0.3)]",
     alignment: "left",
+    glowColorHSL: "20 85 70",
+    borderColors: ['#f97316', '#fb7185', '#fda4af'],
   },
   {
     icon: <Briefcase size={24} />,
@@ -36,6 +43,8 @@ const capabilities = [
     color: "from-emerald-500 to-teal-400",
     glow: "shadow-[0_0_30px_rgba(16,185,129,0.3)]",
     alignment: "right",
+    glowColorHSL: "150 80 70",
+    borderColors: ['#10b981', '#2dd4bf', '#34d399'],
   },
 ];
 
@@ -116,20 +125,31 @@ export default function WhySection() {
               >
                 {/* Content Panel */}
                 <div className={`flex-1 w-full md:w-1/2 ${cap.alignment === 'right' ? 'md:text-left' : 'md:text-right'}`}>
-                  <div className={`group relative p-8 rounded-[24px] bg-[#111827]/60 backdrop-blur-xl border border-white/[0.08] hover:bg-[#111827]/80 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl`}>
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent rounded-[24px] pointer-events-none" />
-                    
-                    <div className={`flex items-center gap-4 mb-4 ${cap.alignment === 'right' ? 'justify-start' : 'md:justify-end justify-start'}`}>
-                      <div className={`w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-500 ${cap.glow}`}>
-                        {cap.icon}
+                  <BorderGlow
+                    edgeSensitivity={35}
+                    glowColor={cap.glowColorHSL}
+                    backgroundColor="#11182799"
+                    borderRadius={24}
+                    glowRadius={40}
+                    glowIntensity={0.8}
+                    coneSpread={25}
+                    animated={true}
+                    colors={cap.borderColors}
+                    className="group relative transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl backdrop-blur-xl"
+                  >
+                    <div className="p-8">
+                      <div className={`flex items-center gap-4 mb-4 ${cap.alignment === 'right' ? 'justify-start' : 'md:justify-end justify-start'}`}>
+                        <div className={`w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-500 ${cap.glow}`}>
+                          {cap.icon}
+                        </div>
+                        <h3 className="text-2xl font-bold text-white tracking-tight">{cap.title}</h3>
                       </div>
-                      <h3 className="text-2xl font-bold text-white tracking-tight">{cap.title}</h3>
+                      
+                      <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors text-lg">
+                        {cap.description}
+                      </p>
                     </div>
-                    
-                    <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors text-lg">
-                      {cap.description}
-                    </p>
-                  </div>
+                  </BorderGlow>
                 </div>
 
                 {/* Central Node (Desktop only) */}

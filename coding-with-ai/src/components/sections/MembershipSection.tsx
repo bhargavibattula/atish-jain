@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Check, Gem } from "lucide-react";
+import GlareHover from "@/components/ui/GlareHover";
 
 const memberships = [
   {
@@ -124,8 +125,17 @@ export default function MembershipSection() {
                 <div className="absolute -inset-[1px] rounded-[24px] bg-gradient-to-b from-amber-400/30 via-amber-500/10 to-transparent blur-sm pointer-events-none z-10" />
               )}
 
-              <div
-                className={`relative flex-1 flex flex-col rounded-[24px] border ${tier.borderColor} ${tier.cardBg} backdrop-blur-xl overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl ${tier.glowColor}`}
+              <GlareHover
+                width="100%"
+                height="100%"
+                background="transparent"
+                borderRadius="24px"
+                borderColor="transparent"
+                glareColor={tier.id === "silver" ? "#cbd5e1" : tier.id === "gold" ? "#fbbf24" : "#38bdf8"}
+                glareOpacity={0.12}
+                glareAngle={-35}
+                glareSize={200}
+                className={`relative flex-1 flex flex-col border ${tier.borderColor} ${tier.cardBg} backdrop-blur-xl overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl ${tier.glowColor}`}
               >
                 {/* Course Banner Image */}
                 <div className="relative w-full h-44 overflow-hidden bg-slate-950 z-0">
@@ -197,7 +207,7 @@ export default function MembershipSection() {
                     </Link>
                   </div>
                 </div>
-              </div>
+              </GlareHover>
             </motion.div>
           ))}
         </div>
