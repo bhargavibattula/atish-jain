@@ -5,6 +5,9 @@ export interface IUserDocument extends Document {
   email: string;
   password?: string;
   role: "student" | "admin";
+  phone?: string;
+  college?: string;
+  degree?: string;
   image?: string;
   provider?: string;
   membership?: string;
@@ -25,6 +28,9 @@ const UserSchema = new Schema<IUserDocument>(
     email: { type: String, required: true, unique: true, lowercase: true, trim: true },
     password: { type: String, select: false, minlength: 6 },
     role: { type: String, enum: ["student", "admin"], default: "student" },
+    phone: { type: String, trim: true },
+    college: { type: String, trim: true },
+    degree: { type: String, trim: true },
     image: { type: String },
     provider: { type: String, default: "credentials" },
     membership: { type: Schema.Types.ObjectId, ref: "Membership", default: null },

@@ -158,7 +158,7 @@ export default function StudentDashboard({ user, session }: StudentDashboardProp
           </div>
 
           {/* No membership CTA */}
-          {!user?.membership && (
+          {!user?.membership ? (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -167,11 +167,11 @@ export default function StudentDashboard({ user, session }: StudentDashboardProp
             >
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div>
-                  <h3 className="font-poppins font-bold text-lg text-white mb-1 flex items-center gap-2">
+                  <h3 className="font-bold text-lg text-white mb-1 flex items-center gap-2">
                     <FaRocket className="text-blue-400" size={18} /> Ready to start building?
                   </h3>
                   <p className="text-gray-400 text-sm">
-                    Choose a membership to unlock courses, projects, and community access.
+                    Choose a membership plan to unlock premium courses, coding projects, and live mentorship.
                   </p>
                 </div>
                 <Link
@@ -182,11 +182,82 @@ export default function StudentDashboard({ user, session }: StudentDashboardProp
                 </Link>
               </div>
             </motion.div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="mb-8 p-6 lg:p-8 rounded-2xl bg-[#111827]/40 border border-white/[0.06] backdrop-blur-xl relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-[300px] h-[300px] rounded-full bg-blue-500/5 blur-[80px] pointer-events-none" />
+              
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-white/5">
+                <div>
+                  <span className={`inline-flex px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-3 ${
+                    user.membership.type === "silver"
+                      ? "bg-slate-500/10 text-slate-300 border border-slate-500/20"
+                      : user.membership.type === "gold"
+                      ? "bg-amber-500/10 text-amber-300 border border-amber-500/20"
+                      : "bg-cyan-500/10 text-cyan-300 border border-cyan-500/20"
+                  }`}>
+                    {user.membership.title || `${user.membership.type} plan`}
+                  </span>
+                  <h2 className="text-2xl font-bold text-white tracking-tight">{user.membership.title}</h2>
+                  <p className="text-gray-400 text-sm mt-1">{user.membership.description}</p>
+                </div>
+                <div className="text-left md:text-right">
+                  <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider">Milestone target</p>
+                  <p className="text-lg font-bold text-blue-400 mt-0.5">{user.membership.milestone}</p>
+                </div>
+              </div>
+
+              {/* Modules / Course Curriculum */}
+              <div className="mt-8">
+                <h3 className="text-base font-bold text-white mb-5 flex items-center gap-2">
+                  <BookOpen size={18} className="text-blue-400" />
+                  Your Course Curriculum
+                </h3>
+                
+                {user.membership.modules && user.membership.modules.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {user.membership.modules.map((mod: any, index: number) => (
+                      <div key={index} className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.04] hover:border-white/[0.08] transition-all">
+                        <div className="flex items-start justify-between gap-3">
+                          <div>
+                            <span className="text-[10px] font-bold text-blue-400 uppercase tracking-widest">Module {index + 1}</span>
+                            <h4 className="text-sm font-semibold text-white mt-0.5">{mod.title}</h4>
+                            <p className="text-xs text-gray-400 mt-1 line-clamp-2 leading-relaxed">{mod.description}</p>
+                          </div>
+                          <span className="text-[10px] font-semibold text-gray-500 bg-white/5 px-2 py-0.5 rounded-full flex-shrink-0">
+                            {mod.videoCount} videos
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-sm text-gray-500">No modules available in this membership tier.</p>
+                )}
+              </div>
+
+              {/* Features List */}
+              <div className="mt-8 pt-6 border-t border-white/5">
+                <h3 className="text-xs text-gray-500 font-bold uppercase tracking-widest mb-4">Included Perks & Features</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                  {user.membership.features?.map((feat: string, i: number) => (
+                    <div key={i} className="flex items-center gap-2.5">
+                      <div className="w-5 h-5 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-400 text-xs font-bold flex-shrink-0">✓</div>
+                      <span className="text-xs text-gray-300 font-medium">{feat}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
           )}
 
           {/* Quick Links */}
           <div className="mb-8">
-            <h2 className="font-poppins font-bold text-lg text-white mb-4">Quick Access</h2>
+            <h2 className="font-bold text-lg text-white mb-4">Quick Access</h2>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {quickLinks.map((link, i) => (
                 <motion.div
@@ -214,9 +285,9 @@ export default function StudentDashboard({ user, session }: StudentDashboardProp
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="p-6 rounded-2xl bg-[#111827] border border-white/10"
+              className="p-6 rounded-2xl bg-[#111827]/40 border border-white/[0.06] backdrop-blur-xl"
             >
-              <h3 className="font-poppins font-bold text-base text-white mb-4">My Courses</h3>
+              <h3 className="font-bold text-base text-white mb-4">My Courses Progress</h3>
               {user?.progress?.length > 0 ? (
                 <div className="space-y-3">
                   {user.progress.slice(0, 3).map((p: any, i: number) => (
@@ -239,10 +310,10 @@ export default function StudentDashboard({ user, session }: StudentDashboardProp
                 </div>
               ) : (
                 <div className="text-center py-8">
-                  <BookOpen size={32} className="text-gray-700 mx-auto mb-3" />
-                  <p className="text-gray-500 text-sm">No courses started yet.</p>
-                  <Link href="/memberships" className="text-blue-400 text-sm hover:underline mt-2 inline-block">
-                    Browse memberships →
+                  <BookOpen size={32} className="text-gray-700 mx-auto mb-3 animate-pulse" />
+                  <p className="text-gray-500 text-sm">No active courses started yet.</p>
+                  <Link href="/memberships" className="text-blue-400 text-sm hover:underline mt-2 inline-block font-semibold">
+                    Browse and purchase memberships →
                   </Link>
                 </div>
               )}
@@ -253,23 +324,23 @@ export default function StudentDashboard({ user, session }: StudentDashboardProp
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.65 }}
-              className="p-6 rounded-2xl bg-[#111827] border border-white/10"
+              className="p-6 rounded-2xl bg-[#111827]/40 border border-white/[0.06] backdrop-blur-xl"
             >
-              <h3 className="font-poppins font-bold text-base text-white mb-4">Certificates</h3>
+              <h3 className="font-bold text-base text-white mb-4">My Certificates</h3>
               {user?.certificates?.length > 0 ? (
                 <div className="space-y-3">
                   {user.certificates.slice(0, 3).map((cert: any, i: number) => (
                     <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-yellow-500/10 border border-yellow-500/20">
                       <Award size={16} className="text-yellow-400 flex-shrink-0" />
-                      <span className="text-sm text-white">{cert.courseName || `Certificate ${i + 1}`}</span>
+                      <span className="text-sm text-white font-semibold">{cert.courseName || `Certificate ${i + 1}`}</span>
                     </div>
                   ))}
                 </div>
               ) : (
                 <div className="text-center py-8">
                   <Award size={32} className="text-gray-700 mx-auto mb-3" />
-                  <p className="text-gray-500 text-sm">No certificates yet.</p>
-                  <p className="text-gray-600 text-xs mt-1">Complete a course to earn your first certificate.</p>
+                  <p className="text-gray-500 text-sm">No certificates earned yet.</p>
+                  <p className="text-gray-600 text-xs mt-1 leading-relaxed">Complete curriculum modules and score well to unlock official certificates.</p>
                 </div>
               )}
             </motion.div>

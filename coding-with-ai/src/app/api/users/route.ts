@@ -1,14 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
+import Membership from "@/models/Membership"; // Ensure Membership schema is registered
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, password } = await req.json();
+    const { name, email, password, phone, college, degree } = await req.json();
 
     if (!name || !email || !password) {
-      return NextResponse.json({ error: "All fields are required" }, { status: 400 });
+      return NextResponse.json({ error: "Name, email, and password are required" }, { status: 400 });
     }
 
     if (password.length < 6) {
@@ -29,6 +32,9 @@ export async function POST(req: NextRequest) {
       email,
       password: hashedPassword,
       role: "student",
+      phone,
+      college,
+      degree,
     });
 
     return NextResponse.json(
@@ -46,10 +52,20 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session || session.user.role !== "admin") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     await connectDB();
-    const users = await User.find({}).select("-password").sort({ createdAt: -1 });
+    const users = await User.find({})
+      .populate("membership")
+      .select("-password")
+      .sort({ createdAt: -1 });
+
     return NextResponse.json({ users });
   } catch (error) {
+    console.error("Fetch users error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

@@ -38,6 +38,9 @@ async function connectDB(): Promise<typeof mongoose> {
 
   try {
     cached.conn = await cached.promise;
+    // Seed admin user in background
+    const { seedAdmin } = require("./seed");
+    seedAdmin().catch((err: any) => console.error("Error in seeding admin:", err));
   } catch (e) {
     cached.promise = null;
     throw e;
