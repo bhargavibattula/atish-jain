@@ -13,6 +13,8 @@ import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import FAQSection from "@/components/sections/FAQSection";
 import CTASection from "@/components/sections/CTASection";
 import ScrollVelocity from "@/components/ui/ScrollVelocity";
+import CurvedLoop from "@/components/ui/CurvedLoop";
+
 
 export default function HomePage() {
   return (
@@ -25,6 +27,13 @@ export default function HomePage() {
 
         {/* Act 2: Build Desire */}
         <WhySection />
+        <CurvedLoop 
+          marqueeText="BUILD WITH AI ✦ MASTER THE ARSENAL ✦ DEPLOY IN SECONDS ✦ BECOME A 10X DEVELOPER ✦ CHATGPT ✦ CLAUDE 3.5 ✦ CURSOR ✦ BOLT.NEW ✦ GITHUB COPILOT ✦"
+          speed={3.5}
+          curveAmount={0}
+          direction="left"
+          interactive={true}
+        />
         <AIToolsSection />
 
         {/* Act 3: Show the Path */}
