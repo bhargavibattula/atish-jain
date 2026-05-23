@@ -5,7 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, LogOut, User, LayoutDashboard } from "lucide-react";
+import { Menu, X, ChevronDown, LogOut, User, LayoutDashboard, Home, Award, Briefcase, Bot, Users } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import Dock from "@/components/ui/Dock";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -20,6 +22,71 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const dockItems = [
+    {
+      icon: (
+        <div className="relative flex flex-col items-center justify-center">
+          <Home size={20} className={pathname === "/" ? "text-cyan-400" : "text-gray-300"} />
+          {pathname === "/" && (
+            <span className="absolute -bottom-2 w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#06b6d4]" />
+          )}
+        </div>
+      ),
+      label: "Home",
+      onClick: () => router.push("/"),
+    },
+    {
+      icon: (
+        <div className="relative flex flex-col items-center justify-center">
+          <Award size={20} className={pathname === "/memberships" ? "text-cyan-400" : "text-gray-300"} />
+          {pathname === "/memberships" && (
+            <span className="absolute -bottom-2 w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#06b6d4]" />
+          )}
+        </div>
+      ),
+      label: "Memberships",
+      onClick: () => router.push("/memberships"),
+    },
+    {
+      icon: (
+        <div className="relative flex flex-col items-center justify-center">
+          <Briefcase size={20} className={pathname === "/projects" ? "text-cyan-400" : "text-gray-300"} />
+          {pathname === "/projects" && (
+            <span className="absolute -bottom-2 w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#06b6d4]" />
+          )}
+        </div>
+      ),
+      label: "Projects",
+      onClick: () => router.push("/projects"),
+    },
+    {
+      icon: (
+        <div className="relative flex flex-col items-center justify-center">
+          <Bot size={20} className={pathname === "/ai-tools" ? "text-cyan-400" : "text-gray-300"} />
+          {pathname === "/ai-tools" && (
+            <span className="absolute -bottom-2 w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#06b6d4]" />
+          )}
+        </div>
+      ),
+      label: "AI Tools",
+      onClick: () => router.push("/ai-tools"),
+    },
+    {
+      icon: (
+        <div className="relative flex flex-col items-center justify-center">
+          <Users size={20} className={pathname === "/community" ? "text-cyan-400" : "text-gray-300"} />
+          {pathname === "/community" && (
+            <span className="absolute -bottom-2 w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#06b6d4]" />
+          )}
+        </div>
+      ),
+      label: "Community",
+      onClick: () => router.push("/community"),
+    },
+  ];
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 40);
@@ -28,7 +95,8 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 pt-4 px-4 sm:px-6 lg:px-8 pointer-events-none">
+    <>
+      <header className="fixed top-0 left-0 right-0 z-50 pt-4 px-4 sm:px-6 lg:px-8 pointer-events-none">
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -52,18 +120,16 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* Desktop Nav Links */}
-          <div className="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="relative px-4 py-2 text-sm text-gray-300 hover:text-white transition-colors duration-300 font-medium group"
-              >
-                {link.label}
-                <span className="absolute inset-x-4 bottom-0 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-center" />
-              </Link>
-            ))}
+          {/* Desktop Nav Links replaced by Dock in the center */}
+          <div className="hidden lg:flex items-center justify-center relative w-[360px] h-12">
+            <Dock
+              items={dockItems}
+              panelHeight={40}
+              baseItemSize={32}
+              magnification={48}
+              distance={100}
+              className="navbar-dock"
+            />
           </div>
 
           {/* Desktop Actions */}
@@ -214,5 +280,7 @@ export default function Navbar() {
         </AnimatePresence>
       </motion.nav>
     </header>
+
+    </>
   );
 }
