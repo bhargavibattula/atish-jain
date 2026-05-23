@@ -14,6 +14,8 @@ import FAQSection from "@/components/sections/FAQSection";
 import CTASection from "@/components/sections/CTASection";
 import ScrollVelocity from "@/components/ui/ScrollVelocity";
 import CurvedLoop from "@/components/ui/CurvedLoop";
+import RotatingText from "@/components/ui/RotatingText";
+
 
 
 export default function HomePage() {
@@ -48,6 +50,34 @@ export default function HomePage() {
         <TestimonialsSection />
 
         {/* Act 5: Close the Loop */}
+        <section className="py-20 relative bg-[#0B0F19] overflow-hidden border-t border-white/[0.02]">
+          <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center opacity-[0.02] [mask-image:radial-gradient(ellipse_at_center,white,transparent_80%)] pointer-events-none" />
+          
+          <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-6 flex flex-col items-center gap-4 leading-snug md:leading-normal">
+              <span className="flex flex-wrap items-center justify-center gap-3">
+                Curious about
+                <RotatingText
+                  texts={["Cohort Schedules?", "AI Mentorship?", "Hands-on Projects?", "Job Placements?", "Tuition Fees?"]}
+                  mainClassName="px-4 py-2 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-cyan-500/20 text-cyan-400 overflow-hidden justify-center rounded-2xl shadow-[0_0_20px_rgba(6,182,212,0.1)] inline-flex items-center align-middle"
+                  staggerFrom={"last"}
+                  initial={{ y: "100%", opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: "-100%", opacity: 0 }}
+                  staggerDuration={0.025}
+                  splitLevelClassName="overflow-visible"
+                  transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                  rotationInterval={2500}
+                />
+              </span>
+              <span>We've got answers.</span>
+            </h2>
+            <p className="mt-4 text-gray-400 text-lg md:text-xl max-w-xl mx-auto">
+              Find instant answers to the most common questions about our AI cohort programs below.
+            </p>
+          </div>
+        </section>
+
         <FAQSection />
         <CTASection />
 
