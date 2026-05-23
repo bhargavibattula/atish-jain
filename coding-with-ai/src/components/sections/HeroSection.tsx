@@ -48,8 +48,8 @@ export default function HeroSection() {
     <section ref={containerRef} className="relative min-h-screen pt-32 pb-20 overflow-hidden bg-[#0B0F19] flex items-center">
       {/* Immersive Particle Background */}
       <div className="absolute inset-0 z-0">
-        <ShapeGrid 
-          speed={0.4} 
+        <ShapeGrid
+          speed={0.4}
           squareSize={48}
           direction="diagonal"
           borderColor="rgba(255, 255, 255, 0.025)"
@@ -58,7 +58,7 @@ export default function HeroSection() {
           hoverTrailAmount={6}
           className="absolute inset-0 z-0 pointer-events-none"
         />
-        
+
         {/* WebGL Light Rays Background */}
         <div className="absolute inset-0 pointer-events-none opacity-40 mix-blend-screen">
           <LightRays
@@ -78,22 +78,22 @@ export default function HeroSection() {
         </div>
 
         {/* Holographic Glowing Orbs */}
-        <motion.div 
+        <motion.div
           animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 -left-1/4 w-[800px] h-[800px] rounded-full bg-blue-600/20 blur-[120px]" 
+          className="absolute top-1/4 -left-1/4 w-[800px] h-[800px] rounded-full bg-blue-600/20 blur-[120px]"
         />
-        <motion.div 
+        <motion.div
           animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.4, 0.2] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute bottom-1/4 -right-1/4 w-[600px] h-[600px] rounded-full bg-purple-600/20 blur-[120px]" 
+          className="absolute bottom-1/4 -right-1/4 w-[600px] h-[600px] rounded-full bg-purple-600/20 blur-[120px]"
         />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-cyan-500/10 blur-[100px]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-8 items-center">
-          
+
           {/* Left Column: Copy & CTA */}
           <motion.div style={{ y, opacity }} className="flex flex-col items-start text-left pt-10 lg:pt-0">
             {/* Startup Badge */}
@@ -129,7 +129,7 @@ export default function HeroSection() {
                 <span className="relative z-10">
                   <SplitText
                     text="at lightspeed."
-                    className="inline-block text-left [&_.split-char]:text-transparent [&_.split-char]:bg-clip-text [&_.split-char]:bg-gradient-to-r [&_.split-char]:from-cyan-400 [&_.split-char]:via-blue-500 [&_.split-char]:to-purple-500"
+                    className="inline-block text-left [&_.split-char]:text-transparent [&_.split-char]:bg-clip-text [&_.split-char]:bg-gradient-to-r [&_.split-char]:from-cyan-400 [&_.split-char]:to-blue-500"
                     delay={55}
                     duration={0.8}
                     ease="power3.out"
@@ -143,7 +143,7 @@ export default function HeroSection() {
                     display="inline-block"
                   />
                 </span>
-                <span className="absolute inset-0 blur-xl bg-gradient-to-r from-cyan-400/30 to-purple-500/30 -z-10" />
+                <span className="absolute inset-0 blur-xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 -z-10" />
               </span>
             </h1>
 
@@ -191,7 +191,7 @@ export default function HeroSection() {
           >
             {/* The Main Editor Panel */}
             <div className="absolute inset-0 lg:right-[-10%] lg:left-[10%] top-[10%] bottom-[10%] rounded-[24px] border border-white/[0.08] bg-[#0A0F1C]/80 backdrop-blur-2xl shadow-[0_0_80px_rgba(59,130,246,0.2)] overflow-hidden z-10 transform lg:rotate-y-[-10deg] lg:rotate-x-[5deg] transition-transform duration-700 hover:rotate-y-0 hover:rotate-x-0">
-              
+
               {/* Editor Header */}
               <div className="h-12 border-b border-white/[0.05] bg-white/[0.02] flex items-center px-4 gap-4">
                 <div className="flex gap-2">
@@ -210,13 +210,13 @@ export default function HeroSection() {
               <div className="p-6 font-mono text-sm leading-relaxed overflow-hidden">
                 <div className="flex">
                   <div className="text-gray-600 select-none pr-4 text-right border-r border-white/5 mr-4 flex flex-col gap-1">
-                    {[1,2,3,4,5,6,7,8].map(n => <span key={n}>{n}</span>)}
+                    {[1, 2, 3, 4, 5, 6, 7, 8].map(n => <span key={n}>{n}</span>)}
                   </div>
                   <div className="text-gray-300 whitespace-pre">
                     <span className="text-purple-400">export default</span> <span className="text-blue-400">function</span> <span className="text-yellow-300">App</span>() {'{\n'}
                     {'  '} <span className="text-cyan-400">const</span> app = <span className="text-blue-300">{codeText}</span>
-                    <motion.span 
-                      animate={{ opacity: [1, 0] }} 
+                    <motion.span
+                      animate={{ opacity: [1, 0] }}
                       transition={{ duration: 0.8, repeat: Infinity }}
                       className="inline-block w-2 h-4 bg-white align-middle ml-1"
                     />
@@ -270,7 +270,7 @@ export default function HeroSection() {
                 <span className="text-xs font-bold text-gray-300">Performance Optimized</span>
               </div>
               <div className="h-1.5 w-32 bg-white/10 rounded-full overflow-hidden">
-                <motion.div 
+                <motion.div
                   initial={{ width: "0%" }}
                   animate={{ width: "98%" }}
                   transition={{ duration: 2, delay: 2, ease: "easeOut" }}
@@ -282,7 +282,7 @@ export default function HeroSection() {
           </motion.div>
         </div>
       </div>
-      
+
       {/* Scroll Down Indicator */}
       <motion.div
         initial={{ opacity: 0 }}

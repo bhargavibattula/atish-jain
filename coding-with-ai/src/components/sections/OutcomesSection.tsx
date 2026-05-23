@@ -93,10 +93,10 @@ const outcomes = [
             <stop offset="100%" stopColor="#ec4899" />
           </linearGradient>
           <filter id="glowFilter">
-            <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+            <feGaussianBlur stdDeviation="1.5" result="coloredBlur" />
             <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
+              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
         </defs>
@@ -216,7 +216,7 @@ export default function OutcomesSection() {
                           </p>
                         </div>
                       </div>
-                      
+
                       {/* Integrated Visualization */}
                       <div className="flex-shrink-0">
                         {outcome.viz}
@@ -295,7 +295,7 @@ export default function OutcomesSection() {
                     <h4 className="text-lg font-bold text-white tracking-tight mb-2 group-hover:text-purple-300 transition-colors">
                       {milestone.text}
                     </h4>
-                    
+
                     <p className="text-sm text-gray-400 leading-relaxed font-normal">
                       {milestone.desc}
                     </p>
