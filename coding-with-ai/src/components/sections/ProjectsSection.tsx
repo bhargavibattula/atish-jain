@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { ExternalLink, Github, ArrowRight, Layout, TerminalSquare, Video, FileText, Database } from "lucide-react";
 
 const projects = [
@@ -13,6 +14,7 @@ const projects = [
     icon: <TerminalSquare size={20} />,
     color: "from-blue-600/40 to-cyan-500/10",
     shadow: "group-hover:shadow-[0_0_40px_rgba(59,130,246,0.3)]",
+    image: "/projects/chatbot.png",
   },
   {
     title: "AI ATS Resume Analyzer",
@@ -22,6 +24,7 @@ const projects = [
     icon: <FileText size={20} />,
     color: "from-purple-600/40 to-fuchsia-500/10",
     shadow: "group-hover:shadow-[0_0_40px_rgba(168,85,247,0.3)]",
+    image: "/projects/ats.png",
   },
   {
     title: "Smart Vision Attendance",
@@ -31,6 +34,7 @@ const projects = [
     icon: <Video size={20} />,
     color: "from-rose-600/40 to-orange-500/10",
     shadow: "group-hover:shadow-[0_0_40px_rgba(244,63,94,0.3)]",
+    image: "/projects/attendance.png",
   },
   {
     title: "AI Portfolio Generator",
@@ -40,6 +44,7 @@ const projects = [
     icon: <Layout size={20} />,
     color: "from-emerald-600/40 to-teal-500/10",
     shadow: "group-hover:shadow-[0_0_40px_rgba(16,185,129,0.3)]",
+    image: "/projects/portfolio.png",
   }
 ];
 
@@ -100,20 +105,21 @@ export default function ProjectsSection() {
               <div className="relative h-64 w-full bg-[#0A0F1C] border-b border-white/[0.05] overflow-hidden flex items-end justify-center pt-8 px-8">
                 <div className={`absolute inset-0 bg-gradient-to-b ${project.color} opacity-20 group-hover:opacity-40 transition-opacity duration-700`} />
                 
-                {/* Abstract UI Device Mockup */}
+                {/* Realistic SaaS Mockup Image */}
                 <div className="relative w-full max-w-md h-full bg-[#111827] rounded-t-2xl border-t border-x border-white/10 shadow-2xl transform translate-y-4 group-hover:translate-y-2 transition-transform duration-500 ease-out flex flex-col overflow-hidden">
-                  <div className="h-8 bg-white/[0.02] border-b border-white/5 flex items-center px-4 gap-2">
-                    <div className="w-2 h-2 rounded-full bg-white/20" />
-                    <div className="w-2 h-2 rounded-full bg-white/20" />
-                    <div className="w-2 h-2 rounded-full bg-white/20" />
+                  <div className="h-8 bg-white/[0.02] border-b border-white/5 flex items-center px-4 gap-1.5 shrink-0">
+                    <div className="w-2 h-2 rounded-full bg-red-500/50" />
+                    <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
+                    <div className="w-2 h-2 rounded-full bg-green-500/50" />
                   </div>
-                  <div className="flex-1 p-4 flex flex-col gap-3">
-                    <div className="w-3/4 h-4 rounded bg-white/5" />
-                    <div className="w-full h-20 rounded bg-white/[0.02]" />
-                    <div className="flex gap-2">
-                      <div className="w-1/3 h-8 rounded bg-white/5" />
-                      <div className="w-1/3 h-8 rounded bg-white/5" />
-                    </div>
+                  <div className="flex-1 relative w-full h-full overflow-hidden bg-[#0A0F1C]">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      sizes="(max-w-768px) 100vw, 50vw"
+                      className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
                   </div>
                 </div>
               </div>
