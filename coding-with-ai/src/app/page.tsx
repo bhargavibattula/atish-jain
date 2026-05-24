@@ -1,22 +1,26 @@
+
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import HeroSection from "@/components/sections/HeroSection";
 import LogoMarquee from "@/components/sections/LogoMarquee";
-import WhySection from "@/components/sections/WhySection";
-import TargetAudienceSection from "@/components/sections/TargetAudienceSection";
-import AIToolsSection from "@/components/sections/AIToolsSection";
-import MembershipSection from "@/components/sections/MembershipSection";
-import ProjectsSection from "@/components/sections/ProjectsSection";
-import ProjectsGallerySection from "@/components/sections/ProjectsGallerySection";
-import OutcomesSection from "@/components/sections/OutcomesSection";
-import FounderSection from "@/components/sections/FounderSection";
-import TestimonialsSection from "@/components/sections/TestimonialsSection";
-import FAQSection from "@/components/sections/FAQSection";
-import CTASection from "@/components/sections/CTASection";
-import ScrollVelocity from "@/components/ui/ScrollVelocity";
-import CurvedLoop from "@/components/ui/CurvedLoop";
-import RotatingText from "@/components/ui/RotatingText";
-import LogoLoop from "@/components/ui/LogoLoop";
+import dynamic from "next/dynamic";
+
+const TargetAudienceSection = dynamic(() => import("@/components/sections/TargetAudienceSection"), { ssr: true });
+const WhySection = dynamic(() => import("@/components/sections/WhySection"), { ssr: true });
+const AIToolsSection = dynamic(() => import("@/components/sections/AIToolsSection"), { ssr: true });
+const MembershipSection = dynamic(() => import("@/components/sections/MembershipSection"), { ssr: true });
+const ProjectsSection = dynamic(() => import("@/components/sections/ProjectsSection"), { ssr: true });
+const ProjectsGallerySection = dynamic(() => import("@/components/sections/ProjectsGallerySection"), { ssr: true });
+const OutcomesSection = dynamic(() => import("@/components/sections/OutcomesSection"), { ssr: true });
+const FounderSection = dynamic(() => import("@/components/sections/FounderSection"), { ssr: true });
+const TestimonialsSection = dynamic(() => import("@/components/sections/TestimonialsSection"), { ssr: true });
+const FAQSection = dynamic(() => import("@/components/sections/FAQSection"), { ssr: true });
+const CTASection = dynamic(() => import("@/components/sections/CTASection"), { ssr: true });
+
+const ScrollVelocity = dynamic(() => import("@/components/ui/ScrollVelocity"));
+const CurvedLoop = dynamic(() => import("@/components/ui/CurvedLoop"));
+const RotatingText = dynamic(() => import("@/components/ui/RotatingText"));
+const LogoLoop = dynamic(() => import("@/components/ui/LogoLoop"));
 import { 
   SiReact, 
   SiNextdotjs, 
