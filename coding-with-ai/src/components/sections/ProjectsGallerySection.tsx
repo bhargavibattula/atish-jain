@@ -6,20 +6,20 @@ import CircularGallery from "@/components/ui/CircularGallery";
 export default function ProjectsGallerySection() {
   const galleryItems = [
     {
-      image: "/projects/chatbot.png",
-      text: "AI Chatbot Platform",
+      image: "/projects/saas-analytics.png",
+      text: "Analytics Dashboard",
     },
     {
-      image: "/projects/ats.png",
-      text: "AI ATS Resume Analyzer",
+      image: "/projects/saas-crm.png",
+      text: "Modern CRM Platform",
     },
     {
-      image: "/projects/attendance.png",
-      text: "Smart Vision Attendance",
+      image: "/projects/saas-ecommerce.png",
+      text: "E-Commerce Admin",
     },
     {
-      image: "/projects/portfolio.png",
-      text: "AI Portfolio Generator",
+      image: "/projects/saas-ai.png",
+      text: "AI Command Center",
     },
   ];
 

@@ -2,6 +2,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import AIToolsSection from "@/components/sections/AIToolsSection";
 import SkillsBubblesPage from "@/components/sections/SkillsBubblesPage";
+import TechStackMarquee from "@/components/sections/TechStackMarquee";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -15,6 +16,7 @@ export default function AIToolsPage() {
       <Navbar />
       <main className="pt-20">
         <AIToolsSection />
+        <TechStackMarquee />
         <SkillsBubblesPage />
       </main>
       <Footer />
