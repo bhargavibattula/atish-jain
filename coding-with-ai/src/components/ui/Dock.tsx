@@ -7,7 +7,8 @@ import "./Dock.css";
 export interface DockItemData {
   icon: React.ReactNode;
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
+  href?: string;
   className?: string;
 }
 
@@ -21,6 +22,7 @@ interface DockItemProps {
   children: React.ReactNode;
   className?: string;
   onClick?: () => void;
+  href?: string;
   mouseX: MotionValue<number>;
   spring: SpringConfig;
   distance: number;
@@ -32,6 +34,7 @@ function DockItem({
   children,
   className = "",
   onClick,
+  href,
   mouseX,
   spring,
   distance,
@@ -56,7 +59,7 @@ function DockItem({
   );
   const size = useSpring(targetSize, spring);
 
-  return (
+  const content = (
     <motion.div
       ref={ref}
       style={{
@@ -81,6 +84,15 @@ function DockItem({
       })}
     </motion.div>
   );
+
+  if (href) {
+    // Import Link dynamically or expect it. We'll use a normal next/link.
+    // Need to make sure Link is imported at the top.
+    const Link = require('next/link').default;
+    return <Link href={href}>{content}</Link>;
+  }
+
+  return content;
 }
 
 interface DockLabelProps {
@@ -179,6 +191,7 @@ export default function Dock({
           <DockItem
             key={index}
             onClick={item.onClick}
+            href={item.href}
             className={item.className}
             mouseX={mouseX}
             spring={spring}

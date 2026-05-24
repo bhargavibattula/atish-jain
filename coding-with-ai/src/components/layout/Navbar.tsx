@@ -38,7 +38,7 @@ export default function Navbar() {
         </div>
       ),
       label: "Home",
-      onClick: () => router.push("/"),
+      href: "/",
     },
     {
       icon: (
@@ -50,7 +50,7 @@ export default function Navbar() {
         </div>
       ),
       label: "Memberships",
-      onClick: () => router.push("/memberships"),
+      href: "/memberships",
     },
     {
       icon: (
@@ -62,7 +62,7 @@ export default function Navbar() {
         </div>
       ),
       label: "Projects",
-      onClick: () => router.push("/projects"),
+      href: "/projects",
     },
     {
       icon: (
@@ -74,7 +74,7 @@ export default function Navbar() {
         </div>
       ),
       label: "AI Tools",
-      onClick: () => router.push("/ai-tools"),
+      href: "/ai-tools",
     },
     {
       icon: (
@@ -86,7 +86,7 @@ export default function Navbar() {
         </div>
       ),
       label: "Blogs",
-      onClick: () => router.push("/blogs"),
+      href: "/blogs",
     },
     {
       icon: (
@@ -98,7 +98,7 @@ export default function Navbar() {
         </div>
       ),
       label: "Community",
-      onClick: () => router.push("/community"),
+      href: "/community",
     },
     {
       icon: (
@@ -110,7 +110,7 @@ export default function Navbar() {
         </div>
       ),
       label: "Contact Us",
-      onClick: () => router.push("/contact"),
+      href: "/contact",
     },
   ];
 
