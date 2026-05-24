@@ -1,98 +1,153 @@
 export const blogsData = [
   {
-    id: "getting-started-with-cursor",
-    title: "Why Cursor is the Future of Coding",
-    excerpt: "Discover how AI-first code editors are completely changing the way developers build software.",
+    id: "ai-coding-tutorial-cursor",
+    title: "How to Build a Full-Stack App in 10 Minutes with Cursor",
+    excerpt: "A step-by-step AI coding tutorial to take you from a blank canvas to a deployed application using AI-first code editors.",
     content: `
-The landscape of software development is undergoing a paradigm shift. For decades, developers have relied on traditional IDEs like VS Code, IntelliJ, or Xcode. While these tools introduced features like IntelliSense and syntax highlighting, the fundamental act of coding remained entirely manual.
+### The Power of AI Coding
+If you are still writing every line of code manually, you are wasting time. With AI editors like Cursor, you act as the architect while the AI acts as the builder.
 
-Enter **Cursor**, the AI-first code editor. 
+#### Step 1: Initialize the Project
+Simply press \`Ctrl+I\` and prompt: *"Create a Next.js 15 application with Tailwind CSS and Framer Motion."* The AI will generate the boilerplate, configure the \`tailwind.config.ts\`, and set up the layout.
 
-Unlike plugins (like GitHub Copilot) that live inside an existing IDE, Cursor was built from the ground up with artificial intelligence as its core engine. It doesn't just autocomplete a line; it understands the entire context of your codebase.
+#### Step 2: Generate the UI
+Instead of manually typing out div classes, prompt the AI: *"Build a dark-mode hero section with a glowing gradient background and a glassmorphic Call to Action button."* 
 
-### 1. Codebase Awareness
-Traditional AI tools struggle because they only see the file you have open. Cursor indexes your entire workspace. You can ask it to "update the authentication flow to use JWTs" and it will navigate through your \`auth.ts\`, \`middleware.ts\`, and \`userController.ts\` to suggest cohesive, multi-file edits.
+#### Step 3: Add the Database
+Use Cursor's Composer to integrate Supabase. Prompt: *"Add Supabase authentication and create a schema for user profiles."* It will create the necessary API routes and SQL migrations.
 
-### 2. Composer & Multi-File Edits
-With Cursor's Composer, you can generate entire features by just pressing \`Ctrl+I\`. It can spawn new files, modify existing ones, and handle the tedious boilerplate that usually takes hours, turning it into a 10-second task.
-
-### 3. The End of Memorization
-Developers no longer need to memorize the exact syntax of a library they haven't used in months. Instead, the focus shifts to **Systems Architecture** and **Problem Solving**. If you know *what* you want to build, Cursor will handle the *how*.
-
-The best developers of the next decade won't be the ones who type the fastest or know the most syntax—they will be the ones who can direct AI the most effectively.
+**The result?** What used to take a weekend now takes a coffee break.
     `,
     author: "Atish Jain",
     date: "May 25, 2026",
-    category: "AI Tools",
-    image: "/gallery/course1.jpg",
-    readTime: "4 min read",
+    category: "AI Coding Tutorials",
+    image: "/blogs/blog_cursor_app.png",
+    readTime: "5 min read",
   },
   {
-    id: "monetizing-ai-saas",
-    title: "How to Build and Monetize AI SaaS Apps in 2026",
-    excerpt: "A comprehensive guide on leveraging LLMs to create profitable software products as a solo founder.",
+    id: "top-5-ai-tools",
+    title: "Top 5 AI Tools Every Developer Needs in 2026",
+    excerpt: "Discover the ultimate stack of AI tools that will 10x your productivity and streamline your engineering workflow.",
     content: `
-The barrier to entry for building software has never been lower. Thanks to modern web frameworks like Next.js and AI tools like Claude 3.5 Sonnet, a single developer can now build applications that would have required a team of five just three years ago.
+The AI ecosystem is moving incredibly fast. Here are the 5 tools you absolutely must have in your toolkit this year:
 
-But building the app is only 20% of the battle. The other 80% is **distribution and monetization**.
+### 1. Cursor (The Editor)
+The undeniable king of AI-first IDEs. It understands your entire codebase and can generate complex, multi-file features.
 
-### 1. Finding the Right Niche
-Do not build another generic "AI Chatbot" wrapper. The market is saturated. Instead, focus on vertical-specific problems. 
-- AI for real estate agents to draft property listings.
-- AI for legal professionals to summarize case files.
-- AI for YouTubers to generate hyper-optimized titles and thumbnails.
+### 2. v0 by Vercel (UI Generation)
+Simply describe the UI you want in plain English, and v0 generates production-ready React components using Tailwind CSS. It is the ultimate cure for CSS headaches.
 
-When you solve a specific problem for a specific group of people with purchasing power, selling becomes infinitely easier.
+### 3. Claude 3.5 Sonnet (The Brain)
+While GPT-4 is great, Claude 3.5 Sonnet has proven to be the superior model for coding. Its large context window allows you to dump entire documentation pages into it.
 
-### 2. The Tech Stack
-Keep it simple. You don't need a complex microservices architecture to validate an idea.
-- **Frontend/Backend:** Next.js (App Router)
-- **Database:** Supabase or MongoDB
-- **Payments:** Stripe
-- **AI Integration:** Vercel AI SDK + OpenAI/Anthropic APIs
+### 4. Perplexity AI (Research)
+Stop using Google to search for coding bugs. Perplexity searches the web, reads StackOverflow threads, and gives you the exact synthesized answer with citations.
 
-### 3. Monetization Models
-For AI SaaS, usage-based pricing or tiered subscriptions work best. Because API calls cost money, you must ensure your unit economics are positive. Charge a premium for access, and offer a free trial with strict rate limits.
-
-The era of the "Micro-SaaS Solo Founder" is here. Your ability to move fast, leverage AI for coding, and market directly to niche communities is your ultimate competitive advantage.
+### 5. GitHub Copilot Workspace
+For managing pull requests and exploring large legacy codebases, Copilot Workspace acts as an AI pair programmer that sits directly in your repository.
     `,
     author: "Atish Jain",
     date: "May 22, 2026",
-    category: "Business",
-    image: "/gallery/course2.jpg",
-    readTime: "6 min read",
+    category: "AI Tools",
+    image: "/blogs/blog_ai_tools.png",
+    readTime: "4 min read",
   },
   {
-    id: "rag-architecture",
-    title: "RAG Architecture Explained Simply",
-    excerpt: "Retrieval-Augmented Generation is the key to making AI understand your custom data. Here is how it works.",
+    id: "survive-ai-takeover",
+    title: "How to Future-Proof Your Tech Career Against AI",
+    excerpt: "Will AI replace software engineers? Here is the career guidance you need to adapt and thrive in the new economy.",
     content: `
-Large Language Models (LLMs) like GPT-4 are incredibly smart, but they suffer from two major limitations:
-1. **They hallucinate.** They will confidently invent facts if they don't know the answer.
-2. **They have a knowledge cutoff.** They don't know about your company's proprietary data, internal documents, or events that happened after they were trained.
+The fear is real: "Will AI replace my job?" The short answer is no. The long answer is: *an engineer using AI will replace an engineer who doesn't.*
 
-This is where **RAG (Retrieval-Augmented Generation)** comes in.
+### Stop Memorizing Syntax
+The value of a software engineer is no longer in remembering how to center a div or write a complex SQL join. The AI knows the syntax better than you do. 
 
-### What is RAG?
-RAG is a framework that connects an LLM to a custom database of information. Before the AI answers a question, it searches your database for relevant context, and then uses that context to formulate an accurate answer.
+### Focus on Systems Architecture
+Your job is now to design systems. How does the frontend communicate with the backend? How do you scale the database? How do you handle security? These are the high-level architectural decisions that AI cannot make for you.
 
-### The 3 Steps of RAG
-
-#### 1. Ingestion (Preparing the Data)
-You take your documents (PDFs, Notion pages, websites) and chop them into small chunks of text. You then pass these chunks through an Embedding Model, which converts the text into a long array of numbers (a vector) that represents the semantic meaning of the text. You store these vectors in a **Vector Database** (like Pinecone or ChromaDB).
-
-#### 2. Retrieval (Finding the Context)
-When a user asks a question, you convert their question into a vector as well. The Vector Database then performs a "similarity search" to find the text chunks whose vectors are mathematically closest to the user's question vector.
-
-#### 3. Generation (Answering the Question)
-You take the original question AND the retrieved text chunks, and you send both to the LLM. You give the LLM a prompt like: *"Answer the user's question using ONLY the provided context."*
-
-The result? The AI provides a perfectly accurate, hallucination-free answer based entirely on your proprietary data. RAG is the foundation of modern enterprise AI.
+### Develop Domain Expertise
+Become an expert in a specific industry (Healthcare, Finance, Real Estate). AI doesn't understand business context or regulatory compliance. If you understand the business problem deeply, you can use AI to build the solution faster than anyone else.
     `,
     author: "Atish Jain",
     date: "May 18, 2026",
-    category: "Engineering",
-    image: "/gallery/course3.jpg",
+    category: "Career Guidance",
+    image: "/blogs/blog_career_future.png",
+    readTime: "6 min read",
+  },
+  {
+    id: "build-pdf-chat-app",
+    title: "Project: Build a 'Chat with PDF' SaaS Application",
+    excerpt: "A complete walkthrough of an impressive coding project to add to your portfolio.",
+    content: `
+If you want to get hired, you need to build things that matter. "To-Do List" apps don't cut it anymore. Today, we are building a SaaS app that lets users upload PDFs and chat with them using RAG (Retrieval-Augmented Generation).
+
+### The Tech Stack
+- **Frontend:** Next.js
+- **Vector Database:** Pinecone
+- **LLM:** OpenAI API
+- **File Storage:** AWS S3
+
+### Step 1: Parsing the PDF
+When a user uploads a PDF, we use a library like \`pdf-parse\` to extract the text.
+
+### Step 2: Creating Embeddings
+We split the extracted text into chunks of 500 words, and send them to OpenAI's \`text-embedding-3-small\` model. We then store these vectors in Pinecone.
+
+### Step 3: The Chat Interface
+When the user asks a question, we embed their question, query Pinecone for the most relevant PDF chunks, and send those chunks to GPT-4 as context.
+
+This project proves you understand Full-Stack architecture and AI integrations.
+    `,
+    author: "Atish Jain",
+    date: "May 15, 2026",
+    category: "Coding Projects",
+    image: "/blogs/blog_pdf_chat.png",
+    readTime: "7 min read",
+  },
+  {
+    id: "crack-ai-interviews",
+    title: "How to Crack Technical Placements in the AI Era",
+    excerpt: "Placement preparation has changed. Here is what FAANG and top startups are looking for right now.",
+    content: `
+Technical interviews have evolved. While LeetCode is still relevant for some massive corporations, modern tech startups care about something else: **Can you ship?**
+
+### The Take-Home Project
+Companies are increasingly giving candidates take-home projects and allowing them to use AI tools like Cursor or Copilot. Why? Because they want to see how fast you can deliver a working product when fully equipped.
+
+### What You Need to Master
+1. **API Integrations:** You must know how to quickly read documentation and integrate third-party APIs (Stripe, Twilio, OpenAI).
+2. **Database Modeling:** You must be able to design a clean relational database schema.
+3. **Debugging:** AI writes code fast, but it also writes bugs fast. Your ability to read AI-generated code and spot security flaws or performance bottlenecks is your most valuable interview skill.
+
+### The Behavioral Round
+Be prepared to explain *why* you chose a specific architecture. "Because the AI suggested it" is an instant rejection. You must own the architectural decisions.
+    `,
+    author: "Atish Jain",
+    date: "May 10, 2026",
+    category: "Placement Preparation",
+    image: "/blogs/blog_placements.png",
     readTime: "5 min read",
+  },
+  {
+    id: "ai-news-simplified",
+    title: "AI News Simplified: What Happened This Month?",
+    excerpt: "We cut through the hype to bring you the simplified AI news that actually matters to developers.",
+    content: `
+The AI industry releases new models and tools every week. It's impossible to keep up. Here is a simplified breakdown of what actually matters to you as an engineer.
+
+### 1. Context Windows are Exploding
+We now have models that can process millions of tokens at once. This means you no longer need complex chunking strategies for medium-sized codebases. You can literally drag and drop your entire repository into the prompt.
+
+### 2. Open Source is Catching Up
+Llama 3 and Mistral are reaching performance levels comparable to proprietary models. For developers, this means you can run powerful AI models locally on your MacBook without paying API fees or worrying about data privacy.
+
+### 3. Agentic Workflows
+We are moving from "AI as an autocomplete" to "AI as an agent". Soon, you won't just ask the AI to write a function; you will give it a Jira ticket and it will read the code, write the tests, implement the feature, and open the Pull Request entirely on its own.
+    `,
+    author: "Atish Jain",
+    date: "May 05, 2026",
+    category: "AI News Simplified",
+    image: "/blogs/blog_ai_news.png",
+    readTime: "3 min read",
   }
 ];
