@@ -23,8 +23,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        poppins: ["Poppins", "sans-serif"],
-        inter: ["Inter", "sans-serif"],
+        poppins: ["var(--font-poppins)", "sans-serif"],
+        inter: ["var(--font-inter)", "sans-serif"],
       },
       animation: {
         "glow-pulse": "glow-pulse 2s ease-in-out infinite",
