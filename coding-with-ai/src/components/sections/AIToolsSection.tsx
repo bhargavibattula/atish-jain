@@ -1,48 +1,63 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Sparkles, Terminal, Code2, Cpu, ArrowRight, Zap, Bot } from "lucide-react";
+import { Cpu, ArrowRight } from "lucide-react";
+import ChromaGrid from "@/components/ui/ChromaGrid";
 
 const tools = [
   {
-    name: "Cursor AI",
-    tagline: "The AI Code Editor",
-    description: "Experience the next evolution of coding. Cursor understands your entire codebase, predicting your next edit before you even type it.",
-    icon: <Terminal size={22} />,
-    gradient: "from-blue-500 to-indigo-500",
-    glowColor: "rgba(59,130,246,0.15)",
-    colSpan: "lg:col-span-2",
-    features: ["Codebase Indexing", "Smart Rewrites", "Terminal Copilot"],
+    image: "/tools/cursor-ai.png",
+    title: "Cursor AI",
+    subtitle: "The AI-native code editor that understands your entire codebase and predicts your next edit.",
+    handle: "Code Editor",
+    borderColor: "#3B82F6",
+    gradient: "linear-gradient(145deg, #3B82F6, #000)",
+    url: "https://cursor.com",
   },
   {
-    name: "Claude 3.5",
-    tagline: "Deep Reasoning",
-    description: "Architect complex systems and debug impossible errors with Claude's unmatched reasoning capabilities.",
-    icon: <Bot size={22} />,
-    gradient: "from-purple-500 to-fuchsia-500",
-    glowColor: "rgba(168,85,247,0.15)",
-    colSpan: "lg:col-span-1",
-    features: ["Architecture", "Logic", "Context"],
+    image: "/tools/claude-ai.png",
+    title: "Claude 3.5",
+    subtitle: "Architect complex systems and debug impossible errors with unmatched reasoning.",
+    handle: "Deep Reasoning",
+    borderColor: "#D97706",
+    gradient: "linear-gradient(210deg, #D97706, #000)",
+    url: "https://claude.ai",
   },
   {
-    name: "Bolt.new",
-    tagline: "Instant Full-Stack",
-    description: "Generate complete, deployable web applications from a single prompt directly in your browser.",
-    icon: <Zap size={22} />,
-    gradient: "from-cyan-500 to-teal-500",
-    glowColor: "rgba(6,182,212,0.15)",
-    colSpan: "lg:col-span-1",
-    features: ["Zero Setup", "Auto-Deploy", "Full-Stack"],
+    image: "/tools/chatgpt.png",
+    title: "ChatGPT",
+    subtitle: "The frontier AI assistant for brainstorming, code generation, and rapid prototyping.",
+    handle: "AI Assistant",
+    borderColor: "#10A37F",
+    gradient: "linear-gradient(165deg, #10A37F, #000)",
+    url: "https://chat.openai.com",
   },
   {
-    name: "GitHub Copilot",
-    tagline: "Your AI Pair Programmer",
-    description: "Write code faster with real-time suggestions and autocomplete powered by millions of open-source repositories.",
-    icon: <Code2 size={22} />,
-    gradient: "from-gray-400 to-gray-500",
-    glowColor: "rgba(156,163,175,0.15)",
-    colSpan: "lg:col-span-2",
-    features: ["Autocomplete", "Chat", "Inline Fixes"],
+    image: "/tools/bolt-new.png",
+    title: "Bolt.new",
+    subtitle: "Generate complete, deployable full-stack web applications from a single prompt.",
+    handle: "Instant Apps",
+    borderColor: "#14B8A6",
+    gradient: "linear-gradient(195deg, #14B8A6, #000)",
+    url: "https://bolt.new",
+  },
+  {
+    image: "/tools/github-copilot.png",
+    title: "GitHub Copilot",
+    subtitle: "Real-time code suggestions and autocomplete powered by millions of open-source repos.",
+    handle: "Pair Programmer",
+    borderColor: "#6E5494",
+    gradient: "linear-gradient(225deg, #6E5494, #000)",
+    url: "https://github.com/features/copilot",
+  },
+  {
+    image: "/tools/v0-dev.png",
+    title: "v0.dev",
+    subtitle: "AI-powered UI generation by Vercel — describe a component, get production-ready code.",
+    handle: "UI Generator",
+    borderColor: "#ffffff",
+    gradient: "linear-gradient(135deg, #333, #000)",
+    url: "https://v0.dev",
   },
 ];
 
@@ -90,74 +105,17 @@ export default function AIToolsSection() {
           </motion.p>
         </div>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
-          {tools.map((tool, i) => (
-            <motion.div
-              key={tool.name}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className={`group relative ${tool.colSpan}`}
-            >
-              <div
-                className="relative h-full rounded-[24px] border border-white/[0.06] overflow-hidden transition-all duration-500 hover:-translate-y-1"
-                style={{
-                  background: `linear-gradient(180deg, rgba(17,24,39,0.6) 0%, rgba(17,24,39,0.3) 100%)`,
-                  boxShadow: `0 0 0 0 transparent`,
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = `0 0 40px ${tool.glowColor}`;
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = '0 0 0 0 transparent';
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)';
-                }}
-              >
-                {/* Top gradient accent line */}
-                <div className={`absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r ${tool.gradient} opacity-0 group-hover:opacity-80 transition-opacity duration-500`} />
-
-                {/* Hover gradient fill */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${tool.gradient} opacity-0 group-hover:opacity-[0.04] transition-opacity duration-700`} />
-
-                <div className="relative z-10 p-8 h-full flex flex-col">
-                  {/* Top row: icon + tagline */}
-                  <div className="flex justify-between items-start mb-8">
-                    <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${tool.gradient} bg-opacity-10 flex items-center justify-center text-white shadow-lg`}
-                      style={{ background: `linear-gradient(135deg, ${tool.glowColor}, transparent)` }}
-                    >
-                      {tool.icon}
-                    </div>
-                    <div className="px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.06] text-[11px] font-semibold tracking-wider text-gray-400 uppercase group-hover:text-white group-hover:border-white/10 transition-all duration-300">
-                      {tool.tagline}
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="mt-auto">
-                    <h3 className="text-2xl font-bold text-white mb-3 tracking-tight">
-                      {tool.name}
-                    </h3>
-                    <p className="text-gray-400 leading-relaxed mb-6 group-hover:text-gray-300 transition-colors text-[15px]">
-                      {tool.description}
-                    </p>
-
-                    {/* Feature pills */}
-                    <div className="flex flex-wrap gap-2">
-                      {tool.features.map(feature => (
-                        <span key={feature} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.06] text-xs text-gray-400 font-medium group-hover:border-white/10 group-hover:text-gray-300 transition-all duration-300">
-                          <Sparkles size={10} className="opacity-40" />
-                          {feature}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+        {/* ChromaGrid */}
+        <div style={{ minHeight: 600, position: "relative" }}>
+          <ChromaGrid
+            items={tools}
+            radius={350}
+            columns={3}
+            rows={2}
+            damping={0.4}
+            fadeOut={0.5}
+            ease="power3.out"
+          />
         </div>
 
         {/* Bottom CTA */}
