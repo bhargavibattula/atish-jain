@@ -19,6 +19,12 @@ export default function FloatingWhatsApp() {
     >
       <div className="absolute inset-0 rounded-full animate-ping bg-green-400/30 -z-10" />
       <MessageCircle className="w-6 h-6 md:w-7 md:h-7" />
+      
+      {/* Notification Dot */}
+      <span className="absolute top-0 right-0 flex h-3.5 w-3.5 md:h-4 md:w-4">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+        <span className="relative inline-flex rounded-full h-3.5 w-3.5 md:h-4 md:w-4 bg-emerald-500 border-2 border-[#0B0F19]"></span>
+      </span>
     </motion.a>
   );
 }
