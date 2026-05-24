@@ -35,11 +35,28 @@ export default function TargetAudienceSection() {
             {/* Soft glowing backdrop */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[60%] bg-cyan-500/20 blur-[100px] -z-10 rounded-full pointer-events-none" />
             
-            Build Apps <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 relative inline-block">
-              Using AI 🚀
-              <span className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 blur-2xl opacity-40 -z-10 mix-blend-screen"></span>
-            </span> <br />
-            <span className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-400 mt-6 block">
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 mb-2">
+              <span>Build Apps</span>
+              <div className="relative inline-flex items-center gap-2 md:gap-4">
+                <motion.span 
+                  className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 relative pt-2 pb-4"
+                  animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                  style={{ backgroundSize: "200% auto" }}
+                >
+                  Using AI
+                  <span className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 blur-2xl opacity-40 -z-10 mix-blend-screen mt-2 mb-4" />
+                </motion.span>
+                <motion.span
+                  animate={{ y: [0, -8, 0], rotate: [0, 10, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  className="inline-block"
+                >
+                  <Rocket className="text-purple-400 drop-shadow-[0_0_15px_rgba(168,85,247,0.6)] w-10 h-10 md:w-14 md:h-14 lg:w-16 lg:h-16" />
+                </motion.span>
+              </div>
+            </div>
+            <span className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-400 mt-2 block">
               Even With <span className="text-gray-100">Little Coding Knowledge</span>
             </span>
           </motion.h2>
