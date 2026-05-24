@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Youtube, Instagram, Linkedin, MessageCircle, Send } from "lucide-react";
+import { Youtube, Instagram, Linkedin, MessageCircle, Send, Facebook, Globe, MapPin, Phone, Mail } from "lucide-react";
 import { FaHeart } from "react-icons/fa";
 
 const footerLinks = {
@@ -17,20 +17,27 @@ const footerLinks = {
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms & Conditions", href: "/terms" },
   ],
-  Resources: [
+  QuickLinks: [
     { label: "Free AI Toolkit", href: "/ai-tools" },
     { label: "Student Dashboard", href: "/student" },
     { label: "Certificates", href: "/student" },
     { label: "Register", href: "/register" },
   ],
+  Contact: [
+    { label: "+91 9989241515", href: "tel:9989241515", icon: Phone },
+    { label: "0883-2474088", href: "tel:08832474088", icon: Phone },
+    { label: "ahcareerpvtltd@gmail.com", href: "mailto:ahcareerpvtltd@gmail.com", icon: Mail },
+    { label: "Near UCO Bank, Danavai Peta", href: "https://maps.google.com/?q=AH+Career+Pvt+Ltd+Rajamahendravaram+Andhra+Pradesh", icon: MapPin },
+    { label: "ahcareer.in", href: "http://ahcareer.in", icon: Globe },
+  ],
 };
 
 const socials = [
   { icon: Youtube, href: "#", label: "YouTube", color: "hover:text-red-500" },
-  { icon: Instagram, href: "#", label: "Instagram", color: "hover:text-pink-500" },
-  { icon: Linkedin, href: "#", label: "LinkedIn", color: "hover:text-blue-400" },
-  { icon: MessageCircle, href: "#", label: "WhatsApp", color: "hover:text-green-500" },
-  { icon: Send, href: "#", label: "Telegram", color: "hover:text-blue-400" },
+  { icon: Facebook, href: "https://www.facebook.com/share/18nvUvNp8m/", label: "Facebook", color: "hover:text-blue-500" },
+  { icon: Instagram, href: "https://www.instagram.com/ah_career_rajahmundry", label: "Instagram", color: "hover:text-pink-500" },
+  { icon: Linkedin, href: "https://www.linkedin.com/company/ahcareer/", label: "LinkedIn", color: "hover:text-blue-400" },
+  { icon: MessageCircle, href: "tel:9989241515", label: "WhatsApp", color: "hover:text-green-500" },
 ];
 
 export default function Footer() {
@@ -87,13 +94,15 @@ export default function Footer() {
             <div key={category}>
               <h3 className="font-poppins font-semibold text-white text-sm mb-4">{category}</h3>
               <ul className="space-y-2.5">
-                {links.map((link) => (
+                {links.map((link: any) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-gray-400 hover:text-white transition-colors duration-200"
+                      className="text-sm text-gray-400 hover:text-white transition-colors duration-200 flex items-start gap-2"
+                      {...(link.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     >
-                      {link.label}
+                      {link.icon && <link.icon size={16} className="mt-0.5 shrink-0" />}
+                      <span>{link.label}</span>
                     </Link>
                   </li>
                 ))}
