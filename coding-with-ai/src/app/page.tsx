@@ -3,6 +3,7 @@ import Footer from "@/components/layout/Footer";
 import HeroSection from "@/components/sections/HeroSection";
 import LogoMarquee from "@/components/sections/LogoMarquee";
 import WhySection from "@/components/sections/WhySection";
+import TargetAudienceSection from "@/components/sections/TargetAudienceSection";
 import AIToolsSection from "@/components/sections/AIToolsSection";
 import MembershipSection from "@/components/sections/MembershipSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
@@ -55,7 +56,10 @@ export default function HomePage() {
         <HeroSection />
         <LogoMarquee />
 
-        {/* Act 2: Build Desire */}
+        {/* Act 2: Target Audience & Value */}
+        <TargetAudienceSection />
+
+        {/* Act 3: Build Desire */}
         <WhySection />
         <CurvedLoop 
           marqueeText="BUILD WITH AI ✦ MASTER THE ARSENAL ✦ DEPLOY IN SECONDS ✦ BECOME A 10X DEVELOPER ✦ CHATGPT ✦ CLAUDE 3.5 ✦ CURSOR ✦ BOLT.NEW ✦ GITHUB COPILOT ✦"

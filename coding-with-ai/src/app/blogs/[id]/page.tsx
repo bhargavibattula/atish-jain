@@ -214,20 +214,24 @@ export default function BlogDetailPage({ params }: { params: Promise<{ id: strin
                     let titlePart = headingText;
                     let inlineBody = "";
                     
-                    // Look for a transition from a lowercase letter to an uppercase letter separated by a space
-                    // e.g. "The Power of AI Coding If you are still..." -> splits at "Coding " and "If"
-                    const transitionMatch = headingText.match(/[a-zA-Z]\s[A-Z][a-z]/);
-                    
-                    if (transitionMatch && transitionMatch.index && transitionMatch.index > 5 && transitionMatch.index < 80) {
-                       const splitPoint = transitionMatch.index + 1; // index of the space
-                       titlePart = headingText.substring(0, splitPoint).trim();
-                       inlineBody = headingText.substring(splitPoint).trim();
-                    } else {
-                       const dotIndex = headingText.indexOf(". ");
-                       if (dotIndex !== -1 && dotIndex < 60) {
-                          titlePart = headingText.substring(0, dotIndex + 1);
-                          inlineBody = headingText.substring(dotIndex + 2);
-                       }
+                    // Only attempt heuristic splitting if the text is exceptionally long
+                    // (which implies the user pasted the body on the same line as the heading)
+                    if (headingText.length > 50) {
+                        // Look for a transition from a lowercase letter to an uppercase letter separated by a space
+                        // e.g. "The Power of AI Coding If you are still..." -> splits at "Coding " and "If"
+                        const transitionMatch = headingText.match(/[a-zA-Z]\s[A-Z][a-z]/);
+                        
+                        if (transitionMatch && transitionMatch.index && transitionMatch.index > 5 && transitionMatch.index < 80) {
+                           const splitPoint = transitionMatch.index + 1; // index of the space
+                           titlePart = headingText.substring(0, splitPoint).trim();
+                           inlineBody = headingText.substring(splitPoint).trim();
+                        } else {
+                           const dotIndex = headingText.indexOf(". ");
+                           if (dotIndex !== -1 && dotIndex < 60) {
+                              titlePart = headingText.substring(0, dotIndex + 1);
+                              inlineBody = headingText.substring(dotIndex + 2);
+                           }
+                        }
                     }
                     
                     currentStep = {
