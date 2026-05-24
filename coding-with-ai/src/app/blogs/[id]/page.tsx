@@ -132,11 +132,9 @@ export default function BlogDetailPage({ params }: { params: Promise<{ id: strin
                          prose-ul:text-gray-300 prose-ul:space-y-3 prose-li:marker:text-cyan-500
                          bg-white/[0.01] border border-white/[0.03] rounded-[32px] p-8 md:p-12 lg:p-16 shadow-2xl backdrop-blur-sm"
             >
-              {blog.content.split("\n\n").map((paragraph, index) => {
-                
+              {(() => {
                 // Helper to format text with bold, italics, and inline code
                 const formatText = (text: string) => {
-                  // This is a naive but effective parser for our specific markdown format
                   const parts = text.split(/(\*\*.*?\*\*|\*.*?\*|`.*?`)/g);
                   return parts.map((part, i) => {
                     if (part.startsWith("**") && part.endsWith("**")) {
@@ -150,48 +148,165 @@ export default function BlogDetailPage({ params }: { params: Promise<{ id: strin
                   });
                 };
 
-                if (paragraph.startsWith("###")) {
-                  return <h3 key={index}>{paragraph.replace("###", "").trim()}</h3>;
-                } else if (paragraph.startsWith("#### Step")) {
-                  const [heading, ...bodyParts] = paragraph.split("\n");
-                  const body = bodyParts.join("\n");
-                  const stepNumberMatch = heading.match(/Step (\d+)/);
-                  const stepNumber = stepNumberMatch ? stepNumberMatch[1] : "*";
-                  const headingText = heading.replace(/#### Step \d+:/, "").trim();
+                const lines = blog.content.split("\n");
+                const blocks: any[] = [];
+                let currentStep: any = null;
 
-                  return (
-                    <div key={index} className="my-12 p-8 md:p-10 rounded-[32px] bg-gradient-to-br from-[#111827] to-[#0A0F1C] border border-cyan-500/20 shadow-[0_15px_40px_-15px_rgba(6,182,212,0.15)] relative overflow-hidden group hover:border-cyan-400/40 transition-all duration-500">
-                      <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-400/10 blur-[80px] rounded-full pointer-events-none group-hover:bg-cyan-400/20 transition-colors duration-500" />
-                      
-                      {/* Step Badge */}
-                      <div className="absolute -left-[1px] top-10 w-1.5 h-16 bg-cyan-400 rounded-r-full shadow-[0_0_15px_rgba(6,182,212,0.8)]" />
+                for (let i = 0; i < lines.length; i++) {
+                  let line = lines[i].trim();
+                  if (!line) continue;
 
-                      <h4 className="text-2xl font-bold text-white mb-4 flex items-center gap-4 mt-0!">
-                        <span className="w-12 h-12 shrink-0 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xl font-black shadow-[0_0_20px_rgba(6,182,212,0.5)]">
-                          {stepNumber}
-                        </span>
-                        {headingText}
-                      </h4>
-                      <p className="text-gray-300 leading-relaxed text-lg mb-0!">
-                        {formatText(body)}
-                      </p>
-                    </div>
-                  );
-                } else if (paragraph.startsWith("####")) {
-                  return <h4 key={index}>{formatText(paragraph.replace("####", "").trim())}</h4>;
-                } else if (paragraph.startsWith("-")) {
-                  return (
-                    <ul key={index}>
-                      {paragraph.split("\n").filter(Boolean).map((item, i) => (
-                        <li key={i}>{formatText(item.replace("-", "").trim())}</li>
-                      ))}
-                    </ul>
-                  );
-                } else if (paragraph.trim() !== "") {
-                  return <p key={index}>{formatText(paragraph)}</p>;
+                  // The user sometimes writes the heading and the body on the EXACT same line
+                  // e.g. "# Step 1: Initialize Simply press..."
+                  let inlineBody = "";
+                  
+                  // Check if it's a step or a numbered item (e.g., "Step 1:", "### 1.", "1.")
+                  const stepMatch = line.match(/^(?:#+)?\s*(?:Step\s*)?(\d+)[:.]?\s*(.*)/i);
+                  
+                  if (stepMatch) {
+                    // Try to separate the title from the body if they are on the same line.
+                    // Usually there is a period or just a shift in casing, but we'll assume the title is short.
+                    let titlePart = stepMatch[2];
+                    
+                    // Remove leading ** if it's bolded like "**API Integrations:**"
+                    if (titlePart.startsWith("**")) {
+                       titlePart = titlePart.replace(/\*\*/g, ""); // Strip asterisks from the title
+                    }
+                    
+                    // A simple heuristic: if there's a colon followed by a space, split there.
+                    const colonIndex = titlePart.indexOf(": ");
+                    if (colonIndex !== -1 && colonIndex < 60) {
+                       inlineBody = titlePart.substring(colonIndex + 2);
+                       titlePart = titlePart.substring(0, colonIndex);
+                    } else {
+                       const dotIndex = titlePart.indexOf(". ");
+                       if (dotIndex !== -1 && dotIndex < 60) {
+                          inlineBody = titlePart.substring(dotIndex + 2);
+                          titlePart = titlePart.substring(0, dotIndex + 1);
+                       } else {
+                          // Look for typical start of sentence like "Simply press" or "Instead of"
+                          const bodyStarts = ["Simply", "Instead", "Use", "You", "We", "This"];
+                          for (const start of bodyStarts) {
+                             const idx = titlePart.indexOf(" " + start);
+                             if (idx > 10) { // Ensure it's not the first word of the title
+                                inlineBody = titlePart.substring(idx + 1);
+                                titlePart = titlePart.substring(0, idx).trim();
+                                break;
+                             }
+                          }
+                       }
+                    }
+
+                    currentStep = {
+                      type: 'step',
+                      number: stepMatch[1],
+                      title: titlePart,
+                      body: inlineBody ? [inlineBody] : []
+                    };
+                    blocks.push(currentStep);
+                    continue;
+                  }
+
+                  // If it's a heading 3
+                  if (line.startsWith("### ")) {
+                    // Check if they put body text on the same line
+                    let headingText = line.replace("### ", "");
+                    let titlePart = headingText;
+                    let inlineBody = "";
+                    
+                    // Look for a transition from a lowercase letter to an uppercase letter separated by a space
+                    // e.g. "The Power of AI Coding If you are still..." -> splits at "Coding " and "If"
+                    const transitionMatch = headingText.match(/[a-zA-Z]\s[A-Z][a-z]/);
+                    
+                    if (transitionMatch && transitionMatch.index && transitionMatch.index > 5 && transitionMatch.index < 80) {
+                       const splitPoint = transitionMatch.index + 1; // index of the space
+                       titlePart = headingText.substring(0, splitPoint).trim();
+                       inlineBody = headingText.substring(splitPoint).trim();
+                    } else {
+                       const dotIndex = headingText.indexOf(". ");
+                       if (dotIndex !== -1 && dotIndex < 60) {
+                          titlePart = headingText.substring(0, dotIndex + 1);
+                          inlineBody = headingText.substring(dotIndex + 2);
+                       }
+                    }
+                    
+                    currentStep = {
+                      type: 'step',
+                      number: null,
+                      title: titlePart,
+                      body: inlineBody ? [inlineBody] : []
+                    };
+                    blocks.push(currentStep);
+                    continue;
+                  } 
+                  // If it's a heading 4
+                  else if (line.startsWith("#### ")) {
+                    currentStep = null;
+                    blocks.push({ type: 'h4', text: line.replace("#### ", "") });
+                  } 
+                  // If it's a list item
+                  else if (line.startsWith("- ")) {
+                    if (currentStep) {
+                       currentStep.body.push("• " + line.replace("- ", ""));
+                    } else if (blocks.length > 0 && blocks[blocks.length - 1].type === 'list') {
+                      blocks[blocks.length - 1].items.push(line.replace("- ", ""));
+                    } else {
+                      blocks.push({ type: 'list', items: [line.replace("- ", "")] });
+                    }
+                  } 
+                  // Normal paragraph
+                  else {
+                    if (currentStep) {
+                       currentStep.body.push(line);
+                    } else {
+                       blocks.push({ type: 'p', text: line });
+                    }
+                  }
                 }
-                return null;
-              })}
+
+                // Render blocks
+                return blocks.map((block, index) => {
+                  if (block.type === 'h3') {
+                    return <h3 key={index}>{formatText(block.text)}</h3>;
+                  } else if (block.type === 'h4') {
+                    return <h4 key={index}>{formatText(block.text)}</h4>;
+                  } else if (block.type === 'p') {
+                    return <p key={index}>{formatText(block.text)}</p>;
+                  } else if (block.type === 'list') {
+                    return (
+                      <ul key={index}>
+                        {block.items.map((item: string, i: number) => (
+                          <li key={i}>{formatText(item)}</li>
+                        ))}
+                      </ul>
+                    );
+                  } else if (block.type === 'step') {
+                    return (
+                      <div key={index} className="my-12 p-8 md:p-10 rounded-[32px] bg-gradient-to-br from-[#111827] to-[#0A0F1C] border border-cyan-500/20 shadow-[0_15px_40px_-15px_rgba(6,182,212,0.15)] relative overflow-hidden group hover:border-cyan-400/40 transition-all duration-500">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-400/10 blur-[80px] rounded-full pointer-events-none group-hover:bg-cyan-400/20 transition-colors duration-500" />
+                        
+                        {/* Step Badge */}
+                        <div className="absolute -left-[1px] top-10 w-1.5 h-16 bg-cyan-400 rounded-r-full shadow-[0_0_15px_rgba(6,182,212,0.8)]" />
+
+                        <h4 className="text-2xl font-bold text-white mb-4 flex items-center gap-4 mt-0!">
+                          {block.number && (
+                            <span className="w-12 h-12 shrink-0 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xl font-black shadow-[0_0_20px_rgba(6,182,212,0.5)]">
+                              {block.number}
+                            </span>
+                          )}
+                          {formatText(block.title)}
+                        </h4>
+                        {block.body.map((pText: string, i: number) => (
+                          <p key={i} className="text-gray-300 leading-relaxed text-lg mb-4 last:mb-0!">
+                            {formatText(pText)}
+                          </p>
+                        ))}
+                      </div>
+                    );
+                  }
+                  return null;
+                });
+              })()}
             </motion.article>
           </div>
 
