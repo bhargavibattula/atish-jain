@@ -14,8 +14,8 @@ const footerLinks = {
   Company: [
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
-    { label: "Privacy Policy", href: "/privacy" },
-    { label: "Terms & Conditions", href: "/terms" },
+    { label: "Privacy Policy", href: "/legal" },
+    { label: "Terms & Conditions", href: "/legal" },
   ],
   QuickLinks: [
     { label: "Free AI Toolkit", href: "/ai-tools" },
