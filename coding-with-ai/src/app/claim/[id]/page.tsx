@@ -13,6 +13,10 @@ export default async function ClaimMembershipPage({ params }: { params: Promise<
     redirect(`/register`);
   }
 
+  if (session.user.role === "admin") {
+    redirect("/admin");
+  }
+
   await connectDB();
   const dbUser = await User.findById(session.user.id);
   if (!dbUser) {

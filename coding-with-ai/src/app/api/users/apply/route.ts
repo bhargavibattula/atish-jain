@@ -11,6 +11,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    if (session.user.role === "admin") {
+      return NextResponse.json({ error: "Admins cannot apply for memberships" }, { status: 403 });
+    }
+
     const { name, phone, whatsappNumber, college, degree, membershipType, message } = await req.json();
 
     if (!whatsappNumber) {
