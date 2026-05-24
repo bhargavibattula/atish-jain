@@ -498,19 +498,19 @@ export default function AdminDashboard({ stats: initialStats, allUsers, session 
                     const maxVal = Math.max(...signupData.map((d) => d.value)) || 1;
                     const percentHeight = Math.round((data.value / maxVal) * 80) + 5;
                     return (
-                      <div key={data.name} className="flex-1 flex flex-col items-center group relative z-10">
-                        <div className="absolute -top-8 bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-md whitespace-nowrap">
+                      <div key={data.name} className="flex-1 flex flex-col items-center justify-end h-full group relative z-10">
+                        <div className="absolute -top-8 bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-md whitespace-nowrap z-20">
                           {data.value} signups
                         </div>
                         <motion.div
                           initial={{ height: 0 }}
                           animate={{ height: `${percentHeight}%` }}
                           transition={{ delay: i * 0.05, duration: 0.8, ease: "easeOut" }}
-                          className="w-8 sm:w-12 bg-gradient-to-t from-blue-600 to-indigo-500 group-hover:from-blue-500 group-hover:to-indigo-400 rounded-t-lg shadow-[0_0_15px_rgba(59,130,246,0.2)] transition-all cursor-pointer relative overflow-hidden"
+                          className="w-8 sm:w-12 bg-gradient-to-t from-blue-600 to-indigo-500 group-hover:from-blue-500 group-hover:to-indigo-400 rounded-t-lg shadow-[0_0_15px_rgba(59,130,246,0.2)] transition-all cursor-pointer relative overflow-hidden mt-auto"
                         >
                           <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
                         </motion.div>
-                        <span className="text-xs text-gray-500 mt-2 font-medium">{data.name}</span>
+                        <span className="text-xs text-gray-500 mt-2 font-medium h-4 flex-shrink-0">{data.name}</span>
                       </div>
                     );
                   })}

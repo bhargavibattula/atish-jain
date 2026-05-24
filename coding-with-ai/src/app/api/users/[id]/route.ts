@@ -5,6 +5,8 @@ import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
 import Membership from "@/models/Membership";
 
+import Course from "@/models/Course";
+
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const session = await getServerSession(authOptions);
@@ -40,12 +42,36 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
         });
       }
 
+      // Find or create a course for this tier
+      let course = await Course.findOne({ membership: type });
+      if (!course) {
+        course = await Course.create({
+          title: `Fullstack AI Developer - ${type.toUpperCase()}`,
+          description: "Master AI coding with modern tools.",
+          thumbnail: "/course-thumbnail.png",
+          membership: type,
+          isPublished: true,
+        });
+      }
+
       targetUser.membership = membership._id;
       targetUser.membershipStatus = "approved";
       targetUser.membershipTypeRequested = null;
+      
+      if (!targetUser.progress) targetUser.progress = [];
+      const hasCourse = targetUser.progress.find((p: any) => p.courseId.toString() === course._id.toString());
+      if (!hasCourse) {
+        targetUser.progress.push({
+          courseId: course._id,
+          completedVideos: [],
+          percentage: 0,
+          lastAccessedAt: new Date()
+        });
+      }
+
       await targetUser.save();
 
-      return NextResponse.json({ message: "Membership approved", user: targetUser });
+      return NextResponse.json({ message: "Membership approved and course access granted", user: targetUser });
     }
 
     if (action === "reject") {

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Providers } from "@/components/layout/Providers";
 import { Toaster } from "react-hot-toast";
+import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 
 export const metadata: Metadata = {
   title: {
@@ -67,6 +68,7 @@ export default function RootLayout({
       <body className="bg-background text-white antialiased">
         <Providers>
           {children}
+          <FloatingWhatsApp />
           <Toaster
             position="top-right"
             toastOptions={{
