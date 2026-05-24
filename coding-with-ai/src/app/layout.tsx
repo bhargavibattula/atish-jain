@@ -3,6 +3,7 @@ import "./globals.css";
 import { Providers } from "@/components/layout/Providers";
 import { Toaster } from "react-hot-toast";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
+import FloatingCall from "@/components/ui/FloatingCall";
 
 export const metadata: Metadata = {
   title: {
@@ -69,6 +70,7 @@ export default function RootLayout({
         <Providers>
           {children}
           <FloatingWhatsApp />
+          <FloatingCall />
           <Toaster
             position="top-right"
             toastOptions={{
