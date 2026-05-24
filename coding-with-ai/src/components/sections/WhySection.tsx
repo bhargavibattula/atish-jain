@@ -109,6 +109,16 @@ const capabilities = [
 
 export default function WhySection() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const handleNext = () => {
     setActiveIndex((prev) => (prev + 1) % capabilities.length);
@@ -226,7 +236,6 @@ export default function WhySection() {
                 }
 
                 // Adjust for mobile viewports
-                const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
                 if (isMobile) {
                   if (relativeIndex === 1) x = 70;
                   else if (relativeIndex === capabilities.length - 1) x = -70;

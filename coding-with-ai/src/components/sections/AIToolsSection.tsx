@@ -106,7 +106,7 @@ export default function AIToolsSection() {
         </div>
 
         {/* ChromaGrid */}
-        <div style={{ minHeight: 600, position: "relative" }}>
+        <div className="min-h-[400px] md:min-h-[600px] relative">
           <ChromaGrid
             items={tools}
             radius={350}

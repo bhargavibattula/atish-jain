@@ -342,7 +342,7 @@ export default function OutcomesSection() {
 
         {/* Interactive Card Stack */}
         <div className="max-w-3xl mx-auto mb-32 relative">
-          <div className="w-full" style={{ height: 340 }}>
+          <div className="w-full h-[420px] sm:h-[380px] md:h-[340px]">
             <Stack
               randomRotation={true}
               sensitivity={180}

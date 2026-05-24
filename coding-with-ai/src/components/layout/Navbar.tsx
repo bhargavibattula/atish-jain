@@ -114,7 +114,7 @@ export default function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className={`max-w-6xl mx-auto rounded-full pointer-events-auto transition-all duration-500 ease-in-out ${
+        className={`max-w-6xl mx-auto rounded-[2rem] pointer-events-auto transition-all duration-500 ease-in-out ${
           isScrolled
             ? "bg-[#0A0F1C]/70 backdrop-blur-2xl border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.4)] py-2 px-4"
             : "bg-transparent py-4 px-0"

@@ -226,7 +226,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="relative lg:h-[600px] w-full mt-12 lg:mt-0 perspective-1000"
+            className="relative h-[400px] sm:h-[500px] lg:h-[600px] w-full mt-12 lg:mt-0 perspective-1000"
           >
             {/* The Main Editor Panel */}
             <EditorPanel />
