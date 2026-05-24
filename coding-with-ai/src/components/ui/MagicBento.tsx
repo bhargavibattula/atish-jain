@@ -492,7 +492,7 @@ const GlobalSpotlight: React.FC<GlobalSpotlightProps> = ({
 
 interface BentoCardGridProps {
   children: React.ReactNode;
-  gridRef: React.RefObject<HTMLDivElement | null>;
+  gridRef: React.RefObject<HTMLDivElement>;
 }
 
 const BentoCardGrid: React.FC<BentoCardGridProps> = ({ children, gridRef }) => (

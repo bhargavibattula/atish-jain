@@ -53,11 +53,12 @@ export const authOptions: NextAuthOptions = {
     },
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;
-        token.role = user.role;
-        token.membership = user.membership ? user.membership.toString() : null;
-        token.isActive = user.isActive;
-        token.membershipStatus = user.membershipStatus || "none";
+        const u = user as any;
+        token.id = u.id;
+        token.role = u.role;
+        token.membership = u.membership ? u.membership.toString() : null;
+        token.isActive = u.isActive;
+        token.membershipStatus = u.membershipStatus || "none";
       } else if (token.email) {
         // Refresh user data from DB
         await connectDB();
@@ -73,12 +74,13 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      if (token) {
-        session.user.id = token.id as string;
-        session.user.role = token.role as "student" | "admin";
-        session.user.membership = token.membership as string;
-        session.user.isActive = token.isActive as boolean;
-        session.user.membershipStatus = token.membershipStatus as string;
+      if (token && session.user) {
+        const u = session.user as any;
+        u.id = token.id as string;
+        u.role = token.role as "student" | "admin";
+        u.membership = token.membership as string;
+        u.isActive = token.isActive as boolean;
+        u.membershipStatus = token.membershipStatus as string;
       }
       return session;
     },

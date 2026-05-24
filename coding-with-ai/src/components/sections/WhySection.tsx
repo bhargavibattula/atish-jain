@@ -281,7 +281,7 @@ export default function WhySection() {
                         glowIntensity={relativeIndex === 0 ? 0.95 : 0.4}
                         colors={cap.borderColors}
                         className={`w-full h-full p-8 flex flex-col justify-between border border-white/5 backdrop-blur-2xl shadow-2xl transition-all duration-300 ${
-                          relativeIndex === 0 ? cap.glow + " border-white/10" : "opacity-80"
+                          relativeIndex === 0 ? "border-white/10" : "opacity-80"
                         }`}
                       >
                         <div>
