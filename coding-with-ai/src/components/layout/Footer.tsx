@@ -116,10 +116,7 @@ export default function Footer() {
           <p className="text-sm text-gray-500">
             © {new Date().getFullYear()} Coding With AI. All rights reserved.
           </p>
-          <p className="text-sm text-gray-500 flex items-center gap-1.5">
-            Built with <FaHeart className="text-red-500" size={12} /> by{" "}
-            <span className="gradient-text-blue-purple font-semibold">Atish Jain</span>
-          </p>
+
         </div>
       </div>
     </footer>
