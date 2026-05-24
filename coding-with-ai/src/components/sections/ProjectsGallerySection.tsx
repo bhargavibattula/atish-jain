@@ -6,27 +6,35 @@ import CircularGallery from "@/components/ui/CircularGallery";
 export default function ProjectsGallerySection() {
   const galleryItems = [
     {
-      image: "/projects/saas-analytics.png",
-      text: "Analytics Dashboard",
+      image: "/outcomes/build_apps.png",
+      text: "Build Real Apps",
     },
     {
-      image: "/projects/saas-crm.png",
-      text: "Modern CRM Platform",
+      image: "/outcomes/placements.png",
+      text: "Improve Placements",
     },
     {
-      image: "/projects/saas-ecommerce.png",
-      text: "E-Commerce Admin",
+      image: "/outcomes/portfolio.png",
+      text: "Build Portfolio",
     },
     {
-      image: "/projects/saas-ai.png",
-      text: "AI Command Center",
+      image: "/outcomes/freelancing.png",
+      text: "Start Freelancing",
+    },
+    {
+      image: "/outcomes/startup.png",
+      text: "Startup Building",
+    },
+    {
+      image: "/outcomes/ai_skills.png",
+      text: "AI-Ready Skills",
     },
   ];
 
   return (
     <section className="py-24 relative bg-[#0B0F19] overflow-hidden border-t border-white/[0.03]">
       {/* Background radial glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none" />
+      <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none block" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
@@ -37,8 +45,8 @@ export default function ProjectsGallerySection() {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/10 mb-4"
           >
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-            <span className="text-xs font-semibold tracking-wide text-gray-300 uppercase">3D Interactive Exhibition</span>
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse block" />
+            <span className="text-xs font-semibold tracking-wide text-gray-300 uppercase">Your Future</span>
           </motion.div>
 
           <motion.h2
@@ -48,7 +56,7 @@ export default function ProjectsGallerySection() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-4"
           >
-            Experience Our Projects in <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">3D Space</span>
+            Real Student <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Outcomes</span>
           </motion.h2>
 
           <motion.p
@@ -58,7 +66,7 @@ export default function ProjectsGallerySection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-base md:text-lg text-gray-400 max-w-xl mx-auto"
           >
-            Click and drag, or scroll to interact with the carousel. See the clean, AI-engineered application interfaces in motion.
+            Click and drag, or scroll to interact with the carousel. See the skills and milestones you will achieve during your journey.
           </motion.p>
         </div>
 
