@@ -112,7 +112,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group relative z-10 pl-2">
             <div className="flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
-              <Image src="/image.png" alt="Coding With AI Logo" width={isScrolled ? 36 : 48} height={isScrolled ? 36 : 48} className="object-contain rounded-lg transition-all duration-500" priority />
+              <Image src="/logo.png" alt="Coding With AI Logo" width={isScrolled ? 36 : 48} height={isScrolled ? 36 : 48} className="object-contain rounded-lg transition-all duration-500" priority />
             </div>
             <span className={`font-bold transition-all duration-500 ${isScrolled ? 'text-base' : 'text-lg'}`}>
               <span className="text-white">Coding</span>

@@ -42,7 +42,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <Image src="/image.png" alt="Coding With AI Logo" width={36} height={36} className="object-contain rounded-lg" />
+              <Image src="/logo.png" alt="Coding With AI Logo" width={36} height={36} className="object-contain rounded-lg" />
               <span className="font-bold text-xl">
                 <span className="text-white">Coding</span>
                 <span className="gradient-text-blue-purple"> With AI</span>

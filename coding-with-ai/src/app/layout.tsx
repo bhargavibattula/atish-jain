@@ -38,6 +38,10 @@ export const metadata: Metadata = {
     description: "Build real apps using AI tools.",
     images: ["/og-image.png"],
   },
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
   robots: { index: true, follow: true },
 };
 
