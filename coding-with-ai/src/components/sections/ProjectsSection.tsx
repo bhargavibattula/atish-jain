@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ExternalLink, Github, ArrowRight, Layout, TerminalSquare, Video, FileText } from "lucide-react";
+import { ExternalLink, Github, ArrowRight, Layout, TerminalSquare, Video, FileText, BookOpen, CheckSquare } from "lucide-react";
 import SpotlightCard from "@/components/ui/SpotlightCard";
 
 const projects = [
@@ -50,6 +50,28 @@ const projects = [
     shadow: "group-hover:shadow-[0_0_40px_rgba(16,185,129,0.3)]",
     image: "/projects/portfolio.png",
     spotlightColor: "rgba(16, 185, 129, 0.15)",
+  },
+  {
+    title: "AI Notes Generator",
+    description: "An intelligent study companion that automatically transcribes lectures, summarizes key points, and generates flashcards.",
+    techStack: ["React", "Whisper API", "LangChain", "Supabase"],
+    category: "EdTech",
+    icon: <BookOpen size={20} />,
+    color: "from-amber-600/40 to-yellow-500/10",
+    shadow: "group-hover:shadow-[0_0_40px_rgba(245,158,11,0.3)]",
+    image: "/projects/saas-analytics.png",
+    spotlightColor: "rgba(245, 158, 11, 0.15)",
+  },
+  {
+    title: "AI Productivity App",
+    description: "A smart Kanban board that uses AI to auto-prioritize tasks, estimate completion times, and suggest workflow optimizations.",
+    techStack: ["Next.js", "Prisma", "PostgreSQL", "Tailwind"],
+    category: "Productivity",
+    icon: <CheckSquare size={20} />,
+    color: "from-indigo-600/40 to-blue-500/10",
+    shadow: "group-hover:shadow-[0_0_40px_rgba(99,102,241,0.3)]",
+    image: "/projects/saas-crm.png",
+    spotlightColor: "rgba(99, 102, 241, 0.15)",
   }
 ];
 
