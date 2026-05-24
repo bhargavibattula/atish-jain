@@ -89,6 +89,16 @@ export default function Stack({
   const shouldDisableDrag = mobileClickOnly && isMobile;
   const shouldEnableClick = sendToBackOnClick || shouldDisableDrag;
 
+  // Pre-compute deterministic rotations to avoid SSR/client hydration mismatch
+  const [rotations] = useState(() => {
+    const seed = 42;
+    return cards.map((_, i) => {
+      // Simple deterministic hash per index
+      const val = Math.sin(seed + i * 9301 + 49297) * 49297;
+      return (val - Math.floor(val)) * 10 - 5;
+    });
+  });
+
   const [stack, setStack] = useState(() =>
     cards.map((content, index) => ({ id: index + 1, content }))
   );
@@ -126,7 +136,7 @@ export default function Stack({
       onMouseLeave={() => pauseOnHover && setIsPaused(false)}
     >
       {stack.map((card, index) => {
-        const randomRotate = randomRotation ? Math.random() * 10 - 5 : 0;
+        const randomRotate = randomRotation ? (rotations[card.id - 1] ?? 0) : 0;
         return (
           <CardRotate
             key={card.id}
