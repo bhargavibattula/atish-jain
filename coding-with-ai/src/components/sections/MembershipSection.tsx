@@ -23,6 +23,7 @@ const memberships = [
       "Discord Community Access",
       "Weekly Live QA Sessions",
     ],
+    cta: "Start Your Journey",
   },
   {
     id: "gold",
@@ -42,6 +43,7 @@ const memberships = [
       "Resume & Portfolio Review",
       "1-on-1 Mentorship (Monthly)",
     ],
+    cta: "Become App Builder",
   },
   {
     id: "diamond",
@@ -60,6 +62,7 @@ const memberships = [
       "Direct Founder Access",
       "Priority Job Board Placement",
     ],
+    cta: "Become AI Founder",
   },
 ];
 
@@ -192,20 +195,26 @@ export default function MembershipSection() {
                     </div>
                   </div>
 
-                  {/* CTA */}
-                  <div>
-                    <Link
-                      href={`/claim/${tier.id}`}
-                      className={`w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-semibold text-sm transition-all duration-300 ${
-                        tier.popular
-                          ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white hover:shadow-[0_0_25px_rgba(245,158,11,0.3)] hover:scale-[1.01]"
-                          : "bg-white/[0.04] text-white border border-white/10 hover:bg-white/[0.08] hover:border-white/20"
-                      }`}
-                    >
-                      Apply for {tier.name}
-                      <ArrowRight size={15} />
-                    </Link>
-                  </div>
+                    {/* CTA */}
+                    <div className="flex flex-col gap-3">
+                      <Link
+                        href={`/claim/${tier.id}`}
+                        className={`group w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-semibold text-sm transition-all duration-300 ${
+                          tier.popular
+                            ? "bg-gradient-to-b from-amber-400 to-orange-600 text-white shadow-[0_2px_15px_-3px_rgba(245,158,11,0.5),inset_0_1px_0_rgba(255,255,255,0.4)] hover:shadow-[0_8px_25px_-3px_rgba(245,158,11,0.6),inset_0_1px_0_rgba(255,255,255,0.6)] hover:-translate-y-0.5"
+                            : "bg-gradient-to-b from-white/[0.08] to-white/[0.02] text-gray-200 border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] hover:text-white hover:border-white/20 hover:from-white/[0.12] hover:to-white/[0.04] hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.15)]"
+                        }`}
+                      >
+                        {tier.cta}
+                      </Link>
+
+                      <Link
+                        href={`/membership/${tier.id}`}
+                        className="w-full text-center text-[13px] font-medium text-gray-400 hover:text-white transition-colors"
+                      >
+                        View Full Curriculum & Details →
+                      </Link>
+                    </div>
                 </div>
               </GlareHover>
             </motion.div>
