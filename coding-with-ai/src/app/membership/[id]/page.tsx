@@ -12,85 +12,87 @@ const membershipData = {
   silver: {
     id: "silver",
     name: "Silver",
-    title: "Learn AI Tools",
-    description: "Understand AI coding ecosystem and build your first AI-assisted app.",
-    milestone: "First AI-powered app created.",
-    cta: "Start Your Journey",
+    title: "AI Coding Starter",
+    description: "Learn AI coding ecosystem and tools. Includes 15 videos, 3 bonuses, AI tool walkthroughs, and beginner-friendly guidance.",
+    milestone: "Build and run first AI-assisted application.",
+    cta: "Start Your AI Journey",
     image: "/silver.png",
     gradient: "from-slate-300 via-slate-100 to-slate-400",
     glow: "bg-slate-500/20",
     curriculum: [
-      { title: "The AI Ecosystem", desc: "Understand LLMs, Prompt Engineering, and the landscape of AI tools." },
-      { title: "Cursor & Copilot", desc: "Master the premier AI code editors to write code 10x faster." },
-      { title: "UI Generation", desc: "Learn to use v0 and Claude to generate stunning frontend components." },
-      { title: "Your First App", desc: "Tie it all together to build and deploy a functional web application." }
+      { title: "Intro & Future", desc: "Introduction to AI coding and the future of programming." },
+      { title: "AI Tools Overview", desc: "Overview of AI coding tools, including Free vs Paid tools." },
+      { title: "Prompt Engineering", desc: "Prompt engineering basics and using ChatGPT for coding." },
+      { title: "Core AI Editors", desc: "Cursor AI basics, GitHub Copilot, and Replit AI integration." },
+      { title: "Debugging", desc: "Master AI-assisted debugging for faster issue resolution." }
     ],
     outcomes: [
-      "Complete understanding of the modern AI developer workflow.",
-      "Ability to generate and modify code without memorizing syntax.",
-      "Confidence to build basic web applications from scratch.",
-      "A live, deployed application to show off to friends and recruiters."
+      "Understand the entire AI coding ecosystem.",
+      "Master essential tools like Cursor, Copilot, and ChatGPT.",
+      "Learn prompt engineering to generate code effortlessly.",
+      "Build and run your first AI-assisted application."
     ],
     faqs: [
       { q: "Do I need any prior coding experience?", a: "Not at all. The Silver tier is designed specifically for absolute beginners. We teach you how to use AI to handle the heavy lifting." },
-      { q: "How long does it take to complete?", a: "Most students complete the core curriculum and their first app within 2 to 4 weeks, depending on their pace." },
-      { q: "What exactly will I build?", a: "You will build a functional, responsive web application (like a personal portfolio or a simple utility tool) and deploy it live to the internet." }
+      { q: "How long does it take to complete?", a: "This is designed to be a 3-day sprint. Most students complete the core 15 videos and build their first app within the first weekend." },
+      { q: "What exactly will I build?", a: "You will build and run your very first functional AI-assisted application." }
     ]
   },
   gold: {
     id: "gold",
     name: "Gold",
-    title: "Build Real AI Apps",
-    description: "Learn to build and deploy complex, full-stack AI-powered applications.",
-    milestone: "3 real-world apps deployed.",
-    cta: "Become App Builder",
+    title: "AI App Builder Pro",
+    description: "Build real-world applications using AI. Deep AI tool training, full project building, and frontend/backend guidance.",
+    milestone: "Build and deploy 3 real-world AI applications. (e.g. AI chatbot, Portfolio generator, Resume analyzer)",
+    cta: "Build Real AI Apps",
     image: "/gold.png",
     gradient: "from-amber-400 via-orange-300 to-amber-600",
     glow: "bg-amber-500/20",
     curriculum: [
-      { title: "Full-Stack Architecture", desc: "Master Next.js, database integration (MongoDB/PostgreSQL), and API routes." },
-      { title: "AI Integration (RAG)", desc: "Learn Retrieval-Augmented Generation to make AI talk to your custom data." },
-      { title: "Vector Databases", desc: "Implement Pinecone/ChromaDB for semantic search and memory." },
-      { title: "Enterprise Deployment", desc: "Secure, scale, and deploy robust applications to production environments." }
+      { title: "Workflow & Frontend", desc: "Master the AI app development workflow and frontend generation." },
+      { title: "Backend & APIs", desc: "Build backend APIs and implement advanced AI integrations." },
+      { title: "Database Basics", desc: "Integrate database basics and set up automation." },
+      { title: "Deployment", desc: "Learn advanced debugging and complete deployment." },
+      { title: "Project Building", desc: "End-to-end building of complex AI-powered projects." }
     ],
     outcomes: [
-      "Ability to architect and build complex SaaS applications.",
-      "Mastery over integrating OpenAI APIs and custom AI models.",
-      "A strong portfolio featuring 3 enterprise-grade applications.",
-      "Deep understanding of databases, authentication, and security."
+      "Ability to architect and build complex full-stack applications.",
+      "Mastery over frontend generation and backend APIs.",
+      "Deploy 3 real-world AI applications (Chatbot, Portfolio, Resume Analyzer).",
+      "Deep understanding of databases and AI integrations."
     ],
     faqs: [
-      { q: "Should I take Silver before Gold?", a: "If you have absolutely no coding experience, yes. If you understand basic HTML/JS, you can jump straight into Gold." },
-      { q: "Will we use real databases?", a: "Yes. You will learn to architect real schemas using modern databases like MongoDB and PostgreSQL." },
-      { q: "What kind of apps will I build?", a: "You will build complex systems like AI-powered CRM dashboards, chat applications with PDF knowledge bases, and more." }
+      { q: "Should I take Silver before Gold?", a: "If you have absolutely no coding experience, yes. If you understand basic development concepts, you can jump straight into Gold." },
+      { q: "Will we build real projects?", a: "Yes. You will build and deploy 3 real-world AI applications, including an AI chatbot, portfolio generator, and resume analyzer." },
+      { q: "Is deployment covered?", a: "Absolutely. You will learn the entire AI project architecture, from backend APIs and databases to full deployment." }
     ]
   },
   diamond: {
     id: "diamond",
     name: "Diamond",
-    title: "Launch & Monetize",
-    description: "Learn freelancing, monetization, and AI startup skills to launch your career.",
-    milestone: "Launch monetizable app or earn first income.",
-    cta: "Become AI Founder",
+    title: "AI Founder Diamond",
+    description: "Monetize apps and AI skills. Includes monetization training, freelancing guidance, and MVP basics.",
+    milestone: "Launch one monetizable app OR earn first income using AI skills.",
+    cta: "Launch & Monetize",
     image: "/diamond.png",
     gradient: "from-cyan-400 via-blue-400 to-cyan-600",
     glow: "bg-cyan-500/20",
     curriculum: [
-      { title: "Product Strategy & Validation", desc: "How to find profitable SaaS ideas and validate them quickly." },
-      { title: "Payments & Monetization", desc: "Integrate Stripe to accept subscriptions and one-time payments." },
-      { title: "Freelancing Blueprint", desc: "Strategies to acquire high-paying clients on Upwork and LinkedIn." },
-      { title: "Scaling & Leadership", desc: "Architecting for scale and managing technical debt as a solo founder." }
+      { title: "Freelancing & Services", desc: "Navigate freelancing platforms and learn how to sell AI services." },
+      { title: "Startup Mindset & MVP", desc: "Develop a startup mindset and execute rapid MVP development." },
+      { title: "App Monetization", desc: "Strategies for monetizing apps and acquiring clients." },
+      { title: "Branding & Audience", desc: "Build a personal brand, grow an audience, and position yourself for internships." }
     ],
     outcomes: [
-      "A fully functional, monetizable SaaS product ready for users.",
-      "The exact blueprint to secure your first freelance clients.",
-      "Mastery of the business side of software engineering.",
-      "Direct access to our founder network and priority job board placements."
+      "Launch a fully functional, monetizable SaaS product or MVP.",
+      "Earn your first income using AI skills.",
+      "Master client acquisition and personal career branding.",
+      "Navigate freelancing platforms effectively to secure high-paying gigs."
     ],
     faqs: [
-      { q: "Do you guarantee I will make money?", a: "We provide the exact blueprints, skills, and tools that we and our successful students have used. Execution and effort are up to you." },
-      { q: "Is 1-on-1 mentorship included?", a: "Yes. Diamond members get exclusive, direct access to the founders for technical and strategic guidance." },
-      { q: "How long does the Diamond track take?", a: "This is a continuous journey. While the core modules take 4-6 weeks, the mentorship and community support are ongoing as you build your business." }
+      { q: "Do you guarantee I will make money?", a: "We provide the exact monetization training, freelancing guidance, and personal branding tools you need. Execution and effort are up to you." },
+      { q: "Is startup strategy included?", a: "Yes. Diamond members get comprehensive MVP development and startup mindset training." },
+      { q: "Who is this track for?", a: "It's for anyone looking to monetize their AI skills, land elite internships, build an audience, or start their own SaaS business." }
     ]
   }
 };
