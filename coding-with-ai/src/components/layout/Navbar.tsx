@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, LogOut, User, LayoutDashboard, Home, Award, Briefcase, Bot, Users, PhoneCall } from "lucide-react";
+import { Menu, X, ChevronDown, LogOut, User, LayoutDashboard, Home, Award, Briefcase, Bot, Users, PhoneCall, BookOpenText } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import Dock from "@/components/ui/Dock";
 
@@ -14,6 +14,7 @@ const navLinks = [
   { label: "Memberships", href: "/memberships" },
   { label: "Projects", href: "/projects" },
   { label: "AI Tools", href: "/ai-tools" },
+  { label: "Blogs", href: "/blogs" },
   { label: "Community", href: "/community" },
   { label: "Contact Us", href: "/contact" },
 ];
@@ -74,6 +75,18 @@ export default function Navbar() {
       ),
       label: "AI Tools",
       onClick: () => router.push("/ai-tools"),
+    },
+    {
+      icon: (
+        <div className="relative flex flex-col items-center justify-center">
+          <BookOpenText size={20} className={pathname === "/blogs" ? "text-cyan-400" : "text-gray-300"} />
+          {pathname === "/blogs" && (
+            <span className="absolute -bottom-2 w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#06b6d4]" />
+          )}
+        </div>
+      ),
+      label: "Blogs",
+      onClick: () => router.push("/blogs"),
     },
     {
       icon: (
