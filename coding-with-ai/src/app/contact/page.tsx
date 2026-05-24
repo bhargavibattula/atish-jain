@@ -3,7 +3,7 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { motion } from "framer-motion";
-import { Mail, MessageCircle, Send, Youtube, Instagram, Linkedin } from "lucide-react";
+import { Mail, MessageCircle, Send, Youtube, Instagram, Linkedin, MapPin, Phone, Globe, Facebook } from "lucide-react";
 
 export default function ContactPage() {
   return (
@@ -56,11 +56,13 @@ export default function ContactPage() {
             {/* Info */}
             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.15 }} className="space-y-6">
               {[
-                { icon: Mail, label: "Email", value: "hello@codingwithai.in", color: "text-blue-400", bg: "bg-blue-500/15" },
-                { icon: MessageCircle, label: "WhatsApp", value: "+91 XXXXX XXXXX", color: "text-green-400", bg: "bg-green-500/15" },
-                { icon: Send, label: "Telegram", value: "@codingwithai", color: "text-blue-400", bg: "bg-blue-500/15" },
+                { icon: Mail, label: "Email", value: "ahcareerpvtltd@gmail.com", href: "mailto:ahcareerpvtltd@gmail.com", color: "text-blue-400", bg: "bg-blue-500/15" },
+                { icon: Phone, label: "Phone", value: "+91 9989241515", href: "tel:9989241515", color: "text-green-400", bg: "bg-green-500/15" },
+                { icon: Phone, label: "Landline", value: "0883-2474088", href: "tel:08832474088", color: "text-purple-400", bg: "bg-purple-500/15" },
+                { icon: MapPin, label: "Address", value: "Near UCO Bank, Danavai Peta, AP 533103", href: "https://maps.google.com/?q=AH+Career+Pvt+Ltd+Rajamahendravaram+Andhra+Pradesh", color: "text-red-400", bg: "bg-red-500/15" },
+                { icon: Globe, label: "Website", value: "ahcareer.in", href: "http://ahcareer.in", color: "text-cyan-400", bg: "bg-cyan-500/15" },
               ].map((item) => (
-                <div key={item.label} className="flex items-center gap-4 p-5 rounded-2xl bg-[#111827] border border-white/10">
+                <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-5 rounded-2xl bg-[#111827] border border-white/10 hover:border-white/30 hover:bg-white/5 transition-all">
                   <div className={`w-12 h-12 rounded-xl ${item.bg} flex items-center justify-center flex-shrink-0`}>
                     <item.icon size={20} className={item.color} />
                   </div>
@@ -68,16 +70,20 @@ export default function ContactPage() {
                     <p className="text-gray-400 text-sm">{item.label}</p>
                     <p className="text-white font-medium">{item.value}</p>
                   </div>
-                </div>
+                </a>
               ))}
 
               <div className="p-5 rounded-2xl bg-[#111827] border border-white/10">
                 <p className="text-gray-400 text-sm mb-3">Follow us on social</p>
                 <div className="flex gap-3">
-                  {[Youtube, Instagram, Linkedin].map((Icon, i) => (
-                    <a key={i} href="#"
-                      className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-white/30 transition-all">
-                      <Icon size={16} />
+                  {[
+                    { icon: Facebook, href: "https://www.facebook.com/share/18nvUvNp8m/" },
+                    { icon: Instagram, href: "https://www.instagram.com/ah_career_rajahmundry" },
+                    { icon: Linkedin, href: "https://www.linkedin.com/company/ahcareer/" },
+                  ].map((social, i) => (
+                    <a key={i} href={social.href} target="_blank" rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-white/30 hover:bg-white/10 transition-all">
+                      <social.icon size={16} />
                     </a>
                   ))}
                 </div>

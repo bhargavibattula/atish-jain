@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, LogOut, User, LayoutDashboard, Home, Award, Briefcase, Bot, Users } from "lucide-react";
+import { Menu, X, ChevronDown, LogOut, User, LayoutDashboard, Home, Award, Briefcase, Bot, Users, PhoneCall } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import Dock from "@/components/ui/Dock";
 
@@ -15,6 +15,7 @@ const navLinks = [
   { label: "Projects", href: "/projects" },
   { label: "AI Tools", href: "/ai-tools" },
   { label: "Community", href: "/community" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -86,6 +87,18 @@ export default function Navbar() {
       label: "Community",
       onClick: () => router.push("/community"),
     },
+    {
+      icon: (
+        <div className="relative flex flex-col items-center justify-center">
+          <PhoneCall size={20} className={pathname === "/contact" ? "text-cyan-400" : "text-gray-300"} />
+          {pathname === "/contact" && (
+            <span className="absolute -bottom-2 w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#06b6d4]" />
+          )}
+        </div>
+      ),
+      label: "Contact Us",
+      onClick: () => router.push("/contact"),
+    },
   ];
 
   useEffect(() => {
@@ -121,7 +134,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav Links replaced by Dock in the center */}
-          <div className="hidden lg:flex items-center justify-center relative w-[360px] h-12">
+          <div className="hidden lg:flex items-center justify-center relative w-[420px] h-12">
             <Dock
               items={dockItems}
               panelHeight={40}
