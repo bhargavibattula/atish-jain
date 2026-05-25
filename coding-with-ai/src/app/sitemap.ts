@@ -1,5 +1,7 @@
 import { MetadataRoute } from "next";
 import { blogsData } from "@/data/blogs";
+import connectDB from "@/lib/mongodb";
+import Blog from "@/models/Blog";
 
 // 1. Base URL Normalization
 const rawBaseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://codingwithai.in";
@@ -21,9 +23,9 @@ function parseSafeDate(dateStr?: string, fallback: Date = STATIC_LAST_MODIFIED):
 /**
  * Helper to calculate the date of the newest blog post.
  */
-function getLatestBlogDate(): Date {
-  if (!blogsData || blogsData.length === 0) return STATIC_LAST_MODIFIED;
-  const dates = blogsData.map(blog => parseSafeDate(blog.date).getTime());
+function getLatestBlogDate(blogs: any[]): Date {
+  if (!blogs || blogs.length === 0) return STATIC_LAST_MODIFIED;
+  const dates = blogs.map(blog => parseSafeDate(blog.date).getTime());
   return new Date(Math.max(...dates));
 }
 
@@ -52,8 +54,20 @@ function deduplicateEntries(entries: MetadataRoute.Sitemap): MetadataRoute.Sitem
   });
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const latestBlogDate = getLatestBlogDate();
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  let blogs: any[] = [];
+  try {
+    await connectDB();
+    blogs = await Blog.find({}).lean();
+    if (blogs.length === 0) {
+      blogs = blogsData;
+    }
+  } catch (error) {
+    console.error("Failed to fetch blogs for sitemap, using static fallback:", error);
+    blogs = blogsData;
+  }
+
+  const latestBlogDate = getLatestBlogDate(blogs);
 
   // A. Static pages config
   const staticPages = [
@@ -85,8 +99,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // C. Dynamic blog post routes (/blogs/[slug])
-  const blogPostEntries = blogsData.map((blog: any) => ({
-    url: normalizeUrl(`${baseUrl}/blogs/${blog.slug}`),
+  const blogPostEntries = blogs.map((blog: any) => ({
+    url: normalizeUrl(`${baseUrl}/blogs/${blog.id}`),
     lastModified: parseSafeDate(blog.date),
     changeFrequency: "monthly" as const,
     priority: 0.75,

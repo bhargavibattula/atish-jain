@@ -6,6 +6,8 @@ import SpotlightCard from "@/components/ui/SpotlightCard";
 import SplitText from "@/components/ui/SplitText";
 import { blogsData } from "@/data/blogs";
 import { Metadata } from "next";
+import connectDB from "@/lib/mongodb";
+import Blog from "@/models/Blog";
 
 export const metadata: Metadata = {
   title: "AI Engineering Blog & Guides — Coding With AI",
@@ -24,7 +26,35 @@ export const metadata: Metadata = {
   ]
 };
 
-export default function BlogsPage() {
+// Force dynamic rendering to always fetch fresh database records
+export const revalidate = 0;
+
+export default async function BlogsPage() {
+  await connectDB();
+  
+  let blogs: any[] = [];
+  try {
+    blogs = await Blog.find({}).sort({ createdAt: -1 }).lean();
+    if (blogs.length === 0) {
+      console.log("No blogs in DB, seeding static blogs...");
+      const formattedBlogs = blogsData.map((blog) => ({
+        id: blog.id,
+        title: blog.title,
+        excerpt: blog.excerpt,
+        content: blog.content,
+        author: blog.author,
+        date: blog.date || new Date().toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" }),
+        category: blog.category,
+        image: blog.image,
+        readTime: blog.readTime,
+      }));
+      await Blog.insertMany(formattedBlogs);
+      blogs = await Blog.find({}).sort({ createdAt: -1 }).lean();
+    }
+  } catch (error) {
+    console.error("Failed to fetch blogs from database, using static fallback:", error);
+    blogs = blogsData;
+  }
   return (
     <div className="min-h-screen bg-[#0B0F19] text-white font-sans overflow-x-hidden">
       <Navbar />
@@ -54,7 +84,7 @@ export default function BlogsPage() {
       {/* Blogs Grid */}
       <section className="relative z-10 py-10 pb-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogsData.map((blog) => (
+          {blogs.map((blog: any) => (
             <Link key={blog.id} href={`/blogs/${blog.id}`} className="group block h-full">
               <SpotlightCard className="h-full flex flex-col rounded-[24px] bg-[#111827]/60 border border-white/5 overflow-hidden transition-transform duration-500 hover:-translate-y-2" spotlightColor="rgba(6, 182, 212, 0.1)">
                 {/* Image */}

@@ -10,15 +10,51 @@ import TiltedCard from "@/components/ui/TiltedCard";
 import SpotlightCard from "@/components/ui/SpotlightCard";
 import GlareHover from "@/components/ui/GlareHover";
 import { blogsData } from "@/data/blogs";
-import { use } from "react";
+import { use, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 export default function BlogDetailPage({ params }: { params: Promise<{ id: string }> }) {
   // Unwrap the promise using React's use() hook for client components
   const resolvedParams = use(params);
   const { id } = resolvedParams;
-  
-  const blog = blogsData.find((b) => b.id === id);
+
+  const [blog, setBlog] = useState<any | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBlog = async () => {
+      try {
+        const res = await fetch(`/api/blogs/${id}`);
+        if (res.ok) {
+          const data = await res.json();
+          setBlog(data.blog);
+        } else {
+          // If not found in DB, fallback to static blogsData
+          const fallback = blogsData.find((b) => b.id === id);
+          if (fallback) {
+            setBlog(fallback);
+          }
+        }
+      } catch (err) {
+        console.error("Error loading blog details:", err);
+        const fallback = blogsData.find((b) => b.id === id);
+        if (fallback) {
+          setBlog(fallback);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchBlog();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#0A0F1C] text-white font-sans flex items-center justify-center">
+        <div className="w-8 h-8 rounded-full border-2 border-t-cyan-400 border-white/10 animate-spin" />
+      </div>
+    );
+  }
 
   if (!blog) {
     notFound();

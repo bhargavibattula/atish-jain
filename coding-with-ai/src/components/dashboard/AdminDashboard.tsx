@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Session } from "next-auth";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Users, DollarSign, CreditCard, TrendingUp, Zap, LogOut, FileDown, Search, BarChart2, Clock, Check, X, Trash2, Edit3, ExternalLink, ShieldAlert, CheckCircle, Shield } from "lucide-react";
+import { Users, DollarSign, CreditCard, TrendingUp, Zap, LogOut, FileDown, Search, BarChart2, Clock, Check, X, Trash2, Edit3, ExternalLink, ShieldAlert, CheckCircle, Shield, BookOpenText, Plus } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { formatPrice, formatDate } from "@/lib/utils";
 import { useRouter } from "next/navigation";
@@ -18,7 +18,7 @@ interface AdminDashboardProps {
 
 export default function AdminDashboard({ stats: initialStats, allUsers, session }: AdminDashboardProps) {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState<"dashboard" | "analytics" | "users" | "applications">("dashboard");
+  const [activeTab, setActiveTab] = useState<"dashboard" | "analytics" | "users" | "applications" | "blogs">("dashboard");
   const [searchQuery, setSearchQuery] = useState("");
   const [usersList, setUsersList] = useState(allUsers);
   
@@ -35,9 +35,130 @@ export default function AdminDashboard({ stats: initialStats, allUsers, session 
     isActive: true,
   });
 
+  // Blog Management States
+  const [blogsList, setBlogsList] = useState<any[]>([]);
+  const [blogsLoading, setBlogsLoading] = useState(false);
+  const [editingBlog, setEditingBlog] = useState<any | null>(null);
+  const [isBlogModalOpen, setIsBlogModalOpen] = useState(false);
+  const [blogForm, setBlogForm] = useState({
+    id: "",
+    title: "",
+    excerpt: "",
+    content: "",
+    category: "AI Coding Tutorials",
+    image: "/blogs/blog_cursor_app.png",
+    readTime: "5 min read",
+    author: "Atish Jain",
+  });
+
   useEffect(() => {
     setUsersList(allUsers);
   }, [allUsers]);
+
+  // Fetch blogs on activeTab change
+  useEffect(() => {
+    if (activeTab === "blogs") {
+      fetchBlogs();
+    }
+  }, [activeTab]);
+
+  const fetchBlogs = async () => {
+    setBlogsLoading(true);
+    try {
+      const res = await fetch("/api/blogs");
+      if (res.ok) {
+        const data = await res.json();
+        setBlogsList(data.blogs || []);
+      } else {
+        toast.error("Failed to load blogs");
+      }
+    } catch (err) {
+      console.error("Error fetching blogs:", err);
+      toast.error("Error connecting to server");
+    } finally {
+      setBlogsLoading(false);
+    }
+  };
+
+  const slugify = (text: string) => {
+    return text
+      .toString()
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, "-")
+      .replace(/&/g, "-and-")
+      .replace(/[^\w\-]+/g, "")
+      .replace(/\-\-+/g, "-");
+  };
+
+  const handleTitleChange = (val: string) => {
+    setBlogForm((prev) => ({
+      ...prev,
+      title: val,
+      id: prev.id && prev.id !== slugify(prev.title) ? prev.id : slugify(val),
+    }));
+  };
+
+  const handleCategoryChange = (cat: string) => {
+    let img = "/blogs/blog_cursor_app.png";
+    if (cat === "AI Tools") img = "/blogs/blog_ai_tools.png";
+    else if (cat === "Career Guidance") img = "/blogs/blog_career_future.png";
+    else if (cat === "Coding Projects") img = "/blogs/blog_pdf_chat.png";
+    else if (cat === "Placement Preparation") img = "/blogs/blog_placements.png";
+    else if (cat === "AI News Simplified") img = "/blogs/blog_ai_news.png";
+
+    setBlogForm((prev) => ({
+      ...prev,
+      category: cat,
+      image: img,
+    }));
+  };
+
+  const handleDeleteBlog = async (blogId: string) => {
+    if (!confirm("Are you sure you want to delete this blog post? This action cannot be undone.")) return;
+    try {
+      const res = await fetch(`/api/blogs/${blogId}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        toast.success("Blog deleted successfully");
+        setBlogsList((prev) => prev.filter((b) => b.id !== blogId));
+      } else {
+        const data = await res.json();
+        toast.error(data.error || "Failed to delete blog");
+      }
+    } catch (err) {
+      console.error("Error deleting blog:", err);
+      toast.error("Failed to delete blog");
+    }
+  };
+
+  const handleBlogSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const url = editingBlog ? `/api/blogs/${editingBlog.id}` : "/api/blogs";
+      const method = editingBlog ? "PUT" : "POST";
+      
+      const res = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(blogForm),
+      });
+
+      if (res.ok) {
+        toast.success(editingBlog ? "Blog updated successfully" : "Blog posted successfully");
+        setIsBlogModalOpen(false);
+        setEditingBlog(null);
+        fetchBlogs();
+      } else {
+        const data = await res.json();
+        toast.error(data.error || "Failed to save blog");
+      }
+    } catch (err) {
+      console.error("Error saving blog:", err);
+      toast.error("Error saving blog");
+    }
+  };
 
   // Reactive Stats Calculations
   const totalUsersCount = usersList.length;
@@ -332,6 +453,17 @@ export default function AdminDashboard({ stats: initialStats, allUsers, session 
           >
             <Users size={16} />
             All Registered Users
+          </button>
+          <button
+            onClick={() => setActiveTab("blogs")}
+            className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all duration-200 w-full text-left ${
+              activeTab === "blogs"
+                ? "bg-blue-500/10 text-blue-400 border border-blue-500/20"
+                : "text-gray-400 hover:text-white hover:bg-white/5"
+            }`}
+          >
+            <BookOpenText size={16} />
+            Manage Blog Posts
           </button>
           <button
             onClick={() => setActiveTab("applications")}
@@ -763,6 +895,153 @@ export default function AdminDashboard({ stats: initialStats, allUsers, session 
               </div>
             </motion.div>
           </div>
+        ) : activeTab === "blogs" ? (
+          /* ==================== BLOG POSTS MANAGEMENT VIEW ==================== */
+          <div>
+            <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <p className="text-gray-400 text-sm mb-1">Content Management System</p>
+                <h1 className="font-bold text-3xl text-white tracking-tight">Manage Blog Posts</h1>
+              </div>
+              <button
+                onClick={() => {
+                  setEditingBlog(null);
+                  setBlogForm({
+                    id: "",
+                    title: "",
+                    excerpt: "",
+                    content: "",
+                    category: "AI Coding Tutorials",
+                    image: "/blogs/blog_cursor_app.png",
+                    readTime: "5 min read",
+                    author: "Atish Jain"
+                  });
+                  setIsBlogModalOpen(true);
+                }}
+                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-400 hover:to-indigo-500 text-white font-semibold text-sm px-5 py-3 rounded-xl shadow-lg shadow-blue-500/10 hover:shadow-blue-500/20 transition-all hover:scale-[1.01]"
+              >
+                <Plus size={16} />
+                Create New Post
+              </button>
+            </div>
+
+            {blogsLoading ? (
+              <div className="flex flex-col items-center justify-center py-20 text-gray-400">
+                <div className="w-8 h-8 rounded-full border-2 border-t-blue-500 border-white/10 animate-spin mb-4" />
+                Loading articles...
+              </div>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="rounded-2xl bg-[#111827]/40 border border-white/[0.06] overflow-hidden backdrop-blur-xl"
+              >
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-white/5 bg-white/[0.01]">
+                        <th className="px-6 py-4 text-left text-xs text-gray-400 font-semibold tracking-wider uppercase">Article</th>
+                        <th className="px-6 py-4 text-left text-xs text-gray-400 font-semibold tracking-wider uppercase">Category</th>
+                        <th className="px-6 py-4 text-left text-xs text-gray-400 font-semibold tracking-wider uppercase">Author</th>
+                        <th className="px-6 py-4 text-left text-xs text-gray-400 font-semibold tracking-wider uppercase">Read Time</th>
+                        <th className="px-6 py-4 text-left text-xs text-gray-400 font-semibold tracking-wider uppercase">Published Date</th>
+                        <th className="px-6 py-4 text-center text-xs text-gray-400 font-semibold tracking-wider uppercase">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-white/5">
+                      {blogsList.length > 0 ? (
+                        blogsList.map((blog) => (
+                          <tr key={blog.id} className="hover:bg-white/[0.01] transition-colors">
+                            <td className="px-6 py-4">
+                              <div className="flex items-center gap-3">
+                                <div className="w-12 h-8 relative rounded overflow-hidden flex-shrink-0 border border-white/10">
+                                  <img
+                                    src={blog.image}
+                                    alt={blog.title}
+                                    className="object-cover w-full h-full"
+                                  />
+                                </div>
+                                <div className="max-w-xs md:max-w-md">
+                                  <p className="text-sm text-white font-semibold truncate" title={blog.title}>{blog.title}</p>
+                                  <p className="text-xs text-gray-500 truncate" title={blog.excerpt}>{blog.excerpt}</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td className="px-6 py-4">
+                              <span className="inline-flex px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                                {blog.category}
+                              </span>
+                            </td>
+                            <td className="px-6 py-4">
+                              <span className="text-sm text-gray-300 font-medium">{blog.author}</span>
+                            </td>
+                            <td className="px-6 py-4">
+                              <span className="text-sm text-gray-300 font-medium">{blog.readTime}</span>
+                            </td>
+                            <td className="px-6 py-4">
+                              <span className="text-sm text-gray-400 font-medium">{blog.date}</span>
+                            </td>
+                            <td className="px-6 py-4 text-center">
+                              <div className="flex items-center justify-center gap-1.5">
+                                {/* View Link */}
+                                <a
+                                  href={`/blogs/${blog.id}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all border border-white/10"
+                                  title="View Article"
+                                >
+                                  <ExternalLink size={14} />
+                                </a>
+
+                                {/* Edit */}
+                                <button
+                                  onClick={() => {
+                                    setEditingBlog(blog);
+                                    setBlogForm({
+                                      id: blog.id,
+                                      title: blog.title,
+                                      excerpt: blog.excerpt,
+                                      content: blog.content,
+                                      category: blog.category,
+                                      image: blog.image,
+                                      readTime: blog.readTime,
+                                      author: blog.author,
+                                    });
+                                    setIsBlogModalOpen(true);
+                                  }}
+                                  className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-blue-500/10 hover:bg-blue-500 text-blue-400 hover:text-white transition-all border border-blue-500/20"
+                                  title="Edit Article"
+                                >
+                                  <Edit3 size={14} />
+                                </button>
+
+                                {/* Delete */}
+                                <button
+                                  onClick={() => handleDeleteBlog(blog.id)}
+                                  className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-red-500/10 hover:bg-red-500 text-red-400 hover:text-white transition-all border border-red-500/20"
+                                  title="Delete Article"
+                                >
+                                  <Trash2 size={14} />
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan={6} className="text-center py-12 text-gray-500 text-sm">
+                            <BookOpenText size={36} className="text-blue-500/30 mx-auto mb-3" />
+                            No articles found. Click "Create New Post" to publish one!
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </motion.div>
+            )}
+          </div>
         ) : (
           /* ==================== REGISTERED USERS MANAGEMENT VIEW ==================== */
           <div>
@@ -1074,6 +1353,152 @@ export default function AdminDashboard({ stats: initialStats, allUsers, session 
                   className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-400 hover:to-indigo-500 text-white font-semibold text-sm transition-all"
                 >
                   Save Changes
+                </button>
+              </div>
+            </form>
+          </motion.div>
+        </div>
+      )}
+
+      {/* Create / Edit Blog Modal */}
+      {isBlogModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="w-full max-w-3xl bg-[#0F172A] border border-white/10 rounded-2xl p-6 shadow-2xl relative my-8"
+          >
+            <button
+              onClick={() => setIsBlogModalOpen(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+            >
+              <X size={20} />
+            </button>
+            
+            <h3 className="font-bold text-xl text-white mb-6 flex items-center gap-2">
+              <BookOpenText className="text-blue-400" size={20} />
+              {editingBlog ? "Edit Blog Post" : "Create New Blog Post"}
+            </h3>
+
+            <form onSubmit={handleBlogSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-400 uppercase mb-1.5">Blog Title</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. How to Build a SaaS App"
+                    value={blogForm.title}
+                    onChange={(e) => handleTitleChange(e.target.value)}
+                    className="w-full bg-white/[0.02] border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-400 uppercase mb-1.5">URL Slug / ID</label>
+                  <input
+                    type="text"
+                    required
+                    disabled={!!editingBlog}
+                    placeholder="e.g. how-to-build-saas-app"
+                    value={blogForm.id}
+                    onChange={(e) => setBlogForm(prev => ({ ...prev, id: e.target.value.toLowerCase().replace(/[^a-z0-9-_]/g, "") }))}
+                    className="w-full bg-white/[0.02] border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                  />
+                  {!editingBlog && <p className="text-[10px] text-gray-500 mt-1">Unique URL path for this article.</p>}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-400 uppercase mb-1.5">Category</label>
+                  <select
+                    value={blogForm.category}
+                    onChange={(e) => handleCategoryChange(e.target.value)}
+                    className="w-full bg-white/[0.02] border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-blue-500"
+                  >
+                    <option value="AI Coding Tutorials" className="bg-[#0f172a] text-white">AI Coding Tutorials</option>
+                    <option value="AI Tools" className="bg-[#0f172a] text-white">AI Tools</option>
+                    <option value="Career Guidance" className="bg-[#0f172a] text-white">Career Guidance</option>
+                    <option value="Coding Projects" className="bg-[#0f172a] text-white">Coding Projects</option>
+                    <option value="Placement Preparation" className="bg-[#0f172a] text-white">Placement Preparation</option>
+                    <option value="AI News Simplified" className="bg-[#0f172a] text-white">AI News Simplified</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-400 uppercase mb-1.5">Read Time</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. 5 min read"
+                    value={blogForm.readTime}
+                    onChange={(e) => setBlogForm(prev => ({ ...prev, readTime: e.target.value }))}
+                    className="w-full bg-white/[0.02] border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-400 uppercase mb-1.5">Author</label>
+                  <input
+                    type="text"
+                    required
+                    value={blogForm.author}
+                    onChange={(e) => setBlogForm(prev => ({ ...prev, author: e.target.value }))}
+                    className="w-full bg-white/[0.02] border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-blue-500"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-gray-400 uppercase mb-1.5">Cover Image URL / Path</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="/blogs/blog_cursor_app.png"
+                  value={blogForm.image}
+                  onChange={(e) => setBlogForm(prev => ({ ...prev, image: e.target.value }))}
+                  className="w-full bg-white/[0.02] border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-blue-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-gray-400 uppercase mb-1.5">Short Excerpt / Description</label>
+                <textarea
+                  required
+                  rows={2}
+                  placeholder="Enter a brief, engaging summary of the article..."
+                  value={blogForm.excerpt}
+                  onChange={(e) => setBlogForm(prev => ({ ...prev, excerpt: e.target.value }))}
+                  className="w-full bg-white/[0.02] border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-blue-500 resize-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-gray-400 uppercase mb-1.5">Article Content (Markdown Supported)</label>
+                <textarea
+                  required
+                  rows={10}
+                  placeholder="### Use Markdown Headings&#10;- Bullet points&#10;- Bold: **text**&#10;- Inline code: `code`&#10;&#10;Use '###' for section titles and write your guides here."
+                  value={blogForm.content}
+                  onChange={(e) => setBlogForm(prev => ({ ...prev, content: e.target.value }))}
+                  className="w-full bg-white/[0.02] border border-white/10 rounded-xl p-4 text-white text-sm font-mono focus:outline-none focus:border-blue-500 resize-y"
+                />
+              </div>
+
+              <div className="flex justify-end gap-3 pt-6 border-t border-white/5">
+                <button
+                  type="button"
+                  onClick={() => setIsBlogModalOpen(false)}
+                  className="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white font-semibold text-sm transition-all"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-400 hover:to-indigo-500 text-white font-semibold text-sm transition-all"
+                >
+                  {editingBlog ? "Save Changes" : "Publish Post"}
                 </button>
               </div>
             </form>
