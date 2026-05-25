@@ -17,38 +17,55 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   metadataBase: new URL("https://codingwithai.in"),
   title: {
-    default: "Coding With AI — Build Real-World Apps Using AI",
-    template: "%s | Coding With AI",
+    default: "Coding With AI — Learn Code With AI from Atish Jain",
+    template: "%s | Coding With AI by Atish Jain",
   },
   description:
-    "Learn AI-assisted coding and build real-world applications even with little coding knowledge. Master tools like ChatGPT, Cursor AI, and GitHub Copilot to accelerate your career.",
+    "Learn to Code with AI! Master AI-assisted coding and build real-world applications under the guidance of Atish Jain (20+ years of tech experience). Course covers Cursor AI, ChatGPT, and GitHub Copilot.",
   keywords: [
-    "AI coding",
-    "learn coding with AI",
-    "ChatGPT coding",
-    "Cursor AI",
-    "GitHub Copilot",
-    "AI programming",
-    "coding bootcamp India",
+    "Atish Jain",
+    "Atish Jain coding",
+    "Atish Jain AI coding",
+    "Atish Jain code with AI",
+    "Atish Jain coding with AI",
+    "Atish Jain mentor",
+    "Atish Jain software engineer",
+    "Atish Jain AH Career",
+    "AH Career Atish Jain",
+    "Code with AI",
+    "Coding with AI",
+    "learn code with AI",
+    "how to code with AI",
+    "AI-assisted coding course",
+    "AI programming training",
+    "Cursor AI coding course",
+    "ChatGPT developer training",
+    "GitHub Copilot bootcamp",
     "build apps with AI",
-    "future-proof career"
+    "learn Next.js and React with AI",
+    "AI developer bootcamps in India",
+    "AI SaaS builder course",
+    "artificial intelligence coding tutorial",
+    "prompt engineering for developers",
+    "future of software development with AI"
   ],
-  authors: [{ name: "Atish Jain" }],
-  creator: "Coding With AI",
+  authors: [{ name: "Atish Jain", url: "https://www.linkedin.com/in/atish-jain" }],
+  creator: "Atish Jain",
+  publisher: "Coding With AI",
   openGraph: {
     type: "website",
     locale: "en_IN",
     url: "https://codingwithai.in",
     siteName: "Coding With AI",
-    title: "Coding With AI — Build Apps Using AI",
+    title: "Coding With AI — Build Apps Using AI with Atish Jain",
     description:
-      "Learn AI-assisted coding and build real-world apps even with little coding knowledge.",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Coding With AI Banner" }],
+      "Learn to Code with AI and build real-world software applications from scratch under the mentorship of veteran software developer Atish Jain.",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Coding With AI by Atish Jain Banner" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Coding With AI",
-    description: "Build real apps using AI tools. Learn AI coding from experts.",
+    title: "Coding With AI — Code with AI by Atish Jain",
+    description: "Learn to build real-world apps using ChatGPT, Cursor, and Copilot with veteran mentor Atish Jain.",
     images: ["/og-image.png"],
   },
   icons: {
@@ -81,12 +98,22 @@ const schemaMarkup = {
   "name": "Coding With AI",
   "url": "https://codingwithai.in",
   "logo": "https://codingwithai.in/logo.png",
-  "description": "Helping high school & engineering students build real-world applications using AI.",
+  "description": "Helping students, software engineers, and developers learn how to code with AI and build real-world applications using tools like ChatGPT, Cursor AI, and GitHub Copilot under mentor Atish Jain.",
   "sameAs": [
     "https://www.facebook.com/share/18nvUvNp8m/",
     "https://www.instagram.com/ah_career_rajahmundry",
-    "https://www.linkedin.com/company/ahcareer/"
+    "https://www.linkedin.com/company/ahcareer/",
+    "https://www.linkedin.com/in/atish-jain"
   ],
+  "founder": {
+    "@type": "Person",
+    "name": "Atish Jain",
+    "jobTitle": "Founder & Mentor",
+    "url": "https://www.linkedin.com/in/atish-jain",
+    "sameAs": [
+      "https://www.linkedin.com/in/atish-jain"
+    ]
+  },
   "contactPoint": {
     "@type": "ContactPoint",
     "telephone": "+91-9989241515",

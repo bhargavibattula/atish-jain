@@ -11,6 +11,14 @@ import {
 
 const faqs = [
   {
+    q: "Who is Atish Jain?",
+    a: "Atish Jain is a veteran software architect, mentor, and the founder of Coding With AI (as well as Director at AH Career Pvt Ltd). Over the past 20+ years, Atish Jain has guided thousands of engineering students and software developers in India to transition from absolute beginners to professional software developers by leveraging cutting-edge development stacks and AI capabilities.",
+  },
+  {
+    q: "What is Coding With AI and how does it teach me to code with AI?",
+    a: "Coding With AI is a leading educational program designed by Atish Jain to teach students how to code with AI. By mastering AI-assisted development tools like ChatGPT, Claude, Cursor AI, and GitHub Copilot, you will learn to build, style, and deploy premium web applications and SaaS solutions 10x faster than traditional coding methods.",
+  },
+  {
     q: "Do I need prior coding knowledge?",
     a: "Absolutely not! Coding With AI is designed for complete beginners. We start from zero and use AI tools to make coding intuitive and fast. Many of our students built their first app with no prior programming experience.",
   },

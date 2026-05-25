@@ -144,7 +144,7 @@ export default function HeroSection() {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-400/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
               <Zap size={14} className="text-cyan-400 animate-pulse" />
-              <span className="text-sm font-semibold text-blue-300 tracking-wide uppercase">The Future of Coding</span>
+              <span className="text-sm font-semibold text-blue-300 tracking-wide uppercase">Code With AI — Mentorship by Atish Jain</span>
             </motion.div>
 
             {/* Massive Heading */}
@@ -192,7 +192,7 @@ export default function HeroSection() {
               transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="text-lg md:text-xl text-gray-400 mb-12 max-w-lg leading-relaxed font-medium"
             >
-              Master AI-assisted development. We transform ambitious students into elite engineers capable of building Silicon Valley-grade applications in days, not months.
+              Master AI-assisted development. Under the direct mentorship of <strong>Atish Jain</strong>, <strong>Coding With AI</strong> transforms ambitious students into elite developers capable of building full-stack applications in days, not months. Learn to code with AI today.
             </motion.p>
 
             {/* Premium CTA Buttons */}

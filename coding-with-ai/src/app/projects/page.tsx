@@ -5,8 +5,15 @@ import CTASection from "@/components/sections/CTASection";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Projects — Real AI Apps You'll Build",
-  description: "Explore the real-world AI projects you'll build and deploy as part of the Coding With AI program.",
+  title: "Projects — Real AI Apps You'll Build & Deploy",
+  description: "Explore the portfolio of real-world AI applications you will build and deploy under Atish Jain's guidance in the Coding With AI cohort.",
+  keywords: [
+    "AI projects showcase",
+    "atish jain coding projects",
+    "build SaaS with AI",
+    "portfolio projects with ChatGPT",
+    "Next.js and Cursor AI projects"
+  ]
 };
 
 export default function ProjectsPage() {

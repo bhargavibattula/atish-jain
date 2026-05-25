@@ -6,8 +6,18 @@ import { Metadata } from "next";
 import { MapPin, Phone, Mail, Globe } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "About — Coding With AI",
-  description: "Meet Atish Jain — 20+ years of experience helping students build real-world apps with AI tools.",
+  title: "About Atish Jain & Coding With AI — Meet the Founder",
+  description: "Learn about Atish Jain, founder of Coding With AI. With over 20+ years of experience in system architecture, he is mentoring the next generation to code with AI.",
+  keywords: [
+    "Atish Jain",
+    "About Atish Jain",
+    "Coding With AI founder",
+    "Atish Jain career",
+    "Atish Jain mentor",
+    "code with AI mentor",
+    "Atish Jain AH Career",
+    "coding classes Rajahmundry"
+  ]
 };
 
 export default function AboutPage() {

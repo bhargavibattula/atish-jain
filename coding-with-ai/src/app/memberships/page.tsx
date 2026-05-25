@@ -5,8 +5,14 @@ import CTASection from "@/components/sections/CTASection";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Memberships — Choose Your AI Coding Path",
-  description: "Silver, Gold, Diamond — choose the membership that matches your goals and start building real AI apps.",
+  title: "Memberships — Choose Your AI Coding Path with Atish Jain",
+  description: "Choose the membership (Silver, Gold, Diamond) that matches your goals and start learning how to code with AI from instructor Atish Jain.",
+  keywords: [
+    "AI coding course price",
+    "learn code with ai subscription",
+    "atish jain coding plans",
+    "artificial intelligence engineering program cost"
+  ]
 };
 
 export default function MembershipsPage() {

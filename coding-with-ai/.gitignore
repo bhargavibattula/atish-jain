@@ -7,7 +7,7 @@
 *.local
 node_modules
 .next
-public
+
 AGENTS.md
 CLAUDE.md
 README.md

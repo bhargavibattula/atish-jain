@@ -5,6 +5,20 @@ import Navbar from "@/components/layout/Navbar";
 import SpotlightCard from "@/components/ui/SpotlightCard";
 import SplitText from "@/components/ui/SplitText";
 import { blogsData } from "@/data/blogs";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "AI Engineering Blog & Guides — Coding With AI",
+  description: "Stay ahead of the curve with AI-assisted coding tutorials, developer guides, and system architecture articles from founder Atish Jain.",
+  keywords: [
+    "AI coding blog",
+    "atish jain coding blog",
+    "learn code with ai articles",
+    "cursor ai tutorials",
+    "prompt engineering guides",
+    "SaaS architecture developer tips"
+  ]
+};
 
 export default function BlogsPage() {
   return (
