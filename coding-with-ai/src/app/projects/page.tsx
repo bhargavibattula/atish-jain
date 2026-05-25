@@ -12,7 +12,11 @@ export const metadata: Metadata = {
     "atish jain coding projects",
     "build SaaS with AI",
     "portfolio projects with ChatGPT",
-    "Next.js and Cursor AI projects"
+    "Next.js and Cursor AI projects",
+    "software projects built with AI",
+    "AI app development portfolio",
+    "SaaS application build guidelines",
+    "interactive AI coding outcomes"
   ]
 };
 

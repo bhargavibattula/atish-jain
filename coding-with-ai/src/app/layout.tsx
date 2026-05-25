@@ -47,7 +47,16 @@ export const metadata: Metadata = {
     "AI SaaS builder course",
     "artificial intelligence coding tutorial",
     "prompt engineering for developers",
-    "future of software development with AI"
+    "future of software development with AI",
+    "Cursor AI editor tutorial",
+    "v0.dev React UI generator",
+    "Bolt.new full-stack development",
+    "Claude 3.5 Sonnet coding mentor",
+    "build SaaS from scratch with AI",
+    "prompt engineering for software engineers",
+    "best coding classes with AI in Andhra Pradesh",
+    "AI software developer transition",
+    "AI tools for web development course"
   ],
   authors: [{ name: "Atish Jain", url: "https://www.linkedin.com/in/atish-jain" }],
   creator: "Atish Jain",

@@ -11,7 +11,11 @@ export const metadata: Metadata = {
     "AI coding course price",
     "learn code with ai subscription",
     "atish jain coding plans",
-    "artificial intelligence engineering program cost"
+    "artificial intelligence engineering program cost",
+    "silver gold diamond membership tiers",
+    "AI coding cohort cost",
+    "Coding With AI pricing",
+    "learn programming with AI subscription plans"
   ]
 };
 

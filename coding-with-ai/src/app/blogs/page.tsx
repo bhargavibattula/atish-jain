@@ -16,7 +16,11 @@ export const metadata: Metadata = {
     "learn code with ai articles",
     "cursor ai tutorials",
     "prompt engineering guides",
-    "SaaS architecture developer tips"
+    "SaaS architecture developer tips",
+    "learn how to use Cursor editor",
+    "AI-first software development guides",
+    "AI coding insights and tutorials",
+    "monetize SaaS with AI"
   ]
 };
 

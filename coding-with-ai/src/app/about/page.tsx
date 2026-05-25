@@ -16,7 +16,11 @@ export const metadata: Metadata = {
     "Atish Jain mentor",
     "code with AI mentor",
     "Atish Jain AH Career",
-    "coding classes Rajahmundry"
+    "coding classes Rajahmundry",
+    "meet Atish Jain",
+    "Atish Jain tech career background",
+    "AI coding instructor India",
+    "software architect mentor"
   ]
 };
 
