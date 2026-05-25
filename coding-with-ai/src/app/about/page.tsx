@@ -88,7 +88,13 @@ export default function AboutPage() {
         </motion.div>
 
         <div className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 leading-tight flex justify-center text-center">
-          <SplitText text="Empowering Next-Gen Devs" tag="h1" delay={30} duration={1.0} />
+          <SplitText 
+            text="Empowering Next-Gen Devs" 
+            tag="h1" 
+            className="font-extrabold pb-2 inline-block text-center [&_.split-char]:text-transparent [&_.split-char]:bg-clip-text [&_.split-char]:bg-gradient-to-r [&_.split-char]:from-blue-400 [&_.split-char]:via-cyan-400 [&_.split-char]:to-purple-400"
+            delay={30} 
+            duration={1.0} 
+          />
         </div>
 
         <motion.p
@@ -97,18 +103,19 @@ export default function AboutPage() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-xl md:text-2xl text-gray-400 mb-10 max-w-3xl mx-auto leading-relaxed"
         >
-          We are redefining software engineering education by replacing dry textbook theory with AI-first, production-level coding workflows.
+          We are redefining software engineering education by replacing <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400 font-semibold">dry textbook theory</span> with <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 font-bold">AI-first, production-level coding workflows</span>.
         </motion.p>
       </section>
 
       {/* Animated Marquee */}
-      <section className="relative z-10 py-6 overflow-hidden border-t border-b border-white/[0.04] bg-[#0A0E17]/60">
+      <section className="relative z-10 py-6 overflow-hidden bg-transparent">
         <ScrollVelocity
           texts={[
             "REDEFINING CODING EDUCATION ✦ 10X SPEED TO PRODUCTION ✦ CODE WITH AI ✦ MENTORSHIP AT SCALE",
             "CURSOR AI COHORT ✦ BUILD DYNAMIC SAAS APPLICATIONS ✦ MASTER NEXT.JS 15 ✦ DEMOCRATIZING WEB DEV"
           ]}
           velocity={40}
+          className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-500 font-extrabold uppercase tracking-tight select-none opacity-80"
         />
       </section>
 
