@@ -95,6 +95,41 @@ export default function ContactPage() {
               </div>
             </motion.div>
           </div>
+
+          {/* Map Embed Section for SEO and user guidance */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25 }}
+            className="mt-14 bg-[#111827] rounded-3xl border border-white/10 p-6 sm:p-8"
+          >
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-6">
+              <div>
+                <h2 className="font-poppins font-bold text-2xl text-white">Find Us on the Map</h2>
+                <p className="text-gray-400 text-sm mt-1">Visit our campus for in-person counseling and training sessions.</p>
+              </div>
+              <a
+                href="https://maps.google.com/?q=AH+Career+Pvt+Ltd+Rajamahendravaram+Andhra+Pradesh"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-medium hover:bg-white/10 hover:border-white/20 transition-all text-center inline-flex items-center justify-center gap-2"
+              >
+                Open in Google Maps
+              </a>
+            </div>
+            <div className="overflow-hidden rounded-2xl relative shadow-[0_0_50px_rgba(59,130,246,0.1)]">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3814.773539958742!2d81.789098!3d17.0102127!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a37a3f892a00c6d%3A0xe5a36395b05a611d!2sAH%20Career%20Pvt%20Ltd!5e0!3m2!1sen!2sin!4v1716656799000!5m2!1sen!2sin"
+                width="100%"
+                height="450"
+                style={{ border: 0 }}
+                allowFullScreen={true}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-full h-full min-h-[350px] md:min-h-[450px] rounded-2xl border border-white/10"
+              />
+            </div>
+          </motion.div>
         </div>
       </main>
       <Footer />
