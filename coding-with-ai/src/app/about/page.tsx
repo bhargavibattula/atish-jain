@@ -9,6 +9,8 @@ import SplitText from "@/components/ui/SplitText";
 import SpotlightCard from "@/components/ui/SpotlightCard";
 import TiltedCard from "@/components/ui/TiltedCard";
 import ScrollVelocity from "@/components/ui/ScrollVelocity";
+import BorderGlow from "@/components/ui/BorderGlow";
+import SkillsBubbles from "@/components/ui/SkillsBubbles";
 import { 
   MapPin, 
   Phone, 
@@ -63,6 +65,22 @@ export default function AboutPage() {
       title: "Zero to Live Production",
       description: "We don't do toy assignments. Every student builds, databases, connects APIs, and deploys fully functional SaaS projects.",
     },
+  ];
+
+  const techStackItems = [
+    { label: "Cursor AI 🤖", rotation: 5, hoverStyles: { bgColor: "rgba(6, 182, 212, 0.2)", textColor: "#22d3ee" } },
+    { label: "Next.js 15 ⚡", rotation: -6, hoverStyles: { bgColor: "rgba(255, 255, 255, 0.15)", textColor: "#ffffff" } },
+    { label: "React 19 ⚛️", rotation: 4, hoverStyles: { bgColor: "rgba(59, 130, 246, 0.2)", textColor: "#60a5fa" } },
+    { label: "TypeScript 📘", rotation: -3, hoverStyles: { bgColor: "rgba(37, 99, 235, 0.2)", textColor: "#60a5fa" } },
+    { label: "Tailwind CSS 🎨", rotation: 6, hoverStyles: { bgColor: "rgba(6, 182, 212, 0.2)", textColor: "#22d3ee" } },
+    { label: "Framer Motion 🎬", rotation: -5, hoverStyles: { bgColor: "rgba(236, 72, 153, 0.2)", textColor: "#f472b6" } },
+    { label: "GSAP 🏎️", rotation: 3, hoverStyles: { bgColor: "rgba(132, 204, 22, 0.2)", textColor: "#a3e635" } },
+    { label: "MongoDB 🍃", rotation: -4, hoverStyles: { bgColor: "rgba(34, 197, 94, 0.2)", textColor: "#4ade80" } },
+    { label: "Supabase ⚡", rotation: 5, hoverStyles: { bgColor: "rgba(234, 179, 8, 0.2)", textColor: "#facc15" } },
+    { label: "Git & GitHub 🐙", rotation: -5, hoverStyles: { bgColor: "rgba(255, 255, 255, 0.1)", textColor: "#f3f4f6" } },
+    { label: "Node.js 🟢", rotation: 4, hoverStyles: { bgColor: "rgba(34, 197, 94, 0.2)", textColor: "#4ade80" } },
+    { label: "LLM Prompting 🪄", rotation: -6, hoverStyles: { bgColor: "rgba(168, 85, 247, 0.2)", textColor: "#c084fc" } },
+    { label: "v0.dev 🚀", rotation: 3, hoverStyles: { bgColor: "rgba(6, 182, 212, 0.2)", textColor: "#22d3ee" } },
   ];
 
   return (
@@ -180,40 +198,48 @@ export default function AboutPage() {
           {/* Right Column: Interactive Tilted Profile Card */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end">
             <TiltedCard rotateXRange={12} rotateYRange={12} scaleOnHover={1.03} className="w-full max-w-[400px]">
-              <div className="relative rounded-[2.5rem] overflow-hidden bg-[#111827]/60 border border-white/10 p-8 flex flex-col items-center text-center shadow-2xl backdrop-blur-xl">
-                <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-transparent to-transparent pointer-events-none" />
-                
-                {/* Profile Image container */}
-                <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-blue-500/30 mb-8 shadow-[0_0_30px_rgba(59,130,246,0.15)] bg-gray-900">
-                  <Image
-                    src="/atishjainsir.png"
-                    alt="Atish Jain - Founder & Coach"
-                    fill
-                    className="object-cover"
-                    priority
-                  />
+              <BorderGlow
+                borderRadius={40}
+                backgroundColor="rgba(17, 24, 39, 0.6)"
+                colors={['#3B82F6', '#8B5CF6', '#06B6D4']}
+                glowIntensity={1.2}
+                className="w-full h-full backdrop-blur-xl"
+              >
+                <div className="relative p-8 flex flex-col items-center text-center">
+                  <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-transparent to-transparent pointer-events-none" />
+                  
+                  {/* Profile Image container */}
+                  <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-blue-500/30 mb-8 shadow-[0_0_30px_rgba(59,130,246,0.15)] bg-gray-900">
+                    <Image
+                      src="/atishjainsir.png"
+                      alt="Atish Jain - Founder & Coach"
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
+
+                  <h3 className="text-2xl font-bold text-white mb-1">Atish Jain</h3>
+                  <p className="text-blue-400 font-bold text-sm mb-4">Founder & Mentor</p>
+                  
+                  <div className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-gray-300 font-semibold tracking-wider uppercase mb-6">
+                    20+ Years Tech Veteran
+                  </div>
+
+                  <p className="text-gray-400 text-sm leading-relaxed mb-8 italic">
+                    &quot;My goal is to help you skip years of outdated trial and error. Leverage AI, master architecture, and code with absolute speed.&quot;
+                  </p>
+
+                  <a
+                    href="https://www.linkedin.com/in/atish-jain"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-sm tracking-wide transition-all shadow-[0_4px_20px_rgba(37,99,235,0.3)] hover:shadow-[0_4px_30px_rgba(37,99,235,0.4)] text-center block"
+                  >
+                    Connect on LinkedIn
+                  </a>
                 </div>
-
-                <h3 className="text-2xl font-bold text-white mb-1">Atish Jain</h3>
-                <p className="text-blue-400 font-bold text-sm mb-4">Founder & Mentor</p>
-                
-                <div className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-gray-300 font-semibold tracking-wider uppercase mb-6">
-                  20+ Years Tech Veteran
-                </div>
-
-                <p className="text-gray-400 text-sm leading-relaxed mb-8 italic">
-                  &quot;My goal is to help you skip years of outdated trial and error. Leverage AI, master architecture, and code with absolute speed.&quot;
-                </p>
-
-                <a
-                  href="https://www.linkedin.com/in/atish-jain"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-sm tracking-wide transition-all shadow-[0_4px_20px_rgba(37,99,235,0.3)] hover:shadow-[0_4px_30px_rgba(37,99,235,0.4)] text-center block"
-                >
-                  Connect on LinkedIn
-                </a>
-              </div>
+              </BorderGlow>
             </TiltedCard>
           </div>
         </div>
@@ -241,6 +267,22 @@ export default function AboutPage() {
                 <p className="text-gray-400 text-sm leading-relaxed">{val.description}</p>
               </SpotlightCard>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Tech Stack Showcase */}
+      <section className="relative z-10 py-24 bg-[#0A0F1C]/40 border-b border-white/[0.02]">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <span className="text-sm font-semibold tracking-wider text-blue-400 uppercase block mb-3">Our Ecosystem</span>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-6">
+            Master the <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 font-extrabold">Modern AI Stack</span>
+          </h2>
+          <p className="text-gray-400 text-base md:text-lg mb-12 max-w-xl mx-auto leading-relaxed">
+            We replace outdated theoretical textbooks with the exact workflows used by elite modern builders. Hover and interact with the bouncy bubbles below:
+          </p>
+          <div className="flex justify-center">
+            <SkillsBubbles items={techStackItems} pillBg="rgba(255, 255, 255, 0.03)" pillColor="#9ca3af" />
           </div>
         </div>
       </section>

@@ -11,13 +11,13 @@ import Dock from "@/components/ui/Dock";
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
   { label: "Memberships", href: "/memberships" },
   { label: "Projects", href: "/projects" },
   { label: "AI Tools", href: "/ai-tools" },
   { label: "Blogs", href: "/blogs" },
   { label: "Community", href: "/community" },
   { label: "Contact Us", href: "/contact" },
+  { label: "About Us", href: "/about" },
 ];
 
 export default function Navbar() {
@@ -40,18 +40,6 @@ export default function Navbar() {
       ),
       label: "Home",
       href: "/",
-    },
-    {
-      icon: (
-        <div className="relative flex flex-col items-center justify-center">
-          <Info size={20} className={pathname === "/about" ? "text-cyan-400" : "text-gray-300"} />
-          {pathname === "/about" && (
-            <span className="absolute -bottom-2 w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#06b6d4]" />
-          )}
-        </div>
-      ),
-      label: "About Us",
-      href: "/about",
     },
     {
       icon: (
@@ -124,6 +112,18 @@ export default function Navbar() {
       ),
       label: "Contact Us",
       href: "/contact",
+    },
+    {
+      icon: (
+        <div className="relative flex flex-col items-center justify-center">
+          <Info size={20} className={pathname === "/about" ? "text-cyan-400" : "text-gray-300"} />
+          {pathname === "/about" && (
+            <span className="absolute -bottom-2 w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#06b6d4]" />
+          )}
+        </div>
+      ),
+      label: "About Us",
+      href: "/about",
     },
   ];
 
