@@ -56,11 +56,11 @@ export default function ContactPage() {
             {/* Info */}
             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.15 }} className="space-y-6">
               {[
-                { icon: Mail, label: "Email", value: "ahcareerpvtltd@gmail.com", href: "mailto:ahcareerpvtltd@gmail.com", color: "text-blue-400", bg: "bg-blue-500/15" },
+                { icon: Mail, label: "Email", value: "atishkumarjain@gmail.com", href: "mailto:atishkumarjain@gmail.com", color: "text-blue-400", bg: "bg-blue-500/15" },
                 { icon: Phone, label: "Phone", value: "+91 9989241515", href: "tel:9989241515", color: "text-green-400", bg: "bg-green-500/15" },
                 { icon: Phone, label: "Landline", value: "0883-2474088", href: "tel:08832474088", color: "text-purple-400", bg: "bg-purple-500/15" },
-                { icon: MapPin, label: "Address", value: "Near UCO Bank, Danavai Peta, AP 533103", href: "https://maps.google.com/?q=AH+Career+Pvt+Ltd+Rajamahendravaram+Andhra+Pradesh", color: "text-red-400", bg: "bg-red-500/15" },
-                { icon: Globe, label: "Website", value: "ahcareer.in", href: "http://ahcareer.in", color: "text-cyan-400", bg: "bg-cyan-500/15" },
+                { icon: MapPin, label: "Address", value: "Near UCO Bank, Danavai Peta, Rajahmundry-533103", href: "https://maps.google.com/?q=AH+Career+Pvt+Ltd+Rajamahendravaram+Andhra+Pradesh", color: "text-red-400", bg: "bg-red-500/15" },
+                { icon: Globe, label: "Website", value: "atishjain.in", href: "http://atishjain.in", color: "text-cyan-400", bg: "bg-cyan-500/15" },
               ].map((item) => (
                 <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-5 rounded-2xl bg-[#111827] border border-white/10 hover:border-white/30 hover:bg-white/5 transition-all">
                   <div className={`w-12 h-12 rounded-xl ${item.bg} flex items-center justify-center flex-shrink-0`}>

@@ -26,9 +26,9 @@ const footerLinks = {
   Contact: [
     { label: "+91 9989241515", href: "tel:9989241515", icon: Phone },
     { label: "0883-2474088", href: "tel:08832474088", icon: Phone },
-    { label: "ahcareerpvtltd@gmail.com", href: "mailto:ahcareerpvtltd@gmail.com", icon: Mail },
-    { label: "Near UCO Bank, Danavai Peta", href: "https://maps.google.com/?q=AH+Career+Pvt+Ltd+Rajamahendravaram+Andhra+Pradesh", icon: MapPin },
-    { label: "ahcareer.in", href: "http://ahcareer.in", icon: Globe },
+    { label: "atishkumarjain@gmail.com", href: "mailto:atishkumarjain@gmail.com", icon: Mail },
+    { label: "Near UCO Bank, Danavai Peta, Rajahmundry-533103", href: "https://maps.google.com/?q=AH+Career+Pvt+Ltd+Rajamahendravaram+Andhra+Pradesh", icon: MapPin },
+    { label: "atishjain.in", href: "http://atishjain.in", icon: Globe },
   ],
 };
 
