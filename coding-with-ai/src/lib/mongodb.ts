@@ -11,12 +11,15 @@ interface MongooseCache {
   promise: Promise<typeof mongoose> | null;
 }
 
-declare global {
-  var mongooseCache: MongooseCache | undefined;
+const globalWithMongoose = globalThis as typeof globalThis & {
+  _mongooseCache?: MongooseCache;
+};
+
+if (!globalWithMongoose._mongooseCache) {
+  globalWithMongoose._mongooseCache = { conn: null, promise: null };
 }
 
-let cached: MongooseCache = global.mongooseCache || { conn: null, promise: null };
-global.mongooseCache = cached;
+const cached = globalWithMongoose._mongooseCache;
 
 async function connectDB(): Promise<typeof mongoose> {
   if (cached.conn) {
