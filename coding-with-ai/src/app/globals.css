@@ -1,5 +1,4 @@
-@import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 
 @tailwind base;
 @tailwind components;
@@ -13,8 +12,8 @@
   --color-cyan: #06B6D4;
   --text-primary: #FFFFFF;
   --text-secondary: #9CA3AF;
-  --font-heading: 'Satoshi', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-heading: var(--font-poppins), 'Satoshi', sans-serif;
+  --font-body: var(--font-inter), 'Inter', sans-serif;
 }
 
 * {

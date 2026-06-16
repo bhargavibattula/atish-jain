@@ -7,7 +7,9 @@ import { useSession, signOut } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown, LogOut, User, LayoutDashboard, Home, Award, Briefcase, Bot, Users, PhoneCall, BookOpenText, Info } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
-import Dock from "@/components/ui/Dock";
+import dynamic from "next/dynamic";
+
+const Dock = dynamic(() => import("@/components/ui/Dock"), { ssr: false });
 
 const navLinks = [
   { label: "Home", href: "/" },

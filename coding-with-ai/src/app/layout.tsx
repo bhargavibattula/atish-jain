@@ -3,8 +3,10 @@ import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/layout/Providers";
 import { Toaster } from "react-hot-toast";
-import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
-import FloatingCall from "@/components/ui/FloatingCall";
+import dynamic from "next/dynamic";
+
+const FloatingWhatsApp = dynamic(() => import("@/components/ui/FloatingWhatsApp"));
+const FloatingCall = dynamic(() => import("@/components/ui/FloatingCall"));
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const poppins = Poppins({ 
