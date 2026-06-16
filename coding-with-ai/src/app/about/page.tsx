@@ -231,7 +231,7 @@ export default function AboutPage() {
                   </p>
 
                   <a
-                    href="https://www.linkedin.com/in/atish-jain"
+                    href="https://in.linkedin.com/in/atishjain9"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-sm tracking-wide transition-all shadow-[0_4px_20px_rgba(37,99,235,0.3)] hover:shadow-[0_4px_30px_rgba(37,99,235,0.4)] text-center block"
@@ -299,7 +299,7 @@ export default function AboutPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {[
-            { icon: Phone, title: "Phone Support", details: ["+91 9989241515", "0883-2474088"], href: "tel:9989241515" },
+            { icon: Phone, title: "Phone Support", details: ["+91 9989241515"], href: "tel:9989241515" },
             { icon: Mail, title: "Email Address", details: ["atishkumarjain@gmail.com"], href: "mailto:atishkumarjain@gmail.com" },
             { icon: Globe, title: "Web Platform", details: ["atishjain.in"], href: "http://atishjain.in" },
             { icon: MapPin, title: "Official Location", details: ["Near UCO Bank, Danavai Peta", "Rajahmundry-533103"], href: "https://maps.google.com/?q=AH+Career+Pvt+Ltd+Rajamahendravaram+Andhra+Pradesh" }

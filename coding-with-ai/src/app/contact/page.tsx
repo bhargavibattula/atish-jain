@@ -58,7 +58,7 @@ export default function ContactPage() {
               {[
                 { icon: Mail, label: "Email", value: "atishkumarjain@gmail.com", href: "mailto:atishkumarjain@gmail.com", color: "text-blue-400", bg: "bg-blue-500/15" },
                 { icon: Phone, label: "Phone", value: "+91 9989241515", href: "tel:9989241515", color: "text-green-400", bg: "bg-green-500/15" },
-                { icon: Phone, label: "Landline", value: "0883-2474088", href: "tel:08832474088", color: "text-purple-400", bg: "bg-purple-500/15" },
+
                 { icon: MapPin, label: "Address", value: "Near UCO Bank, Danavai Peta, Rajahmundry-533103", href: "https://maps.google.com/?q=AH+Career+Pvt+Ltd+Rajamahendravaram+Andhra+Pradesh", color: "text-red-400", bg: "bg-red-500/15" },
                 { icon: Globe, label: "Website", value: "atishjain.in", href: "http://atishjain.in", color: "text-cyan-400", bg: "bg-cyan-500/15" },
               ].map((item) => (
@@ -77,9 +77,9 @@ export default function ContactPage() {
                 <p className="text-gray-400 text-sm mb-3">Follow us on social</p>
                 <div className="flex gap-3">
                   {[
-                    { icon: Facebook, href: "https://www.facebook.com/share/18nvUvNp8m/" },
-                    { icon: Instagram, href: "https://www.instagram.com/ah_career_rajahmundry" },
-                    { icon: Linkedin, href: "https://www.linkedin.com/company/ahcareer/" },
+                    { icon: Facebook, href: "https://www.facebook.com/atishkumarjain/" },
+                    { icon: Instagram, href: "https://www.instagram.com/atishjain_official/" },
+                    { icon: Linkedin, href: "https://in.linkedin.com/in/atishjain9" },
                   ].map((social, i) => (
                     <a key={i} href={social.href} target="_blank" rel="noopener noreferrer"
                       className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-white/30 hover:bg-white/10 transition-all">

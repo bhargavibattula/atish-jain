@@ -83,7 +83,7 @@ export default function FounderSection() {
               showUserInfo={true}
               enableTilt={false}
               enableMobileTilt={false}
-              onContactClick={() => window.open("https://www.linkedin.com/in/atish-jain", "_blank")}
+              onContactClick={() => window.open("https://in.linkedin.com/in/atishjain9", "_blank")}
               behindGlowEnabled={false}
               innerGradient="linear-gradient(145deg, #1e1b4b8c 0%, #3b82f644 100%)"
             />

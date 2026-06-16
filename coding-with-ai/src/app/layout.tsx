@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     "AI software developer transition",
     "AI tools for web development course"
   ],
-  authors: [{ name: "Atish Jain", url: "https://www.linkedin.com/in/atish-jain" }],
+  authors: [{ name: "Atish Jain", url: "https://in.linkedin.com/in/atishjain9" }],
   creator: "Atish Jain",
   publisher: "Coding With AI",
   openGraph: {
@@ -109,18 +109,18 @@ const schemaMarkup = {
   "logo": "https://codingwithai.in/logo.png",
   "description": "Helping students, software engineers, and developers learn how to code with AI and build real-world applications using tools like ChatGPT, Cursor AI, and GitHub Copilot under mentor Atish Jain.",
   "sameAs": [
-    "https://www.facebook.com/share/18nvUvNp8m/",
-    "https://www.instagram.com/ah_career_rajahmundry",
-    "https://www.linkedin.com/company/ahcareer/",
-    "https://www.linkedin.com/in/atish-jain"
+    "https://www.facebook.com/atishkumarjain/",
+    "https://www.instagram.com/atishjain_official/",
+    "https://in.linkedin.com/in/atishjain9",
+    "https://in.linkedin.com/in/atishjain9"
   ],
   "founder": {
     "@type": "Person",
     "name": "Atish Jain",
     "jobTitle": "Founder & Mentor",
-    "url": "https://www.linkedin.com/in/atish-jain",
+    "url": "https://in.linkedin.com/in/atishjain9",
     "sameAs": [
-      "https://www.linkedin.com/in/atish-jain"
+      "https://in.linkedin.com/in/atishjain9"
     ]
   },
   "contactPoint": {

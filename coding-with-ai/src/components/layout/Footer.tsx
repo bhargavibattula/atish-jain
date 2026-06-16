@@ -25,7 +25,7 @@ const footerLinks = {
   ],
   Contact: [
     { label: "+91 9989241515", href: "tel:9989241515", icon: Phone },
-    { label: "0883-2474088", href: "tel:08832474088", icon: Phone },
+
     { label: "atishkumarjain@gmail.com", href: "mailto:atishkumarjain@gmail.com", icon: Mail },
     { label: "Near UCO Bank, Danavai Peta, Rajahmundry-533103", href: "https://maps.google.com/?q=AH+Career+Pvt+Ltd+Rajamahendravaram+Andhra+Pradesh", icon: MapPin },
     { label: "atishjain.in", href: "http://atishjain.in", icon: Globe },
@@ -34,9 +34,9 @@ const footerLinks = {
 
 const socials = [
   { icon: Youtube, href: "#", label: "YouTube", color: "hover:text-red-500" },
-  { icon: Facebook, href: "https://www.facebook.com/share/18nvUvNp8m/", label: "Facebook", color: "hover:text-blue-500" },
-  { icon: Instagram, href: "https://www.instagram.com/ah_career_rajahmundry", label: "Instagram", color: "hover:text-pink-500" },
-  { icon: Linkedin, href: "https://www.linkedin.com/company/ahcareer/", label: "LinkedIn", color: "hover:text-blue-400" },
+  { icon: Facebook, href: "https://www.facebook.com/atishkumarjain/", label: "Facebook", color: "hover:text-blue-500" },
+  { icon: Instagram, href: "https://www.instagram.com/atishjain_official/", label: "Instagram", color: "hover:text-pink-500" },
+  { icon: Linkedin, href: "https://in.linkedin.com/in/atishjain9", label: "LinkedIn", color: "hover:text-blue-400" },
   { icon: MessageCircle, href: "tel:9989241515", label: "WhatsApp", color: "hover:text-green-500" },
 ];
 
