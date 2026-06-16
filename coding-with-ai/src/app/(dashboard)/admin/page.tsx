@@ -3,9 +3,9 @@ import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
-import Membership from "@/models/Membership"; // Ensure Membership schema is registered
-import Course from "@/models/Course";
-import Certificate from "@/models/Certificate";
+import "@/models/Membership"; // Ensure Membership schema is registered
+import "@/models/Course";
+import "@/models/Certificate";
 import AdminDashboard from "@/components/dashboard/AdminDashboard";
 
 export const dynamic = "force-dynamic";
