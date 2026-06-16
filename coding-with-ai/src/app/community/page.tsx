@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Community — Coding With AI" };
 export default function CommunityPage() {
   const channels = [
     { icon: MessageCircle, name: "WhatsApp Community", desc: "Daily tips, doubts, and peer support", members: "200+", color: "text-green-400", bg: "bg-green-500/15", border: "border-green-500/20", cta: "Join WhatsApp", href: "#" },
-    { icon: Send, name: "Telegram Channel", desc: "AI news, resources, and project ideas", members: "300+", color: "text-blue-400", bg: "bg-blue-500/15", border: "border-blue-500/20", cta: "Join Telegram", href: "#" },
+    { icon: Send, name: "Telegram Channel", desc: "AI news, resources, and project ideas", members: "300+", color: "text-blue-400", bg: "bg-blue-500/15", border: "border-blue-500/20", cta: "Join Telegram", href: "https://t.me/+VVgdlVS9giNanSYN" },
     { icon: Users, name: "Discord Server", desc: "Voice rooms, code reviews, and study groups", members: "150+", color: "text-purple-400", bg: "bg-purple-500/15", border: "border-purple-500/20", cta: "Join Discord", href: "#" },
   ];
 
