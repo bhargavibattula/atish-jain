@@ -387,7 +387,7 @@ export default function AdminDashboard({ stats: initialStats, allUsers, session 
       user.college || "—",
       user.degree || "—",
       user.role,
-      user.membership ? (user.membership.name || "Active") : "None",
+      user.membership ? (user.membership.title || user.membership.type || "Active") : "None",
       user.membershipStatus || "none",
       user.isActive !== false ? "Active" : "Blocked",
       new Date(user.createdAt).toLocaleDateString(),
@@ -586,7 +586,7 @@ export default function AdminDashboard({ stats: initialStats, allUsers, session 
                               ? "bg-cyan-500/10 text-cyan-300 border border-cyan-500/20"
                               : "bg-white/[0.02] text-gray-400 border border-white/[0.06]"
                           }`}>
-                            {user.membershipStatus === "approved" && user.membership ? user.membership.name : "Free / Trial"}
+                            {user.membershipStatus === "approved" && user.membership ? (user.membership.title || user.membership.type) : "Free / Trial"}
                           </span>
                         </td>
                         <td className="px-6 py-4">
@@ -1150,7 +1150,7 @@ export default function AdminDashboard({ stats: initialStats, allUsers, session 
                                   ? "bg-amber-500/10 text-amber-300 border-amber-500/20"
                                   : "bg-cyan-500/10 text-cyan-300 border-cyan-500/20"
                               }`}>
-                                {user.membership.name}
+                                {user.membership.title || user.membership.type}
                               </span>
                             ) : user.membershipStatus === "pending" ? (
                               <span className="inline-flex px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-amber-500/10 text-amber-300 border border-amber-500/20 animate-pulse">
